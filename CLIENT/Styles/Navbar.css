@@ -1,0 +1,169 @@
+/* General navbar styling */
+.navbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1rem;
+	background-color: #4682a9;
+}
+
+.brand_head {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	padding-left: 1rem;
+	/* display: flex;
+	gap: 8%; */
+}
+
+.brand_head>*{
+	margin: 0%;
+	padding: 0%;
+}
+
+.brand_head img {
+	margin-right: 1rem;
+}
+
+.brand-name {
+	display: flex;
+	flex-direction: column;
+	/* gap: 0%; */
+}
+
+.navbar-text {
+	color: #F6F4EB;
+}
+
+.navbar-toggler-icon{
+	color: #F6F4EB;
+	
+}
+
+.subtitle {
+	font-size: 0.7rem;
+	margin: 0%;
+	padding: 0%;
+	text-wrap: nowrap;
+}
+
+/* Navbar links styling */
+.navbar-nav {
+	display: flex;
+	flex-direction: row;
+	list-style: none;
+	padding-left: 0;
+	margin-bottom: 0;
+	margin-top: 2%;
+}
+
+.navbar-collapse{
+	display: flex;
+	justify-content: space-between;
+}
+
+.nav-item {
+	margin-left: 1rem;
+}
+
+.nav-link {
+	text-decoration: none;
+	padding: 0.5rem 1rem;
+}
+
+.nav-link:hover {
+	text-decoration: underline;
+}
+
+/* Account buttons styling */
+.account-buttons {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.account-buttons .btn {
+	margin-right: 0.5rem;
+}
+
+.profile-logout {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 10%;
+}
+
+.profile-img {
+	border-radius: 50%;
+	margin-right: 0.5rem;
+}
+
+/* Responsive styling */
+@media (max-width: 992px) {
+	.navbar-nav {
+		flex-direction: column;
+		width: 100%;
+		align-items: flex-start;
+	}
+
+	.nav-item {
+		margin-left: 0;
+		margin-bottom: 0.5rem;
+	}
+
+	.account-buttons {
+		flex-direction: column;
+		width: 100%;
+		align-items: flex-start;
+		justify-content: center;
+		padding: 0%;
+	}
+
+	.account-buttons .btn {
+		margin-right: 0;
+		margin-bottom: 0.5rem;
+	}
+
+	.profile-logout {
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: flex-end;
+		gap: 0.7rem;
+		margin-top: 10px;
+	}
+
+	.profile-logout .btn {
+		margin-bottom: 0.5rem;
+	}
+}
+
+@media (max-width: 768px) {
+	.account-buttons {
+		width: 100%;
+		justify-content: center;
+		padding: 0%;
+		justify-content: center;
+	}
+}
+
+@media (max-width: 576px) {
+	.brand_head {
+		margin-bottom: 1rem;
+	}
+
+	.navbar-nav {
+		width: 100%;
+	}
+
+	.account-buttons {
+		width: 100%;
+		padding: 0%;
+		justify-content: center;
+	}
+
+	.profile-logout {
+		width: 100%;
+		align-items: center;
+	}
+}

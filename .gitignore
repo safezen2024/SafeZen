@@ -1,0 +1,4 @@
+.vscode
+TEMP
+.env
+node_modules

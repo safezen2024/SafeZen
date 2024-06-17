@@ -1,0 +1,173 @@
+.indTherapyHero {
+	width: 100%;
+	height: 50rem;
+	margin-bottom: 2rem;
+	background-image: url("/src//indTherapyHero.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 50rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	align-items: flex-start;
+}
+
+.book-appoinntment-card {
+	position: relative;
+	background: rgba(246, 244, 235, 0.7) /* Green background with 30% opacity */;
+	height: 22rem;
+	width: 27rem;
+	align-content: center;
+	border-radius: 50px;
+	margin-left: 10%;
+	margin-bottom: 10%;
+	padding: 3%;
+	color: #4682a9;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.book-appoinntment-card-text {
+	padding-left: 2rem;
+}
+.btn-book-appointment {
+	margin-left: 2rem;
+	width: 60%;
+}
+
+.book-appoinntment-card-text {
+	font-size: 1.8rem;
+}
+
+.illness {
+	background-color: #91c8e4;
+	border-radius: 8%;
+	height: 20rem;
+	width: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	padding: 3rem;
+}
+
+.normal-text {
+	font-family: "Inter", sans-serif;
+	font-style: normal;
+	font-size: 1.2rem;
+	color: #f6f4eb;
+	color: #000;
+}
+
+.heading-text {
+	font-family: "Inter", sans-serif;
+	/* font-weight: 500; */
+	font-style: normal;
+	font-size: 2.2rem;
+	color: #4682a9;
+}
+
+.various_illness {
+	margin: 2rem;
+}
+
+
+.indPage{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-family: "Inter", sans-serif;	
+}
+
+@media (max-width: 756px) {
+	.indTherapyHero {
+		background-size: auto 50rem;
+	}
+	.book-appoinntment-card {
+		height: 20rem;
+		width: 25rem;
+	}
+
+	.book-appoinntment-card-text {
+		font-size: 1.8rem;
+	}
+}
+
+@media (max-width: 600px) {
+	.book-appoinntment-card {
+		height: 18rem;
+		width: 22rem;
+	}
+	.book-appoinntment-card-text {
+		font-size: 1.5rem;
+	}
+}
+
+@media (max-width: 420px) {
+	.book-appoinntment-card {
+		width: 80%;
+	}
+	.book-appoinntment-card-text {
+		font-size: 1.3rem;
+	}
+	.btn-book-appointment {
+		width: 70%;
+	}
+}
+
+@media (max-width: 350px) {
+	.btn-book-appointment {
+		padding: 0%;
+		width: 80%;
+		margin-left: 1rem ;
+	}
+}
+
+@media (max-width: 1300px) {
+	.illness {
+		height: 15rem;
+		padding: 2rem;
+	}
+	.normal-text {
+		font-family: "Inter", sans-serif;
+		font-size: 1rem;
+	}
+
+	.heading-text {
+		font-family: "Inter", sans-serif;
+		font-size: 1.8rem;
+	}
+}
+
+@media (max-width: 700px) {
+	.illness {
+		height: 12rem;
+		padding: 1rem;
+	}
+	.normal-text {
+		font-family: "Inter", sans-serif;
+		font-size: 0.75rem;
+	}
+
+	.heading-text {
+		font-family: "Inter", sans-serif;
+		font-size: 2rem;
+	}
+}
+
+@media (max-width: 400px) {
+	.illness {
+		height: 8rem;
+		padding: 1rem;
+	}
+	.normal-text {
+		font-family: "Inter", sans-serif;
+		font-size: 0.5rem;
+	}
+
+	.heading-text {
+		font-family: "Inter", sans-serif;
+		font-size: 1rem;
+	}
+}

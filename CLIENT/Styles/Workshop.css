@@ -1,0 +1,60 @@
+.page-title{
+	font-family: "Inter", sans-serif;
+	font-weight: 700;
+	font-style: normal;
+	font-size: 5rem;
+	padding-top: 2.5rem;
+	color: #4682A9;
+	text-align: center;
+	text-wrap: wrap;
+	margin-left: 2rem;
+	margin-right: 2rem;
+}
+
+.meditation-text{
+	text-align: center;
+	align-content: center;
+	margin: 2.5rem 6rem 4rem 6rem;
+	padding: 0rem 4rem 0rem 4rem ;
+	/* display: block; */
+	height: 23rem;
+	background-color: #91C8E4;
+	border-radius: 50px;
+	/* border-radius: 1-4 length|% / 1-4 length|%|initial|inherit; */
+	color: #F6F4EB;
+	font-weight: 700;
+	font-size: larger;
+}
+
+@media (max-width: 620px) {
+	.page-title{
+		font-size: 4rem;
+	}
+	.meditation-text{
+		padding: 2rem 3rem 2rem 3rem ;
+		height: 30rem;
+		font-size: large;
+	}
+}
+
+@media (max-width: 500px) {
+	.page-title{
+		font-size: 3.5rem;
+	}
+}
+
+@media (max-width: 440px) {
+	.page-title{
+		font-size: 3rem;
+	}
+	.meditation-text{
+		font-size: smaller;
+		height: 36.5rem;
+	}
+}
+
+@media (max-width: 320px) {
+	.page-title{
+		font-size: 2rem;
+	}
+}
