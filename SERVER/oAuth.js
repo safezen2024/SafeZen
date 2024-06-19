@@ -54,7 +54,7 @@ app.get("/", async function (req, res, next) {
 	console.log(code);
 	console.log("Step 1");
 	try {
-		const redirectURL = "http://localhost:4666/oauth";
+		const redirectURL = "https://safezen.onrender.com/oauth";
 		const oAuth2Client = new OAuth2Client(
 			process.env.GOOGLE_CLIENT_ID,
 			process.env.GOOGLE_CLIENT_SECRET,
@@ -72,8 +72,8 @@ app.get("/", async function (req, res, next) {
 		console.log("Error logging in with OAuth2 user", err);
 	}
 	if (user_data_google.email_verified) {
-		await res.redirect(303, "http://localhost:5173/");
-	} else res.redirect(303, "http://localhost:5173/login");
+		await res.redirect(303, "https://safezen2.netlify.app");
+	} else res.redirect(303, "https://safezen2.netlify.app/login");
 });
 
 export default app;

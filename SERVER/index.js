@@ -19,7 +19,7 @@ env.config();
 
 app.use(
 	cors({
-		origin: "http://localhost:5173",
+		origin: "https://safezen2.netlify.app",
 		methods: ["POST", "GET"],
 		credentials: true,
 	})
@@ -44,7 +44,7 @@ app.use(
 );
 
 app.use(function (req, res, next) {
-	res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+	res.setHeader("Access-Control-Allow-Origin", "https://safezen2.netlify.app");
 	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
 	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
 	next();
@@ -102,6 +102,10 @@ app.get("/IndTherapy", (req, res) => {
 	} catch (err) {
 		console.error(err.message);
 	}
+});
+
+app.get("/test", (req, res) => {
+	res.send("Server Working");
 });
 
 app.get("/RelTherapy", (req, res) => {

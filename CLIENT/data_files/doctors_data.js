@@ -8,7 +8,7 @@ async function setData(data){
 }
 
 try {
-	await axios.get("http://localhost:4666/doctorsData")
+	await axios.get("https://safezen.onrender.com/doctorsData")
     .then(res => setData(res.data))
     .catch(err => console.error(err));
 } catch (err) {

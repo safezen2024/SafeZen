@@ -7,7 +7,7 @@ import { auth, email } from "../data_files/checkLoginStatus";
 export default function Navbar() {
 	const handleDelete = () => {
 		axios
-			.get("http://localhost:4666/logout")
+			.get("https://safezen.onrender.com/logout")
 			.then((res) => {
 				location.reload(true);
 			})
@@ -104,92 +104,3 @@ export default function Navbar() {
 		</nav>
 	);
 }
-
-// import React from "react";
-// import { Link } from "react-router-dom";
-// import Illness from "./Illness";
-// import axios from "axios";
-// import { auth } from "../data_files/checkLoginStatus";
-
-// export default function Navbar() {
-// 	const handleDelete = () => {
-// 		axios
-// 			.get("http://localhost:4666/logout")
-// 			.then((res) => {
-// 				location.reload(true);
-// 			})
-// 			.catch((err) => console.log(err));
-// 	};
-
-// 	return (
-// 		<nav className="navbar-expand-lg navbar">
-// 			<a
-// 				href="/"
-// 				className="d-inline-flex link-body-emphasis text-decoration-none brand_head">
-// 				<img src="/src/Circle_Logo.PNG" alt="brand-logo" height="60" />
-// 				<div className="brand-name">
-// 					<h1 className="navbar-text m-0 p-0">SafeZen</h1>
-// 					<p className="navbar-text subtitle">From your home to your heart</p>
-// 				</div>
-// 			</a>
-// 			<button
-// 				className="navbar-toggler"
-// 				type="button"
-// 				data-bs-toggle="collapse"
-// 				data-bs-target="#navbarNavDropdown"
-// 				aria-controls="navbarNavDropdown"
-// 				aria-expanded="false"
-// 				aria-label="Toggle navigation">
-// 				<span className="navbar-toggler-icon"></span>
-// 			</button>
-// 			<div className="collapse navbar-collapse" id="navbarNavDropdown">
-// 				<ul className="navbar-nav">
-// 					<li className="nav-item">
-// 						<a className="nav-link navbar-text" href="/">
-// 							Home
-// 						</a>
-// 					</li>
-// 					<li className="nav-item dropdown">
-// 						<Illness />
-// 					</li>
-// 					<li className="nav-item">
-// 						<a className="nav-link navbar-text" href="/workshop">
-// 							Workshops
-// 						</a>
-// 					</li>
-// 					<li className="nav-item">
-// 						<a className="nav-link navbar-text" href="/contact">
-// 							Contact
-// 						</a>
-// 					</li>
-// 				</ul>
-// 			</div>
-// 			<div className="col-md-3 text-end account-buttons">
-// 				{!auth ? (
-// 					<div>
-// 						<Link to="/login" id="props.id">
-// 							<button type="button" className="btn me-2">
-// 								Login
-// 							</button>
-// 						</Link>
-// 						<Link to="/signup" id="props.id">
-// 							<button type="button" className="btn btn-sign-up">
-// 								Sign-up
-// 							</button>
-// 						</Link>
-// 					</div>
-// 				) : (
-// 					<div className="profile-logout">
-// 						<img src="/src/profile_img.jpg" className="profile-img" height="45" />
-// 						<button
-// 							type="button"
-// 							className="btn m-0"
-// 							onClick={handleDelete}>
-// 							Logout
-// 						</button>
-// 					</div>
-// 				)}
-// 			</div>
-// 		</nav>
-// 	);
-// }

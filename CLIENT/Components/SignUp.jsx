@@ -16,7 +16,7 @@ export default function SignUp() {
 		window.location.href = url;
 	}
 	async function auth() {
-		const response = await fetch("http://localhost:4666/request", { method: "post" });
+		const response = await fetch("https://safezen.onrender.com/request", { method: "post" });
 
 		const data = await response.json();
 		console.log(data);
@@ -38,7 +38,7 @@ export default function SignUp() {
 		try {
 			console.log(formData);
 			axios
-				.post("http://localhost:4666/signup", formData)
+				.post("https://safezen.onrender.com/signup", formData)
 				.then((res) => {
 					if (res.data.Status === "Success") navigate("/login");
 					else alert(res.data.Error);

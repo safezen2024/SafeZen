@@ -15,7 +15,7 @@ if (token) {
 			console.log("token yeh hai: ", token);
 			if (token) {
 				axios
-					.post("http://localhost:4666/verifyToken", { token })
+					.post("https://safezen.onrender.com/verifyToken", { token })
 					.then((res) => {
 						if (res.data.Status === "Success") {
 							console.log("abcxyz");
@@ -34,7 +34,7 @@ if (token) {
 	} else {
 		try {
 			axios
-				.get("http://localhost:4666")
+				.get("http://https://safezen.onrender.com")
 				.then((res) => {
 					if (res.data.Status === "Success") {
 						auth = true;

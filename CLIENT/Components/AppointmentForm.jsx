@@ -76,7 +76,7 @@ export default function AppointmentForm() {
 							try {
 								console.log(formData);
 								axios
-									.post("http://localhost:4666/book-appointment", formData)
+									.post("https://safezen.onrender.com/book-appointment", formData)
 									.then((res) => {
 										if (res.data.Status === "Success")
 											window.location.href = "/";
