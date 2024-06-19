@@ -87,7 +87,7 @@ app.get("/", verifyUser, (req, res) => {
 	res.send({ Status: "Success", email: req.email });
 });
 
-app.get('/test', (req, res) => {
+app.get("/test", (req, res) => {
 	res.send("Server Working");
 });
 
