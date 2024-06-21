@@ -73,11 +73,11 @@ app.get("/", async function (req, res, next) {
 	}
 	if (user_data_google.email_verified) {
 <<<<<<< HEAD
-		await res.redirect(303, "https://safezen2.netlify.app");
+		await res.redirect(303, "https://safezen.in");
 =======
-		await res.redirect(303, "https://safezen2.netlify.app/");
+		await res.redirect(303, "https://safezen.in");
 >>>>>>> fa66756e1b2dbe274af499197de8fc987a373a0b
-	} else res.redirect(303, "https://safezen2.netlify.app/login");
+	} else res.redirect(303, "https://safezen.in/login");
 });
 
 export default app;
