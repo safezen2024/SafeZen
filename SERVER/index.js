@@ -19,7 +19,7 @@ env.config();
 
 app.use(
 	cors({
-		origin: "https://safezen2.netlify.app",
+		origin: "https://safezen.in",
 		methods: ["POST", "GET"],
 		credentials: true,
 	})
@@ -44,7 +44,7 @@ app.use(
 );
 
 app.use(function (req, res, next) {
-	res.setHeader("Access-Control-Allow-Origin", "https://safezen2.netlify.app");
+	res.setHeader("Access-Control-Allow-Origin", "https://safezen.in");
 	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
 	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
 	next();
