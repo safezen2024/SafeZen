@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import bcrypt from "bcrypt";
-import session from "express-session";
+import session from "cookie-session";
 import env from "dotenv";
 import db from "./db.js";
 import cookieParser from "cookie-parser";
@@ -39,6 +39,7 @@ app.use(
 			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
 			// httpOnly: true, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
 			// secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
+			secure: true,
 		},
 	})
 );
