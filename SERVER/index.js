@@ -51,13 +51,6 @@ app.use(function (req, res, next) {
 	next();
 });
 
-app.use(function (req, res, next) {
-	res.setHeader("Access-Control-Allow-Origin", "https://www.safezen.in");
-	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
-	next();
-});
-
 app.use("/oauth", authRouter);
 app.use("/request", requestRouter);
 // app.use("/htmlAuth", htmlRouter);
