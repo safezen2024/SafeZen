@@ -2,12 +2,29 @@ import express from "express";
 import env from "dotenv";
 import db from "./db.js";
 import { OAuth2Client } from "google-auth-library";
+import cors from "cors";
 
 var app = express.Router();
 env.config();
 console.log("Step 0");
 export let user_data_google = [];
 export let tokenExport = [];
+
+app.use(
+	cors({
+		origin: ["https://safezen.in", "https://www.safezen.in"],
+		methods: ["POST", "GET", "PUT", "DELETE"],
+		allowedHeaders:["Content-Type", "Access-Control-Allow-Headers"],
+		credentials: true,
+	})
+);
+
+app.use(function (req, res, next) {
+	res.setHeader("Access-Control-Allow-Origin", "https://safezen.in");
+	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
+	next();
+});
 
 async function getUserData(access_token) {
 	console.log("STEP 6");
