@@ -1,13 +1,25 @@
 import express from "express";
 import env from "dotenv";
 import { OAuth2Client } from "google-auth-library";
+import cors from "cors";
 
 var app = express.Router();
 env.config();
 
+app.use(
+	cors({
+		origin: ["https://safezen.in", "https://www.safezen.in"],
+		methods: ["POST", "GET", "PUT", "DELETE"],
+		allowedHeaders:["Content-Type", "Access-Control-Allow-Headers"],
+		credentials: true,
+	})
+);
+
 app.post("/", async function (req, res, next) {
 	res.header("Access-Control-Allow-Origin", "https://safezen.in");
-	res.header('Referrer-Policy', 'no-referrer-when-downgrade');
+	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
+	res.header("Referrer-Policy", "no-referrer-when-downgrade");
 	// Something to fo with http or https ↑
 	const redirectUrl = "https://safezen.onrender.com/oauth";
 
@@ -18,7 +30,7 @@ app.post("/", async function (req, res, next) {
 	);
 	console.log("Step 4");
 	const authorizeUrl = oAuth2Client.generateAuthUrl({
-		access_type: 'offline',
+		access_type: "offline",
 		client_id: process.env.GOOGLE_CLIENT_ID,
 		// If you need to force the refresh token creation, then only put offline here ↑
 		scope: "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email openid",
