@@ -15,7 +15,6 @@ const port = process.env.PORT;
 const saltRounds = 10;
 const secret = process.env.SESSION_SECRET;
 env.config();
-// db.connect();
 
 app.use(
 	cors({
