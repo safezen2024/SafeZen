@@ -19,7 +19,7 @@ env.config();
 
 app.use(
 	cors({
-		origin: "https://safezen2.netlify.app",
+		origin: "https://safezen.in",
 		methods: ["POST", "GET"],
 		credentials: true,
 	})
@@ -33,7 +33,7 @@ app.use(
 		key: "userID",
 		secret: process.env.SESSION_SECRET,
 		resave: false,
-		saveUninitialized: false, //  D  -  O  -  U  -  B  -  T
+		saveUninitialized: ture, //  D  -  O  -  U  -  B  -  T
 		cookie: {
 			maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
 			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
@@ -44,7 +44,14 @@ app.use(
 );
 
 app.use(function (req, res, next) {
-	res.setHeader("Access-Control-Allow-Origin", "https://safezen2.netlify.app");
+	res.setHeader("Access-Control-Allow-Origin", "https://safezen.in");
+	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
+	next();
+});
+
+app.use(function (req, res, next) {
+	res.setHeader("Access-Control-Allow-Origin", "https://www.safezen.in");
 	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
 	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
 	next();

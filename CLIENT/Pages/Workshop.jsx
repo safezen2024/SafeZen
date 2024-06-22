@@ -1,15 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import Navbar from "../Components/Navbar";
-
 import Foot from "../Components/Foot";
-import {
-	BrowserRouter as Router,
-	Routes,
-	Route,
-	Navigate,
-	Link,
-	useParams,
-} from "react-router-dom";
 
 export default function Workshop() {
 	// const params = useParams();

@@ -34,7 +34,7 @@ if (token) {
 	} else {
 		try {
 			axios
-				.get("http://https://safezen.onrender.com")
+				.get("https://safezen.onrender.com")
 				.then((res) => {
 					if (res.data.Status === "Success") {
 						auth = true;

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Illness from "./Illness";
 import axios from "axios";
-import { auth, email } from "../data_files/checkLoginStatus";
+import { auth } from "../data_files/checkLoginStatus";
 
 export default function Navbar() {
 	const handleDelete = () => {
@@ -51,24 +51,30 @@ export default function Navbar() {
 			<div className="collapse navbar-collapse" id="navbarNavDropdown">
 				<div>
 					<ul className="navbar-nav">
-						<li className="nav-item">
-							<a className="nav-link navbar-text" href="/">
-								Home
-							</a>
-						</li>
+						<Link to="/">
+							<li className="nav-item">
+								<a className="nav-link navbar-text" href="/">
+									Home
+								</a>
+							</li>
+						</Link>
 						<li className="nav-item dropdown">
 							<Illness />
 						</li>
-						<li className="nav-item">
-							<a className="nav-link navbar-text" href="/workshop">
-								Workshops
-							</a>
-						</li>
-						<li className="nav-item">
-							<a className="nav-link navbar-text" href="/contact">
-								Contact
-							</a>
-						</li>
+						<Link to="/workshop">
+							<li className="nav-item">
+								<a className="nav-link navbar-text" href="/workshop">
+									Workshops
+								</a>
+							</li>
+						</Link>
+						<Link to="/contact">
+							<li className="nav-item">
+								<a className="nav-link navbar-text" href="/contact">
+									Contact
+								</a>
+							</li>
+						</Link>
 					</ul>
 				</div>
 				<div className="col-md-3 text-end account-buttons">

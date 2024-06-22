@@ -134,15 +134,6 @@ export default function AppointmentForm() {
 					}
 				})()}
 
-				{/* <input
-					required
-					type="text"
-					placeholder="Describe Your Problem"
-					className="form--input problem-description"
-					onChange={handleDescriptionChange}
-					value={description}
-				/> */}
-
 				<div className="text-neutral-200 bg-neutral-800 w-[40rem] rounded space-y-2 problem-space mb-2">
 					<textarea
 						className="p-0 bg-neutral-700 active:outline-none focus:outline-none rounded problem-space"

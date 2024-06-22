@@ -6,10 +6,18 @@
 	height: 30rem;
 	width: 100%;
 }
+
+.brand-foot{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
 .footer-text{
 	color: #F6F4EB;
 }
 
-.footer-text > * > *{
+.footer-text > * > * > *{
 	color: #F6F4EB;
 }
