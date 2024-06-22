@@ -6,8 +6,8 @@ var app = express.Router();
 env.config();
 
 app.post("/", async function (req, res, next) {
-	// res.header("Access-Control-Allow-Origin", "http://localhost:5173");
-	// res.header('Referrer-Policy', 'no-referrer-when-downgrade');
+	res.header("Access-Control-Allow-Origin", "https://safezen.in");
+	res.header('Referrer-Policy', 'no-referrer-when-downgrade');
 	// Something to fo with http or https ↑
 	const redirectUrl = "https://safezen.onrender.com/oauth";
 
