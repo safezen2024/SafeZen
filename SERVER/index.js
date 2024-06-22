@@ -33,7 +33,7 @@ app.use(
 		key: "userID",
 		secret: process.env.SESSION_SECRET,
 		resave: false,
-		saveUninitialized: ture, //  D  -  O  -  U  -  B  -  T
+		saveUninitialized: true, //  D  -  O  -  U  -  B  -  T
 		cookie: {
 			maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
 			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
@@ -45,7 +45,6 @@ app.use(
 
 app.use(function (req, res, next) {
 	res.setHeader("Access-Control-Allow-Origin", "https://safezen.in");
-<<<<<<< HEAD
 	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
 	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
 	next();
@@ -53,8 +52,6 @@ app.use(function (req, res, next) {
 
 app.use(function (req, res, next) {
 	res.setHeader("Access-Control-Allow-Origin", "https://www.safezen.in");
-=======
->>>>>>> fba413eba6d9f4eb05b4e729b6e815b0120e93d2
 	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
 	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
 	next();
