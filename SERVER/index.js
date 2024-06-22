@@ -45,6 +45,7 @@ app.use(
 
 app.use(function (req, res, next) {
 	res.setHeader("Access-Control-Allow-Origin", "https://safezen.in");
+<<<<<<< HEAD
 	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
 	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
 	next();
@@ -52,6 +53,8 @@ app.use(function (req, res, next) {
 
 app.use(function (req, res, next) {
 	res.setHeader("Access-Control-Allow-Origin", "https://www.safezen.in");
+=======
+>>>>>>> fba413eba6d9f4eb05b4e729b6e815b0120e93d2
 	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
 	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
 	next();
