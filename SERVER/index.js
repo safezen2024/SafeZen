@@ -17,13 +17,13 @@ const secret = process.env.SESSION_SECRET;
 env.config();
 // db.connect();
 
-app.use(
-	cors({
-		origin: "https://safezen.in",
-		methods: ["POST", "GET"],
-		credentials: true,
-	})
-);
+// app.use(
+// 	cors({
+// 		origin: "https://safezen.in",
+// 		methods: ["POST", "GET"],
+// 		credentials: true,
+// 	})
+// );
 app.use(express.json()); //req.body
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
