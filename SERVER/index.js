@@ -33,7 +33,7 @@ app.use(
 		key: "userID",
 		secret: process.env.SESSION_SECRET,
 		resave: false,
-		saveUninitialized: true, //  D  -  O  -  U  -  B  -  T
+		saveUninitialized: false, //  D  -  O  -  U  -  B  -  T
 		cookie: {
 			// token: "token",
 			maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
