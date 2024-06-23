@@ -126,15 +126,15 @@ app.get("/RelTherapy", (req, res) => {
 });
 
 app.get("/doctorsData", (req, res) => {
-	res.header("Access-Control-Allow-Origin", "https://safezen.in");
-	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
-	res.header("Referrer-Policy", "no-referrer-when-downgrade");
+	// res.header("Access-Control-Allow-Origin", "https://safezen.in");
+	// res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+	// res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
+	// res.header("Referrer-Policy", "no-referrer-when-downgrade");
 	try {
 		const sql = "SELECT * FROM doctor_data";
 		db.query(sql, (err, data) => {
 			if (err) return res.json(err);
-			console.log(data);
+			// console.log(data);
 			return res.json(data);
 		});
 	} catch (err) {
@@ -157,6 +157,7 @@ app.post("/login", (req, res) => {
 					} else {
 						if (valid) {
 							const token = jwt.sign({ email }, secret, { expiresIn: '7d' });
+							console.log("Login successful")
 							res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
 							return res.json({ Status: "Success" });
 						} else {
@@ -212,7 +213,7 @@ app.post("/signup", (req, res) => {
 });
 
 app.post("/book-appointment", (req, res) => {
-	console.log("hi");
+	console.log("hi book appoiintment");
 	const email = req.body.email;
 	const date = req.body.date;
 	const timeSlot = req.body.timeSlot;
