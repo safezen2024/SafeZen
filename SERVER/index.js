@@ -60,8 +60,8 @@ app.use(function (req, res, next) {
 });
 
 // Response.AddHeader("Set-Cookie", "CookieName=CookieValue; path=/;");
-Response.SetCookie(new HttpCookie("session-id") { Value = Guid.NewGuid().ToString(), HttpOnly = false });
-Response.SetCookie(new HttpCookie("user-name") { Value = data.Login, HttpOnly = false });
+// Response.SetCookie(new HttpCookie("session-id") { Value = Guid.NewGuid().ToString(), HttpOnly = false });
+// Response.SetCookie(new HttpCookie("user-name") { Value = data.Login, HttpOnly = false });
 
 app.use("/oauth", authRouter);
 app.use("/request", requestRouter);
