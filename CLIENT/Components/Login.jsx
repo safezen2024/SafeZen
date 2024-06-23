@@ -42,7 +42,7 @@ export default function Login() {
 					if (res.data.Status === "Success") 
 					{
 						console.log(res.data);	
-						
+						window.location.href = "/";
 					}
 					else alert(res.data.Error);
 				})
