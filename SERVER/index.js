@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import bcrypt from "bcrypt";
-import session from "cookie-session";
+// import session from "cookie-session";
 import env from "dotenv";
 import db from "./db.js";
 import cookieParser from "cookie-parser";
@@ -29,23 +29,23 @@ app.use(express.json()); //req.body
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(	
-	session({
-		key: "userID",
-		secret: process.env.SESSION_SECRET,
-		resave: false,
-		saveUninitialized: false, //  D  -  O  -  U  -  B  -  T
-		cookie: {
-			// token: "token",
-			maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-			httpOnly: false, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
-			secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
-			// secure: true,
-			same_site: 'None',
-		},
-	})
-);
+// app.use(	
+// 	session({
+// 		key: "userID",
+// 		secret: process.env.SESSION_SECRET,
+// 		resave: false,
+// 		saveUninitialized: false, //  D  -  O  -  U  -  B  -  T
+// 		cookie: {
+// 			// token: "token",
+// 			maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+// 			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+// 			httpOnly: false, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
+// 			secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
+// 			// secure: true,
+// 			same_site: 'None',
+// 		},
+// 	})
+// );
 
 app.use(function (req, res, next) {
 	// Response.AddHeader("Set-Cookie", "CookieName=CookieValue; path=/;");
@@ -55,8 +55,13 @@ app.use(function (req, res, next) {
 	res.setHeader("Access-Control-Allow-Origin", "https://safezen.in");
 	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
 	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
+	res.setHeader("Set-Cookie", "token=CookieValue; path=/;");
 	next();
 });
+
+// Response.AddHeader("Set-Cookie", "CookieName=CookieValue; path=/;");
+Response.SetCookie(new HttpCookie("session-id") { Value = Guid.NewGuid().ToString(), HttpOnly = false });
+Response.SetCookie(new HttpCookie("user-name") { Value = data.Login, HttpOnly = false });
 
 app.use("/oauth", authRouter);
 app.use("/request", requestRouter);
