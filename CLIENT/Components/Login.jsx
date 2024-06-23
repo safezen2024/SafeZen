@@ -43,7 +43,7 @@ export default function Login() {
 					{
 						console.log(res.data);	
 						// navigate("/");
-						window.localation.href = "/";
+						window.location.href = "/";
 					}
 					else alert(res.data.Error);
 				})
