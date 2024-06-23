@@ -9,12 +9,12 @@ import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import authRouter, { tokenExport, user_data_google } from "./oAuth.js";
 import requestRouter from "./request.js";
+env.config();
 
 const app = express();
 const port = process.env.PORT;
 const saltRounds = 10;
 const secret = process.env.SESSION_SECRET;
-env.config();
 
 app.use(
 	cors({
@@ -37,9 +37,9 @@ app.use(
 		cookie: {
 			maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
 			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-			// httpOnly: true, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
-			// secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
-			secure: true,
+			httpOnly: true, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
+			secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
+			// secure: true,
 		},
 	})
 );
@@ -86,10 +86,6 @@ app.post("/verifyToken", (req, res) => {
 
 app.get("/", verifyUser, (req, res) => {
 	res.send({ Status: "Success", email: req.email });
-});
-
-app.get("/test", (req, res) => {
-	res.send("Server Working");
 });
 
 app.get("/logout", (req, res) => {
@@ -158,7 +154,7 @@ app.post("/login", (req, res) => {
 						if (valid) {
 							const token = jwt.sign({ email }, secret, { expiresIn: '7d' });
 							res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
-							console.log(res.cookie);
+							// console.log(cookie);
 							return res.json({ Status: "Success" });
 						} else {
 							return res.json({ Error: "Passwors do no match" });

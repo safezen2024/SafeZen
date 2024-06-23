@@ -4,7 +4,7 @@ let doctors_data = [];
 
 async function setData(data){
 	doctors_data = data;
-	console.log(doctors_data);
+	// console.log(doctors_data);
 }
 
 try {

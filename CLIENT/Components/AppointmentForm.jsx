@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import SelectTime from "./SelectTime";
 import Specialization from "./Specialization";
@@ -98,6 +99,7 @@ export default function AppointmentForm() {
 			}
 		} else {
 			window.location.href = "/login";
+			
 		}
 	}
 

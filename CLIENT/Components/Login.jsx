@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios, { Axios } from "axios";
 import googleButton from "/assets/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png";
 import { useEffect } from "react";
-const clientId = "285249744808-b8o6c61ilimep0rqhfgbl82ua11aaft9.apps.googleusercontent.com";
+const clientId = process.env.clientId;
 
 export default function Login() {
 	const [formData, setFormData] = React.useState({
@@ -41,7 +41,8 @@ export default function Login() {
 				.then((res) => {
 					if (res.data.Status === "Success") 
 					{
-						window.location.href = '/';
+						console.log(res.data);	
+						
 					}
 					else alert(res.data.Error);
 				})
