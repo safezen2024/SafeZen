@@ -64,7 +64,8 @@ export let email = "";
 axios.defaults.withCredentials = true;
 
 try {
-	let token = Cookies.get("token");
+	// let token = Cookies.get("token");
+	let token = document.cookie;
 	console.log("Retrieved token:", token); // Debugging log
 
 	if (token) {
