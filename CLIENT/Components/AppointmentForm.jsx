@@ -99,7 +99,6 @@ export default function AppointmentForm() {
 			}
 		} else {
 			window.location.href = "/login";
-			
 		}
 	}
 
