@@ -22,6 +22,7 @@ app.use(
 		methods: ["POST", "GET"],
 		allowedHeaders:["Content-Type", "Access-Control-Allow-Headers"],
 		credentials: true,
+		exposedHeaders: ["Set-cookie"],	
 	})
 );
 app.use(express.json()); //req.body
@@ -41,7 +42,7 @@ app.use(
 			httpOnly: false, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
 			secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
 			// secure: true,
-			sameSite: 'None',
+			same_site: 'None',
 		},
 	})
 );
@@ -91,6 +92,9 @@ app.post("/verifyToken", (req, res) => {
 });
 
 app.get("/", verifyUser, (req, res) => {
+	// Response.AddHeader("Set-Cookie", "CookieName=CookieValue; path=/;");
+	// Response.SetCookie(new HttpCookie("session-id") { Value = Guid.NewGuid().ToString(), HttpOnly = false });
+	// Response.SetCookie(new HttpCookie("user-name") { Value = data.Login, HttpOnly = false });
 	res.send({ Status: "Success", email: req.email });
 });
 
@@ -165,7 +169,7 @@ app.post("/login", (req, res) => {
                                 httpOnly: false, // Ensure the cookie is only accessible by the web server
                                 secure: process.env.NODE_ENV === "production", // Use secure cookies in production
 								// secure: true,
-								sameSite: 'None'
+								same_site: 'None'
                             });
 							// console.log(cookie);
 							return res.json({ Status: "Success" });
