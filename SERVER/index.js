@@ -37,9 +37,10 @@ app.use(
 		cookie: {
 			maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
 			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-			// httpOnly: true, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
-			// secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
-			secure: true,
+			httpOnly: true, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
+			secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
+			// secure: true,
+			sameSite: 'None',
 		},
 	})
 );
@@ -153,7 +154,13 @@ app.post("/login", (req, res) => {
 					} else {
 						if (valid) {
 							const token = jwt.sign({ email }, secret, { expiresIn: '7d' });
-							res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
+							// res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
+							res.cookie("token", token, { 
+                                maxAge: 7 * 24 * 60 * 60 * 1000,
+                                httpOnly: true, // Ensure the cookie is only accessible by the web server
+                                secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+								sameSite: 'None'
+                            });
 							// console.log(cookie);
 							return res.json({ Status: "Success" });
 						} else {
