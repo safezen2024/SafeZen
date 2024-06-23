@@ -172,7 +172,7 @@ app.post("/login", (req, res) => {
 								sameSite: 'None'
                             });
 							// res.setHeader("Set-Cookie", "token=CookieValue; path=/;");
-							res.setHeader("Set-Cookie", token);
+							// res.setHeader("Set-Cookie", token);
 							// console.log(cookie);
 							return res.json({ Status: "Success" });
 						} else {
