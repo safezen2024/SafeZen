@@ -1,8 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import axios, { Axios } from "axios";
+import axios from "axios";
 import googleButton from "/assets/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png";
-import { useEffect } from "react";
 const clientId = process.env.clientId;
 
 export default function Login() {

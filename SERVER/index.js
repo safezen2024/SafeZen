@@ -55,7 +55,6 @@ app.use(function (req, res, next) {
 	res.setHeader("Access-Control-Allow-Origin", "https://safezen.in");
 	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
 	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
-	res.setHeader("Set-Cookie", "token=CookieValue; path=/;");
 	next();
 });
 
@@ -172,6 +171,8 @@ app.post("/login", (req, res) => {
 								// secure: true,
 								same_site: 'None'
                             });
+							// res.setHeader("Set-Cookie", "token=CookieValue; path=/;");
+							res.setHeader("Set-Cookie", token);
 							// console.log(cookie);
 							return res.json({ Status: "Success" });
 						} else {
