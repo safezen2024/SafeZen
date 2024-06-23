@@ -65,7 +65,6 @@ app.use(function (req, res, next) {
 
 app.use("/oauth", authRouter);
 app.use("/request", requestRouter);
-// app.use("/htmlAuth", htmlRouter);
 
 const verifyUser = (req, res, next) => {
 	const token = req.cookies.token;
@@ -97,9 +96,6 @@ app.post("/verifyToken", (req, res) => {
 });
 
 app.get("/", verifyUser, (req, res) => {
-	// Response.AddHeader("Set-Cookie", "CookieName=CookieValue; path=/;");
-	// Response.SetCookie(new HttpCookie("session-id") { Value = Guid.NewGuid().ToString(), HttpOnly = false });
-	// Response.SetCookie(new HttpCookie("user-name") { Value = data.Login, HttpOnly = false });
 	res.send({ Status: "Success", email: req.email });
 });
 

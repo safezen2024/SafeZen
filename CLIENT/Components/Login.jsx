@@ -42,7 +42,8 @@ export default function Login() {
 					if (res.data.Status === "Success") 
 					{
 						console.log(res.data);	
-						navigate("/");
+						// navigate("/");
+						window.localation.href = "/";
 					}
 					else alert(res.data.Error);
 				})
