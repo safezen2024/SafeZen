@@ -18,8 +18,8 @@ const secret = process.env.SESSION_SECRET;
 
 app.use(
 	cors({
-		origin: ["https://safezen.in", "https://www.safezen.in"],
-		methods: ["POST", "GET", "PUT", "DELETE"],
+		origin: ["https://safezen.in"],
+		methods: ["POST", "GET"],
 		allowedHeaders:["Content-Type", "Access-Control-Allow-Headers"],
 		credentials: true,
 	})
@@ -28,7 +28,7 @@ app.use(express.json()); //req.body
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(
+app.use(	
 	session({
 		key: "userID",
 		secret: process.env.SESSION_SECRET,
