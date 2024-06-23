@@ -157,8 +157,8 @@ app.post("/login", (req, res) => {
 					} else {
 						if (valid) {
 							const token = jwt.sign({ email }, secret, { expiresIn: '7d' });
-							console.log("Login successful")
 							res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
+							console.log(res.cookie);
 							return res.json({ Status: "Success" });
 						} else {
 							return res.json({ Error: "Passwors do no match" });
