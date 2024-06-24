@@ -170,7 +170,8 @@ app.post("/login", (req, res) => {
                                 httpOnly: false, // Ensure the cookie is only accessible by the web server
                                 secure: process.env.NODE_ENV === "production", // Use secure cookies in production
 								// secure: true,
-								sameSite: 'None'
+								sameSite: 'None',
+								domain: '.safezen.in'
                             });
 							// res.setHeader("Set-Cookie", "token=CookieValue; path=/;");
 							// res.setHeader("Set-Cookie", token);

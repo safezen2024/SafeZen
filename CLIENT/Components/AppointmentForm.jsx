@@ -102,7 +102,7 @@ export default function AppointmentForm() {
 		}
 	}
 
-	return (
+	return(
 		<div className="form-container">
 			<form className="form" onSubmit={handleSubmit}>
 				<DatePicker
