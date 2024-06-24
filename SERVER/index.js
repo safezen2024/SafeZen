@@ -104,7 +104,7 @@ app.get("/", verifyUser, (req, res) => {
 		// secure: process.env.NODE_ENV === "production", // Use secure cookies in production
 		secure: true,
 		sameSite: "None",
-		domain: ".safezen.in",
+		// domain: ".safezen.in",
 	});
 	res.send({ Status: "Success", email: req.email });
 });
@@ -182,7 +182,7 @@ app.post("/login", (req, res) => {
 								// secure: process.env.NODE_ENV === "production", // Use secure cookies in production
 								secure: true,
 								sameSite: "None",
-								domain: ".safezen.in",
+								// domain: ".safezen.in",
 							});
 							// res.setHeader("Set-Cookie", "token=CookieValue; path=/;");
 							// res.setHeader("Set-Cookie", token);
