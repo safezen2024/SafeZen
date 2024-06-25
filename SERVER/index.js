@@ -22,7 +22,7 @@ app.use(
 		methods: ["POST", "GET", "PUT", "DELETE"],
 		allowedHeaders: ["Content-Type", "Access-Control-Allow-Headers"],
 		credentials: true,
-		// exposedHeaders: ["Set-cookie"],
+		exposedHeaders: ["Cookie"],
 	})
 );
 app.use(express.json()); //req.body
