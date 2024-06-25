@@ -18,7 +18,7 @@ const secret = process.env.SESSION_SECRET;
 
 app.use(
 	cors({
-		origin: ["https://safezen.in"],
+		origin: true,
 		methods: ["POST", "GET", "PUT", "DELETE"],
 		allowedHeaders: ["Content-Type", "Access-Control-Allow-Headers"],
 		credentials: true,
