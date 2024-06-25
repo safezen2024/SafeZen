@@ -188,7 +188,7 @@ app.post("/login", (req, res) => {
 							// res.setHeader("Set-Cookie", token);
 							// console.log(cookie);
 							// return res.json({ Status: "Success" });
-							res.send('Cookie set', { Status: "Success" });
+							res.send('Cookie set');
 						} else {
 							return res.json({ Error: "Passwors do no match" });
 						}
