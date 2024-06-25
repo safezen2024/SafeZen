@@ -1,15 +1,23 @@
 import Cookies from "js-cookie";
 import axios from "axios";
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 
 export let auth = false;
 export let email = "";
 axios.defaults.withCredentials = true;
 
+function getCookie(name) {
+	const value = `; ${document.cookie}`;
+	const parts = value.split(`; ${name}=`);
+	if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
 try {
 	// let token = Cookies.get("token");
-	let token = useCookies['token'];
-	// let token = document.cookie;
+	// let token = useCookies['token'];
+	// let token = document.cookie;.
+	let token = getCookie('token');
+	console.log(document.cookie);
 	console.log("Retrieved token:", token); // Debugging log
 
 	if (token) {

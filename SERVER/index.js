@@ -95,17 +95,17 @@ app.post("/verifyToken", (req, res) => {
 });
 
 app.get("/", verifyUser, (req, res) => {
-	const token = jwt.sign({ email }, secret, { expiresIn: "7d" });
-	// res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
-	res.cookie("token", token, {
-		path: "/",
-		maxAge: 7 * 24 * 60 * 60 * 1000,
-		// httpOnly: false, // Ensure the cookie is only accessible by the web server
-		// secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-		secure: true,
-		sameSite: "None",
-		// domain: ".safezen.in",
-	});
+	// const token = jwt.sign({ email }, secret, { expiresIn: "7d" });
+	// // res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
+	// res.cookie("token", token, {
+	// 	path: "/",
+	// 	maxAge: 7 * 24 * 60 * 60 * 1000,
+	// 	// httpOnly: false, // Ensure the cookie is only accessible by the web server
+	// 	// secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+	// 	secure: true,
+	// 	sameSite: "None",
+	// 	// domain: ".safezen.in",
+	// });
 	res.send({ Status: "Success", email: req.email });
 });
 
