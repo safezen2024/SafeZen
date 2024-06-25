@@ -51,7 +51,7 @@ app.use(function (req, res, next) {
 	// Response.AddHeader("Set-Cookie", "CookieName=CookieValue; path=/;");
 	// Response.SetCookie(new HttpCookie("session-id") { Value = Guid.NewGuid().ToString(), HttpOnly = false });
 	// Response.SetCookie(new HttpCookie("user-name") { Value = data.Login, HttpOnly = false });
-
+	
 	res.setHeader("Access-Control-Allow-Origin", "https://safezen.in");
 	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
 	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
@@ -175,6 +175,7 @@ app.post("/login", (req, res) => {
 						if (valid) {
 							const token = jwt.sign({ email }, process.env.SESSION_SECRET, { expiresIn: "7d" });
 							// res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
+							res.setHeader("Cookie", `token=${token}; path=/;`);
 							res.cookie("token", token, {
 								// path: "/",
 								maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -184,7 +185,6 @@ app.post("/login", (req, res) => {
 								sameSite: "None",
 								// domain: ".safezen.in",
 							});
-							res.setHeader("Set-Cookie", `token=${token}; path=/;`);
 							// res.setHeader("Set-Cookie", token);
 							// console.log(cookie);
 							// return res.json({ Status: "Success" });
