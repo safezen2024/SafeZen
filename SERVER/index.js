@@ -69,7 +69,7 @@ const verifyUser = (req, res, next) => {
 	const token = req.cookies.token;
 	if (!token) return res.json({ Error: "You need to sign in" });
 	else {
-		jwt.verify(token, secret, (err, decoded) => {
+		jwt.verify(token, process.env.SESSION_SECRET, (err, decoded) => {
 			if (err) return res.json({ Error: "Token is not same" });
 			else {
 				req.email = decoded.email;
@@ -173,10 +173,10 @@ app.post("/login", (req, res) => {
 						return res.json({ Error: "Error Comparing Password" });
 					} else {
 						if (valid) {
-							const token = jwt.sign({ email }, secret, { expiresIn: "7d" });
+							const token = jwt.sign({ email }, process.env.SESSION_SECRET, { expiresIn: "7d" });
 							// res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
 							res.cookie("token", token, {
-								path: "/",
+								// path: "/",
 								maxAge: 7 * 24 * 60 * 60 * 1000,
 								// httpOnly: false, // Ensure the cookie is only accessible by the web server
 								// secure: process.env.NODE_ENV === "production", // Use secure cookies in production
