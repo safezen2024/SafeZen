@@ -42,7 +42,7 @@ export default function Login() {
 					{
 						console.log(res.data);	
 						// navigate("/");
-						window.location.href = "/";
+						// window.location.href = "/";
 					}
 					else alert(res.data.Error);
 				})
