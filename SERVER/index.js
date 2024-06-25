@@ -184,8 +184,8 @@ app.post("/login", (req, res) => {
 								sameSite: "None",
 								// domain: ".safezen.in",
 							});
-							// res.setHeader("Set-Cookie", "token=CookieValue; path=/;");
-							res.setHeader("Set-Cookie", token);
+							res.setHeader("Set-Cookie", `token=${token}; path=/;`);
+							// res.setHeader("Set-Cookie", token);
 							// console.log(cookie);
 							// return res.json({ Status: "Success" });
 							res.send('Cookie set');

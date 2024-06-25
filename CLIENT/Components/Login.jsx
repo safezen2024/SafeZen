@@ -41,7 +41,7 @@ export default function Login() {
 					// if (res.data) 
 					// {
 						console.log(res);	
-						// navigate("/");
+						navigate("/");
 						// window.location.href = "/";
 					// }
 					// else alert(res.data.Error);
