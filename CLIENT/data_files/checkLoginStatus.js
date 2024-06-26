@@ -3,7 +3,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 
 export let auth = false;
-export let email = "";
+// export let email = "";
 axios.defaults.withCredentials = true;
 
 function getCookie(name) {
@@ -39,7 +39,7 @@ try {
 						if (res.data.Status === "Success") {
 							console.log("Token verified successfully");
 							auth = true;
-							email = res.data.email;
+							// email = res.data.email;
 						} else {
 							auth = false;
 							console.log(res.data.Error);
@@ -56,7 +56,7 @@ try {
 					.then((res) => {
 						if (res.data.Status === "Success") {
 							auth = true;
-							email = res.data.email;
+							// email = res.data.email;
 						} else {
 							auth = false;
 							console.log(res.data.Error);

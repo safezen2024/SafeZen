@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Illness from "./Illness";
 import axios from "axios";
 import { auth } from "../data_files/checkLoginStatus";
-import { logged_in } from "./Login";
+import { logged_in, email } from "./Login";
 
 export default function Navbar() {
 	const handleDelete = () => {

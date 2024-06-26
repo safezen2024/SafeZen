@@ -5,6 +5,7 @@ import googleButton from "/assets/google_signin_buttons/web/1x/btn_google_signin
 const clientId = process.env.clientId;
 
 export let logged_in = false;
+export let email = "";
 
 export default function Login() {
 	const [formData, setFormData] = React.useState({
@@ -43,6 +44,7 @@ export default function Login() {
 					if (res.data.Status === "Success") 
 					{
 						logged_in = true;
+						email = formData.email;
 						console.log(res.data.Status);	
 						navigate("/");
 						// window.location.href = "/";
