@@ -8,7 +8,7 @@ env.config();
 
 app.use(
 	cors({
-		origin: ture,
+		origin: true,
 		methods: ["POST", "GET", "PUT", "DELETE"],
 		allowedHeaders:["Content-Type", "Access-Control-Allow-Headers"],
 		credentials: true,
