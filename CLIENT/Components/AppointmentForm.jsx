@@ -74,7 +74,7 @@ export default function AppointmentForm() {
 						(result) => {
 							console.log(result);
 							console.log("SUCCESS!");
-							alert("Appointment Booked Email sent");
+							// alert("Appointment Booked Email sent");
 							try {
 								console.log(formData);
 								axios
