@@ -250,6 +250,7 @@ app.post("/book-appointment", (req, res) => {
 	const therapy = req.body.therapy;
 	const illness = req.body.illness;
 	const description = req.body.description;
+	console.log(email);
 	try {
 		db.query("SELECT * FROM user_data WHERE emailId = ?", [email], (err, checkResult) => {
 			if (err) return res.json({ Error: "Error" });

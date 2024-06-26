@@ -4,6 +4,8 @@ import axios from "axios";
 import googleButton from "/assets/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png";
 const clientId = process.env.clientId;
 
+export let logged_in = false;
+
 export default function Login() {
 	const [formData, setFormData] = React.useState({
 		email: "",
@@ -40,9 +42,10 @@ export default function Login() {
 				.then((res) => {
 					if (res.data.Status === "Success") 
 					{
-						console.log(res);	
-						// navigate("/");
-						window.location.href = "/";
+						logged_in = true;
+						console.log(res.data.Status);	
+						navigate("/");
+						// window.location.href = "/";
 					}
 					else alert(res.data.Error);
 				})

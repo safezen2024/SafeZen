@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Illness from "./Illness";
 import axios from "axios";
 import { auth } from "../data_files/checkLoginStatus";
+import { logged_in } from "./Login";
 
 export default function Navbar() {
 	const handleDelete = () => {
@@ -13,7 +14,7 @@ export default function Navbar() {
 			})
 			.catch((err) => console.log(err));
 	};
-
+	console.log(logged_in);
 	return (
 		<nav className="navbar navbar-expand-lg">
 			<a
@@ -78,7 +79,7 @@ export default function Navbar() {
 					</ul>
 				</div>
 				<div className="col-md-3 text-end account-buttons">
-					{!auth ? (
+					{!logged_in ? (
 						<div>
 							<Link to="/login" id="props.id">
 								<button type="button" className="btn me-2">

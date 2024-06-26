@@ -1,11 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import SelectTime from "./SelectTime";
 import Specialization from "./Specialization";
 import SelectIllness from "./SelectIllness";
 import "react-datepicker/dist/react-datepicker.css";
 import { auth, email } from "../data_files/checkLoginStatus";
+import { logged_in } from "./Login";
 import axios from "axios";
 import emailjs from "@emailjs/browser";
 // import env from "dotenv";
@@ -20,7 +21,7 @@ export default function AppointmentForm() {
 	const [therapy, setTherapy] = React.useState("");
 
 	const textAreaRef = React.useRef(null);
-
+	const navigate = useNavigate();
 	React.useEffect(() => {
 		textAreaRef.current.style.height = "auto";
 		textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
@@ -57,7 +58,7 @@ export default function AppointmentForm() {
 		// const form = React.useRef();
 		event.preventDefault();
 		console.log(date, timeSlot, description, illness, therapy);
-		if (auth) {
+		if (logged_in) {
 			const formData = { email, date, timeSlot, therapy, illness, description };
 			const mailData = {
 				user_email: email,
@@ -80,7 +81,10 @@ export default function AppointmentForm() {
 									.post("https://safezen.onrender.com/book-appointment", formData)
 									.then((res) => {
 										if (res.data.Status === "Success")
-											window.location.href = "/";
+										{
+											alert("Appointment booked");
+											navigate("/");
+										}
 										else alert(res.data.Error);
 									})
 									.catch((err) => console.log(err));
@@ -98,11 +102,11 @@ export default function AppointmentForm() {
 				console.error(err.message);
 			}
 		} else {
-			window.location.href = "/login";
+			navigate("/login");
 		}
 	}
 
-	return(
+	return (
 		<div className="form-container">
 			<form className="form" onSubmit={handleSubmit}>
 				<DatePicker
