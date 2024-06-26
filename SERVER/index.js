@@ -39,10 +39,10 @@ app.use(
 			// token: "token",
 			maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
 			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-			// httpOnly: false, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
+			httpOnly: false, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
 			// secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
-			secure: true,
-			sameSite: "None",
+			secure: false,
+			sameSite: 'None',
 		},
 	})
 );
@@ -179,10 +179,10 @@ app.post("/login", (req, res) => {
 							res.cookie("token", token, {
 								// path: "/",
 								maxAge: 7 * 24 * 60 * 60 * 1000,
-								// httpOnly: false, // Ensure the cookie is only accessible by the web server
+								httpOnly: false, // Ensure the cookie is only accessible by the web server
 								// secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-								secure: true,
-								sameSite: "None",
+								secure: false,
+								sameSite: 'None',
 								// domain: ".safezen.in",
 							});
 							// res.setHeader("Set-Cookie", token);
