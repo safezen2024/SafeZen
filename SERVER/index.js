@@ -16,6 +16,17 @@ const port = process.env.PORT;
 const saltRounds = 10;
 const secret = process.env.SESSION_SECRET;
 
+app.use(function (req, res, next) {
+	// Response.AddHeader("Set-Cookie", "CookieName=CookieValue; path=/;");
+	// Response.SetCookie(new HttpCookie("session-id") { Value = Guid.NewGuid().ToString(), HttpOnly = false });
+	// Response.SetCookie(new HttpCookie("user-name") { Value = data.Login, HttpOnly = false });
+
+	res.setHeader("Access-Control-Allow-Origin", "https://safezen.in");
+	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
+	next();
+});
+
 app.use(
 	cors({
 		origin: true,
@@ -42,21 +53,10 @@ app.use(
 			httpOnly: false, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
 			// secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
 			secure: true,
-			sameSite: 'None',
+			sameSite: "None",
 		},
 	})
 );
-
-app.use(function (req, res, next) {
-	// Response.AddHeader("Set-Cookie", "CookieName=CookieValue; path=/;");
-	// Response.SetCookie(new HttpCookie("session-id") { Value = Guid.NewGuid().ToString(), HttpOnly = false });
-	// Response.SetCookie(new HttpCookie("user-name") { Value = data.Login, HttpOnly = false });
-	
-	res.setHeader("Access-Control-Allow-Origin", "https://safezen.in");
-	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
-	next();
-});
 
 // Response.AddHeader("Set-Cookie", "CookieName=CookieValue; path=/;");
 // Response.SetCookie(new HttpCookie("session-id") { Value = Guid.NewGuid().ToString(), HttpOnly = false });
@@ -173,7 +173,9 @@ app.post("/login", (req, res) => {
 						return res.json({ Error: "Error Comparing Password" });
 					} else {
 						if (valid) {
-							const token = jwt.sign({ email }, process.env.SESSION_SECRET, { expiresIn: "7d" });
+							const token = jwt.sign({ email }, process.env.SESSION_SECRET, {
+								expiresIn: "7d",
+							});
 							// res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
 							res.setHeader("Cookie", `token=${token}; path=/;`);
 							res.cookie("token", token, {
@@ -182,7 +184,7 @@ app.post("/login", (req, res) => {
 								httpOnly: false, // Ensure the cookie is only accessible by the web server
 								// secure: process.env.NODE_ENV === "production", // Use secure cookies in production
 								secure: true,
-								sameSite: 'None',
+								sameSite: "None",
 								// domain: ".safezen.in",
 							});
 							// res.setHeader("Set-Cookie", token);
