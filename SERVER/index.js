@@ -41,7 +41,7 @@ app.use(
 			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
 			httpOnly: false, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
 			// secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
-			secure: false,
+			secure: true,
 			sameSite: 'None',
 		},
 	})
@@ -181,7 +181,7 @@ app.post("/login", (req, res) => {
 								maxAge: 7 * 24 * 60 * 60 * 1000,
 								httpOnly: false, // Ensure the cookie is only accessible by the web server
 								// secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-								secure: false,
+								secure: true,
 								sameSite: 'None',
 								// domain: ".safezen.in",
 							});
