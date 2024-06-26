@@ -38,13 +38,13 @@ export default function Login() {
 			axios
 				.post("https://safezen.onrender.com/login", formData)
 				.then((res) => {
-					// if (res.data) 
-					// {
+					if (res.data.Status === "Success") 
+					{
 						console.log(res);	
-						navigate("/");
-						// window.location.href = "/";
-					// }
-					// else alert(res.data.Error);
+						// navigate("/");
+						window.location.href = "/";
+					}
+					else alert(res.data.Error);
 				})
 				.catch((err) => console.log("Idhar error hai"));
 		} catch (err) {
