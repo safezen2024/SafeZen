@@ -12,7 +12,7 @@ export let tokenExport = [];
 
 app.use(
 	cors({
-		origin: ["https://safezen.in", "https://www.safezen.in"],
+		origin: true,
 		methods: ["POST", "GET", "PUT", "DELETE"],
 		allowedHeaders:["Content-Type", "Access-Control-Allow-Headers"],
 		credentials: true,
