@@ -42,7 +42,7 @@ app.use(
 			httpOnly: false, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
 			// secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
 			secure: false,
-			SameSite: 'None',
+			sameSite: 'None',
 		},
 	})
 );
@@ -182,7 +182,7 @@ app.post("/login", (req, res) => {
 								httpOnly: false, // Ensure the cookie is only accessible by the web server
 								// secure: process.env.NODE_ENV === "production", // Use secure cookies in production
 								secure: false,
-								SameSite: 'None',
+								sameSite: 'None',
 								// domain: ".safezen.in",
 							});
 							// res.setHeader("Set-Cookie", token);
