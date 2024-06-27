@@ -92,9 +92,10 @@ app.get("/", async function (req, res, next) {
 		console.log("Error logging in with OAuth2 user", err);
 	}
 	if (user_data_google.email_verified) {
-		await res.redirect(303, "https://safezen.in");
+		res.redirect(303, "https://safezen.in");
 	} else res.redirect(303, "https://safezen.in/login");
-	if (user_data_google.email_verified) await res.redirect(303, "https://safezen.in");
+	if (user_data_google.email_verified) 
+		res.redirect(303, "https://safezen.in");
 	else res.redirect(303, "https://safezen.in/login");
 });
 
