@@ -92,7 +92,7 @@ app.get("/", async function (req, res, next) {
 		console.log("Error logging in with OAuth2 user", err);
 	}
 	if (user_data_google.email_verified) {
-		res.redirect(303, "https://safezen.in" , {Status : "Success"});
+		res.redirect(303, "https://safezen.in");
 	} else res.redirect(303, "https://safezen.in/login");
 });
 export default app;
