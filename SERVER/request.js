@@ -23,10 +23,10 @@ app.use(
 );
 
 app.post("/", async function (req, res, next) {
-	res.header("Access-Control-Allow-Origin", "https://safezen.in");
-	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
-	res.header("Referrer-Policy", "no-referrer-when-downgrade");
+	// res.header("Access-Control-Allow-Origin", "https://safezen.in");
+	// res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+	// res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
+	// res.header("Referrer-Policy", "no-referrer-when-downgrade");
 	// Something to fo with http or https ↑
 	const redirectUrl = "https://safezen.onrender.com/oauth";
 
