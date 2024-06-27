@@ -94,9 +94,9 @@ app.get("/", async function (req, res, next) {
 	if (user_data_google.email_verified) {
 		res.redirect(303, "https://safezen.in");
 	} else res.redirect(303, "https://safezen.in/login");
-	if (user_data_google.email_verified) 
-		res.redirect(303, "https://safezen.in");
-	else res.redirect(303, "https://safezen.in/login");
+	// if (user_data_google.email_verified) 
+	// 	res.redirect(303, "https://safezen.in");
+	// else res.redirect(303, "https://safezen.in/login");
 });
 
 export default app;
