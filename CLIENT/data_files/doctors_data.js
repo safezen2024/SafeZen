@@ -7,6 +7,7 @@ async function setData(data){
 	// console.log(doctors_data);
 }
 
+axios.defaults.withCredentials = true;
 try {
 	await axios.get("https://safezen.onrender.com/doctorsData")
     .then(res => setData(res.data))
