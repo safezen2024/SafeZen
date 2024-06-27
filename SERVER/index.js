@@ -20,9 +20,8 @@ app.use(function (req, res, next) {
 	// Response.AddHeader("Set-Cookie", "CookieName=CookieValue; path=/;");
 	// Response.SetCookie(new HttpCookie("session-id") { Value = Guid.NewGuid().ToString(), HttpOnly = false });
 	// Response.SetCookie(new HttpCookie("user-name") { Value = data.Login, HttpOnly = false });
-
-	res.setHeader("Access-Control-Allow-Origin", "https://safezen.in");
-	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Methods", "*");
 	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
 	next();
 });
