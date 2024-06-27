@@ -54,8 +54,8 @@ app.use(express.json()); //req.body
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use("/oauth", authRouter);
-app.use("/request", requestRouter);
+// app.use("/oauth", authRouter);
+// app.use("/request", requestRouter);
 
 const verifyUser = (req, res, next) => {
 	const token = req.cookies.token;
