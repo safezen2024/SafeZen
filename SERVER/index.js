@@ -75,8 +75,8 @@ const verifyUser = (req, res, next) => {
 };
 
 app.post("/verifyToken", (req, res) => {
-	let token = req.body;
-	token = token.token;
+	let token = req.body.token;
+	// token = token.token;
 	let tokenImported = tokenExport;
 	token = JSON.stringify(token);
 	tokenImported = JSON.stringify(tokenImported);

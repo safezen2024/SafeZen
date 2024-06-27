@@ -13,11 +13,8 @@ function getCookie(name) {
 }
 
 try {
-	let token = Cookies.get("token");
-	// let token = useCookies['token'];
-	// let token = document.cookie;.
-	// let token = getCookie('token');
 	console.log(document.cookie);
+	let token = Cookies.get("token");
 	console.log("Retrieved token:", token); // Debugging log
 
 	if (token) {
