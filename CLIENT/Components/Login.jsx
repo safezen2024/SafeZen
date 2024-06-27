@@ -19,7 +19,7 @@ export default function Login() {
 			const response = await fetch("https://safezen.onrender.com/request", { method: "post" });
 			const data = await response.json();
 			console.log(data);
-			logged_in = true;
+			// logged_in = true;
 			window.location.href = data.url;
 		} catch (error) {
 			console.error("Error during OAuth request:", error);
