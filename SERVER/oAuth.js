@@ -67,9 +67,9 @@ async function getUserData(access_token) {
 }
 
 app.get("/", async function (req, res, next) {
-	res.setHeader("Access-Control-Allow-Origin", "https://safezen.in");
-	res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
+	// res.setHeader("Access-Control-Allow-Origin", "https://safezen.in");
+	// res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+	// res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
 	const code = req.query.code;
 	console.log(code);
 	console.log("Step 1");

@@ -28,19 +28,6 @@ app.use(function (req, res, next) {
 });
 
 app.use(
-	cors({
-		origin: true,
-		methods: ["POST", "GET", "PUT", "DELETE"],
-		allowedHeaders: ["Content-Type", "Access-Control-Allow-Headers"],
-		credentials: true,
-		exposedHeaders: ["Cookie"],
-	})
-);
-app.use(express.json()); //req.body
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(
 	session({
 		key: "userID",
 		secret: process.env.SESSION_SECRET,
@@ -58,9 +45,18 @@ app.use(
 	})
 );
 
-// Response.AddHeader("Set-Cookie", "CookieName=CookieValue; path=/;");
-// Response.SetCookie(new HttpCookie("session-id") { Value = Guid.NewGuid().ToString(), HttpOnly = false });
-// Response.SetCookie(new HttpCookie("user-name") { Value = data.Login, HttpOnly = false });
+app.use(
+	cors({
+		origin: true,
+		methods: ["POST", "GET", "PUT", "DELETE"],
+		allowedHeaders: ["Content-Type", "Access-Control-Allow-Headers"],
+		credentials: true,
+		exposedHeaders: ["Cookie"],
+	})
+);
+app.use(express.json()); //req.body
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/oauth", authRouter);
 app.use("/request", requestRouter);
@@ -95,17 +91,6 @@ app.post("/verifyToken", (req, res) => {
 });
 
 app.get("/", verifyUser, (req, res) => {
-	// const token = jwt.sign({ email }, secret, { expiresIn: "7d" });
-	// // res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
-	// res.cookie("token", token, {
-	// 	path: "/",
-	// 	maxAge: 7 * 24 * 60 * 60 * 1000,
-	// 	// httpOnly: false, // Ensure the cookie is only accessible by the web server
-	// 	// secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-	// 	secure: true,
-	// 	sameSite: "None",
-	// 	// domain: ".safezen.in",
-	// });
 	res.send({ Status: "Success", email: req.email });
 });
 
