@@ -16,16 +16,6 @@ const port = process.env.PORT;
 const saltRounds = 10;
 const secret = process.env.SESSION_SECRET;
 
-app.use(function (req, res, next) {
-	// Response.AddHeader("Set-Cookie", "CookieName=CookieValue; path=/;");
-	// Response.SetCookie(new HttpCookie("session-id") { Value = Guid.NewGuid().ToString(), HttpOnly = false });
-	// Response.SetCookie(new HttpCookie("user-name") { Value = data.Login, HttpOnly = false });
-	res.setHeader("Access-Control-Allow-Origin", "*");
-	res.setHeader("Access-Control-Allow-Methods", "*");
-	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
-	next();
-});
-
 app.use(
 	session({
 		key: "userID",
@@ -56,6 +46,13 @@ app.use(
 app.use(express.json()); //req.body
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(function (req, res, next) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Methods", "*");
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
+	next();
+});
 
 app.use("/oauth", authRouter);
 app.use("/request", requestRouter);
