@@ -95,5 +95,4 @@ app.get("/", async function (req, res, next) {
 		res.redirect(303, "https://safezen.in" , {Status : "Success"});
 	} else res.redirect(303, "https://safezen.in/login");
 });
-
 export default app;
