@@ -17,6 +17,20 @@ const saltRounds = 10;
 const secret = process.env.SESSION_SECRET;
 
 app.use(
+	cors({
+		origin: true,
+		methods: ["POST", "GET", "PUT", "DELETE"],
+		allowedHeaders: ["Content-Type", "Access-Control-Allow-Headers"],
+		credentials: true,
+		exposedHeaders: ["Cookie"],
+	})
+);
+
+app.use(express.json()); //req.body
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
 	session({
 		key: "userID",
 		secret: process.env.SESSION_SECRET,
@@ -41,21 +55,8 @@ app.use(function (req, res, next) {
 	next();
 });
 
-app.use(
-	cors({
-		origin: true,
-		methods: ["POST", "GET", "PUT", "DELETE"],
-		allowedHeaders: ["Content-Type", "Access-Control-Allow-Headers"],
-		credentials: true,
-		exposedHeaders: ["Cookie"],
-	})
-);
-app.use(express.json()); //req.body
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// app.use("/oauth", authRouter);
-// app.use("/request", requestRouter);
+app.use("/oauth", authRouter);
+app.use("/request", requestRouter);
 
 const verifyUser = (req, res, next) => {
 	const token = req.cookies.token;
