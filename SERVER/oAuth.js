@@ -96,4 +96,13 @@ app.get("/", async function (req, res, next) {
 	} else res.redirect(303, "https://safezen.in/login");
 });
 
+app.get("/verifyGoogleLogin", (req,res) => {
+	if (user_data_google.email_verified) {
+		let email_user = user_data_google.email;
+		return res.json({ Status: "Success", email: email_user });
+	}else{
+		return res.json({ Status: "Error", Error: "Invalid Token" });
+	}
+})
+
 export default app;

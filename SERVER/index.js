@@ -73,15 +73,6 @@ const verifyUser = (req, res, next) => {
 };
 
 
-app.get("/verifyGoogleLogin", (req,res) => {
-	if (user_data_google.email_verified) {
-		let email_user = user_data_google.email;
-		return res.json({ Status: "Success", email: email_user });
-	}else{
-		return res.json({ Status: "Error", Error: "Invalid Token" });
-	}
-})
-
 app.post("/verifyToken", (req, res) => {
 	let token = req.body.token;
 	// token = token.token;
