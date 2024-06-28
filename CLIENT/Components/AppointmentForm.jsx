@@ -58,7 +58,7 @@ export default function AppointmentForm() {
 		// const form = React.useRef();
 		event.preventDefault();
 		console.log(date, timeSlot, description, illness, therapy);
-		if (logged_in) {
+		if (logged_in || auth) {
 			const formData = { email, date, timeSlot, therapy, illness, description };
 			const mailData = {
 				user_email: email,
