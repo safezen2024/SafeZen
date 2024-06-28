@@ -6,6 +6,7 @@ import { auth } from "../data_files/checkLoginStatus";
 import { logged_in, email } from "./Login";
 
 export default function Navbar() {
+	axios.defaults.withCredentials = true;
 	const handleDelete = () => {
 		axios
 			.get("https://safezen.onrender.com/logout")
@@ -14,7 +15,7 @@ export default function Navbar() {
 			})
 			.catch((err) => console.log(err));
 	};
-	console.log(logged_in);
+	console.log(auth);
 	return (
 		<nav className="navbar navbar-expand-lg">
 			<a
@@ -79,7 +80,7 @@ export default function Navbar() {
 					</ul>
 				</div>
 				<div className="col-md-3 text-end account-buttons">
-					{!logged_in ? (
+					{!(logged_in || auth) ? (
 						<div>
 							<Link to="/login" id="props.id">
 								<button type="button" className="btn me-2">

@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import authRouter, { tokenExport, user_data_google } from "./oAuth.js";
 import requestRouter from "./request.js";
+import { islogged_in } from "./oAuth.js";
 env.config();
 
 const app = express();
@@ -72,6 +73,16 @@ const verifyUser = (req, res, next) => {
 	}
 };
 
+
+app.get("/verifyGoogleLogin", (req,res) => {
+	if (islogged_in) {
+		let email_user = user_data_google.email;
+		res.json({ Status: "Success", email: email_user });
+	}else{
+		res.json({ Status: "Error", Error: "Invalid Token" });
+	}
+})
+
 app.post("/verifyToken", (req, res) => {
 	let token = req.body.token;
 	// token = token.token;
@@ -97,9 +108,6 @@ app.get("/logout", (req, res) => {
 });
 
 app.get("/IndTherapy", (req, res) => {
-	// res.header("Access-Control-Allow-Origin", "https://safezen.in");
-	// res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-	// res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
 	try {
 		const sql = "SELECT * FROM indtherapy";
 		db.query(sql, (err, data) => {
@@ -116,9 +124,6 @@ app.get("/test", (req, res) => {
 });
 
 app.get("/RelTherapy", (req, res) => {
-	// res.header("Access-Control-Allow-Origin", "https://safezen.in");
-	// res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-	// res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
 	try {
 		const sql = "SELECT * FROM reltherapy";
 		db.query(sql, (err, data) => {
