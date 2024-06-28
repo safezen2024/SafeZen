@@ -73,14 +73,14 @@
 
 import axios from "axios";
 export let auth = false;
-
+export let gmail = "";
 try{
 	axios
 	.get("https://safezen.onrender.com/verifyGoogleLogin")
 	.then((res) => {
 		if (res.data.Status === "Success") {
 			auth = true;
-			// email = res.data.email;
+			gemail = res.data.email;
 		} else {
 			auth = false;
 			console.log(res.data.Error);

@@ -5,7 +5,7 @@ import SelectTime from "./SelectTime";
 import Specialization from "./Specialization";
 import SelectIllness from "./SelectIllness";
 import "react-datepicker/dist/react-datepicker.css";
-import { auth } from "../data_files/checkLoginStatus";
+import { auth, gmail } from "../data_files/checkLoginStatus";
 import { logged_in, email } from "./Login";
 import axios from "axios";
 import emailjs from "@emailjs/browser";
@@ -59,9 +59,14 @@ export default function AppointmentForm() {
 		event.preventDefault();
 		console.log(date, timeSlot, description, illness, therapy);
 		if (logged_in || auth) {
-			const formData = { email, date, timeSlot, therapy, illness, description };
+			let x = "";
+			if(logged_in)
+				x = email;
+			else 
+				x = gmail;
+			const formData = { x, date, timeSlot, therapy, illness, description };
 			const mailData = {
-				user_email: email,
+				user_email: x,
 				date: date,
 				timeSlot: timeSlot,
 				illness: illness,
