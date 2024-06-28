@@ -97,4 +97,9 @@ app.get("/", async function (req, res, next) {
 		res.redirect(303, "https://safezen.in");
 	} else res.redirect(303, "https://safezen.in/login");
 });
+
+app.get("/logout", (req, res) => {
+	islogged_in = false;
+	return res.json({ Status: "Success" });
+});
 export default app;

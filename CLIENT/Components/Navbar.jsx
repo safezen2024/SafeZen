@@ -7,11 +7,11 @@ import { logged_in, email } from "./Login";
 
 export default function Navbar() {
 	axios.defaults.withCredentials = true;
-	const handleDelete = () => {
-		axios
+	const handleDelete = async() => {
+		await axios
 			.get("https://safezen.onrender.com/logout")
 			.then((res) => {
-				window.location.reload(true);
+				location.reload();
 			})
 			.catch((err) => console.log(err));
 	};
