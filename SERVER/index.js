@@ -240,7 +240,7 @@ app.post("/signup", (req, res) => {
 
 app.post("/book-appointment", (req, res) => {
 	console.log("hi book appoiintment");
-	const email = req.body.email;
+	const email = req.body.x;
 	const date = req.body.date;
 	const timeSlot = req.body.timeSlot;
 	const therapy = req.body.therapy;

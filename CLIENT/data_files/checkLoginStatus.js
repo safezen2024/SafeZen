@@ -80,7 +80,7 @@ try{
 	.then((res) => {
 		if (res.data.Status === "Success") {
 			auth = true;
-			gemail = res.data.email;
+			gmail = res.data.email;
 		} else {
 			auth = false;
 			console.log(res.data.Error);
