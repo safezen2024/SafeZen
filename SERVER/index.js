@@ -9,7 +9,6 @@ import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import authRouter, { tokenExport, user_data_google } from "./oAuth.js";
 import requestRouter from "./request.js";
-import { islogged_in } from "./oAuth.js";
 env.config();
 
 const app = express();
