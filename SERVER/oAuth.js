@@ -9,7 +9,6 @@ env.config();
 console.log("Step 0");
 export let user_data_google = [];
 export let tokenExport = [];
-export let islogged_in = false;
 
 app.use(function (req, res, next) {
 	res.setHeader("Access-Control-Allow-Origin", "*");
@@ -93,13 +92,8 @@ app.get("/", async function (req, res, next) {
 		console.log("Error logging in with OAuth2 user", err);
 	}
 	if (user_data_google.email_verified) {
-		islogged_in = true;
 		res.redirect(303, "https://safezen.in");
 	} else res.redirect(303, "https://safezen.in/login");
 });
 
-app.get("/logout", (req, res) => {
-	islogged_in = false;
-	return res.json({ Status: "Success" });
-});
 export default app;

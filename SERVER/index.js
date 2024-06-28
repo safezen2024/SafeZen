@@ -75,11 +75,11 @@ const verifyUser = (req, res, next) => {
 
 
 app.get("/verifyGoogleLogin", (req,res) => {
-	if (islogged_in) {
+	if (user_data_google.email_verified) {
 		let email_user = user_data_google.email;
-		res.json({ Status: "Success", email: email_user });
+		return res.json({ Status: "Success", email: email_user });
 	}else{
-		res.json({ Status: "Error", Error: "Invalid Token" });
+		return res.json({ Status: "Error", Error: "Invalid Token" });
 	}
 })
 
