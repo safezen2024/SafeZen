@@ -104,7 +104,7 @@ app.get("/", verifyUser, (req, res) => {
 
 app.get("/logout", (req, res) => {
 	res.clearCookie("token");
-	islogged_in = false;
+	// islogged_in = false;
 	return res.json({ Status: "Success" });
 });
 

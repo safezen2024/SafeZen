@@ -11,7 +11,7 @@ export default function Navbar() {
 		axios
 			.get("https://safezen.onrender.com/logout")
 			.then((res) => {
-				window.location.reload();
+				window.location.reload(true);
 			})
 			.catch((err) => console.log(err));
 	};
