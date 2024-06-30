@@ -13,14 +13,21 @@ export default function Login() {
 		password: "",
 	});
 	const navigate = useNavigate();
-
-	async function auth() {
+	// axios.defaults.withCredentials = true;
+	function auth() {
 		try {
-			const response = await fetch("https://safezen.onrender.com/request", { method: "post" });
-			const data = await response.json();
-			console.log(data);
-			// logged_in = true;
-			window.location.href = data.url;
+			// const response = await fetch("https://safezen.onrender.com/request", { method: "post" });
+			// const data = await response.json();
+			// console.log(data);
+			// // logged_in = true;
+			// window.location.href = data.url;
+			const response = axios.post("https://safezen.onrender.com/request")
+			.then(async(res) => {
+				const data = await response.json();
+				console.log(data);
+				window.location.href = data.url;
+			})
+			.catch((err) => console.log("Error"));
 		} catch (error) {
 			console.error("Error during OAuth request:", error);
 		}
@@ -34,7 +41,7 @@ export default function Login() {
 		}));
 	}
 
-	axios.defaults.withCredentials = true;
+	//
 
 	function handleSubmit(event) {
 		event.preventDefault();
@@ -43,15 +50,13 @@ export default function Login() {
 			axios
 				.post("https://safezen.onrender.com/login", formData)
 				.then((res) => {
-					if (res.data.Status === "Success") 
-					{
+					if (res.data.Status === "Success") {
 						logged_in = true;
 						email = formData.email;
-						console.log(res.data.Status);	
+						console.log(res.data.Status);
 						navigate("/");
 						// window.location.href = "/";
-					}
-					else alert(res.data.Error);
+					} else alert(res.data.Error);
 				})
 				.catch((err) => console.log("Idhar error hai"));
 		} catch (err) {

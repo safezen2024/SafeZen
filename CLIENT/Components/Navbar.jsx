@@ -6,7 +6,7 @@ import { auth } from "../data_files/checkLoginStatus";
 import { logged_in, email } from "./Login";
 
 export default function Navbar() {
-	axios.defaults.withCredentials = true;
+	// axios.defaults.withCredentials = true;
 	const handleDelete = async() => {
 		await axios
 			.get("https://safezen.onrender.com/logout")
