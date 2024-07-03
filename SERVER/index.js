@@ -163,14 +163,14 @@ app.post("/login", (req, res) => {
 							// res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
 							res.setHeader("Cookie", `token=${token}; path=/;`);
 							res.cookie("token", token, {
-								// path: "/",
+								path: "/",
 								maxAge: 7 * 24 * 60 * 60 * 1000,
 								withCredentials: true,
 								httpOnly: false, // Ensure the cookie is only accessible by the web server
 								// secure: process.env.NODE_ENV === "production", // Use secure cookies in production
 								secure: true,
 								sameSite: "None",
-								// domain: ".safezen.in",
+								domain: "safezen.onrender.com",
 							});
 							// res.setHeader("Set-Cookie", token);
 							// console.log(cookie);
