@@ -1,13 +1,12 @@
 import axios from "axios";
+axios.defaults.withCredentials = true;
 
 let doctors_data = [];
-
 async function setData(data){
 	doctors_data = data;
 	// console.log(doctors_data);
 }
 
-axios.defaults.withCredentials = true;
 try {
 	await axios.get("https://safezen.onrender.com/doctorsData")
     .then(res => setData(res.data))

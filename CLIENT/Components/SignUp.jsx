@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import googleButton from "/assets/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png";
-
+axios.defaults.withCredentials = true;
 export default function SignUp() {
 	const [formData, setFormData] = React.useState({
 		email: "",
@@ -32,7 +32,7 @@ export default function SignUp() {
 			[name]: type === "checkbox" ? checked : value,
 		}));
 	}
-	axios.defaults.withCredentials = true;
+	// axios.defaults.withCredentials = true;
 	function handleSubmit(event) {
 		event.preventDefault();
 		try {
@@ -98,23 +98,13 @@ export default function SignUp() {
 
 				<br />
 				{/* <hr height="2px" border-width="0" color="gray" background-color="gray" /> */}
-				<p>-----------OR-----------</p>
+				{/* <p>-----------OR-----------</p>
 
 				
 				<button className="btn-auth" type="button" onClick={() => auth()}>
 					<img className="btn-auth-img" src={googleButton} alt="google sign in" />
-				</button>
-				{/* <div>
-                    <GoogleLogin
-                        clientId = {clientId}
-                        buttonText = "Login"
-                        onSuccess={onSuccess}
-                        onFailure={onFailure}
-                        cookiePolicy={'single_host_origin'}
-                        isSignedIn={true}
-                    />
-                </div> */}
-				{/* <GLogin/> */}
+				</button> */}
+				
 			</form>
 		</div>
 	);

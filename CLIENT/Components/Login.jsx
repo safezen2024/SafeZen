@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import googleButton from "/assets/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png";
 const clientId = process.env.clientId;
-
+axios.defaults.withCredentials = true;
 export let logged_in = false;
 export let email = "";
 
@@ -21,13 +21,14 @@ export default function Login() {
 			// console.log(data);
 			// // logged_in = true;
 			// window.location.href = data.url;
-			const response = axios.post("https://safezen.onrender.com/request")
-			.then(async(res) => {
-				const data = await response.json();
-				console.log(data);
-				window.location.href = data.url;
-			})
-			.catch((err) => console.log("Error"));
+			const response = axios
+				.post("https://safezen.onrender.com/request")
+				.then(async (res) => {
+					const data = await response.json();
+					console.log(data);
+					window.location.href = data.url;
+				})
+				.catch((err) => console.log("Error"));
 		} catch (error) {
 			console.error("Error during OAuth request:", error);
 		}
@@ -52,6 +53,11 @@ export default function Login() {
 				.then((res) => {
 					if (res.data.Status === "Success") {
 						logged_in = true;
+						// const cok = document.cookie();
+						// console.log(cok);
+						document.cookie =
+							"username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC";
+						console.log(document.cookie);
 						email = formData.email;
 						console.log(res.data.Status);
 						navigate("/");
@@ -96,22 +102,12 @@ export default function Login() {
 
 				<button className="form--submit">Login</button>
 				<br />
-				{/* <hr height="2px" border-width="0" color="gray" background-color="gray" /> */}
+				{/* 
 				<p>-----------OR-----------</p>
 
-				{/*<div >
-					<div className="card social-block">
-						<div className="card-body">
-							<a className="btn-block" href="/auth/google" role="button">
-								<i className="fab fa-google"></i>
-								Sign In with Google
-							</a>
-						</div>
-					</div>
-				</div> */}
 				<button className="btn-auth" type="button" onClick={auth}>
 					<img className="btn-auth-img" src={googleButton} alt="google sign in" />
-				</button>
+				</button> */}
 
 				{/* <GLogin/> */}
 			</form>

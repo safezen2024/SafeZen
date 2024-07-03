@@ -11,7 +11,7 @@ import axios from "axios";
 import emailjs from "@emailjs/browser";
 // import env from "dotenv";
 // env.config();
-
+axios.defaults.withCredentials = true ;
 export default function AppointmentForm() {
 	const d = new Date();
 	const [date, setDate] = React.useState(d);

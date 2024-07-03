@@ -1,4 +1,4 @@
-// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 // import axios from "axios";
 // import { useCookies } from "react-cookie";
 
@@ -71,23 +71,28 @@
 // 	console.error("Error getting token:", err);
 // }
 
-import axios from "axios";
 export let auth = false;
+// import axios from "axios";
+// export let auth = false;
 export let gmail = "";
-try{
-	axios
-	.get("https://safezen.onrender.com/verifyGoogleLogin")
-	.then((res) => {
-		if (res.data.Status === "Success") {
-			auth = true;
-			gmail = res.data.email;
-		} else {
-			auth = false;
-			console.log(res.data.Error);
-		}
-	})
-	.catch((err) => console.error("Error verifying token:", err));
+// try{
+// 	axios
+// 	.get("https://safezen.onrender.com/verifyGoogleLogin")
+// 	.then((res) => {
+// 		if (res.data.Status === "Success") {
+// 			auth = true;
+// 			gmail = res.data.email;
+// 		} else {
+// 			auth = false;
+// 			console.log(res.data.Error);
+// 		}
+// 	})
+// 	.catch((err) => console.error("Error verifying token:", err));
 
-}catch(err){
-	console.error("Error verifying token:", err);
-}
+// }catch(err){
+// 	console.error("Error verifying token:", err);
+// }
+
+console.log(document.cookie);
+let token = Cookies.get("token");
+console.log("Retrieved token:", token); // Debugging log

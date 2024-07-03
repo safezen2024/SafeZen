@@ -4,7 +4,7 @@ import Illness from "./Illness";
 import axios from "axios";
 import { auth } from "../data_files/checkLoginStatus";
 import { logged_in, email } from "./Login";
-
+axios.defaults.withCredentials = true ;
 export default function Navbar() {
 	// axios.defaults.withCredentials = true;
 	const handleDelete = async() => {

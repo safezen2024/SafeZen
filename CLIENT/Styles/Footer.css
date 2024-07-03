@@ -1,5 +1,5 @@
 .footer{
-	background-color: #4682A9;
+	background-color: #d7f5ff;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -15,9 +15,9 @@
 }
 
 .footer-text{
-	color: #F6F4EB;
+	color: #273f95;
 }
 
 .footer-text > * > * > *{
-	color: #F6F4EB;
+	color: #273f95;
 }

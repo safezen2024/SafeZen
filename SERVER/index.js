@@ -165,6 +165,7 @@ app.post("/login", (req, res) => {
 							res.cookie("token", token, {
 								// path: "/",
 								maxAge: 7 * 24 * 60 * 60 * 1000,
+								withCredentials: true,
 								httpOnly: false, // Ensure the cookie is only accessible by the web server
 								// secure: process.env.NODE_ENV === "production", // Use secure cookies in production
 								secure: true,

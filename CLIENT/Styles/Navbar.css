@@ -5,7 +5,7 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 1rem;
-	background-color: #4682a9;
+	background-color: #d7f5ff;
 }
 
 .brand_head {
@@ -33,11 +33,11 @@
 }
 
 .navbar-text {
-	color: #F6F4EB;
+	color: #273f95;
 }
 
 .navbar-toggler-icon{
-	color: #F6F4EB;
+	color: #273f95;
 	
 }
 

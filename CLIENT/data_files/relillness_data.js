@@ -1,11 +1,10 @@
 import axios from "axios";
+axios.defaults.withCredentials = true;
 
 let relillness_data = [];
-
 async function setData(data){
 	relillness_data = data;
 }
-axios.defaults.withCredentials = true;
 try {
 	await axios.get("https://safezen.onrender.com/RelTherapy")
     .then(res => setData(res.data))

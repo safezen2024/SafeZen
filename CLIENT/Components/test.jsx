@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import googleButton from "/assets/google_signin_buttons/web/1x/btn_google_signin_dark_pressed_web.png";
-
+axios.defaults.withCredentials = true;
 export default function Login() {
 	const [formData, setFormData] = useState({ email: "", password: "" });
 	const navigate = useNavigate();
@@ -26,7 +26,7 @@ export default function Login() {
 		}));
 	}
 
-	axios.defaults.withCredentials = true;
+	// axios.defaults.withCredentials = true;
 
 	function handleSubmit(event) {
 		event.preventDefault();

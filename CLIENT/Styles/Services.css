@@ -21,7 +21,7 @@
 	margin-left: 10%;
 	margin-bottom: 10%;
 	padding: 3%;
-	color: #4682a9;
+	color: #273f95;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
@@ -40,7 +40,7 @@
 }
 
 .illness {
-	background-color: #91c8e4;
+	background-color: #d7f5ff;
 	border-radius: 8%;
 	height: 20rem;
 	width: auto;
@@ -55,7 +55,7 @@
 	font-family: "Inter", sans-serif;
 	font-style: normal;
 	font-size: 1.2rem;
-	color: #f6f4eb;
+	/* color: #f6f4eb; */
 	color: #000;
 }
 
@@ -64,7 +64,7 @@
 	/* font-weight: 500; */
 	font-style: normal;
 	font-size: 2.2rem;
-	color: #4682a9;
+	color: #273f95;
 }
 
 .various_illness {

@@ -8,7 +8,7 @@ body {
 	font-optical-sizing: auto;
 	font-style: normal;
 	font-variation-settings: "slnt" 0;
-	background-color: #f6f4eb;
+	background-color: #f0f4f8;
 }
 
 body::-webkit-scrollbar {
@@ -54,31 +54,38 @@ p {
 }
 
 .btn:hover {
-	background-color: #4682a9;
-	color: #f6f4eb;
+	background-color: #273f95;
+	color: #d7f5ff;
+	border-color: #273f95;
 }
 
 .btn {
-	border-color: #f6f4eb;
-	color: #f6f4eb;
+	border-color: #273f95;
+	color: #273f95;
 	font-weight: 600;
 	margin: 10px;
 }
 .btn-sign-up {
-	border-color: #f6f4eb;
-	color: #4682a9;
-	background-color: #f6f4eb;
+	border-color: #273f95;
+	color: #d7f5ff;
+	background-color: #273f95;
+}
+
+.btn-sign-up:hover {
+	border-color: #273f95;
+	color: #273f95;
+	background-color: #d7f5ff;
 }
 
 .btn-book-appointment {
-	border-color: #4682a9;
-	color: #f6f4eb;
-	background-color: #4682a9;
+	border-color: #273f95;
+	color: #273f95;
+	background-color: #d7f5ff;
 }
 
 .btn-book-appointment:hover {
-	background-color: #f6f4eb;
-	color: #4682a9;
+	background-color: #d7f5ff;
+	color: #273f95;
 }
 
 .card-deck {
@@ -94,7 +101,7 @@ p {
 }
 
 .card-header {
-	background-color: #94b1cf;
+	background-color: #d7f5ff;
 }
 
 .hero_photo {
