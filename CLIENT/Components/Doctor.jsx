@@ -39,11 +39,11 @@ export default function Doctor(props) {
 			</button>
 			<div className="doctorDetails prevent-select services-text">
 				<h2>{doctors_data[id].name}</h2>
-				<ul className="doctorDetailList">
+				{/* <ul className="doctorDetailList">
 					{doctors_data[id].specialization.split("|").map((item) => (
 						<li>{item}</li>
 					))}
-				</ul>
+				</ul> */}
 				<ul className="doctorDetailList">
 					{doctors_data[id].qualification.split("|").map((item) => (
 						<li>{item}</li>

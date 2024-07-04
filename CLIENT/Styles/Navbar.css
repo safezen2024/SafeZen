@@ -5,8 +5,8 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 1rem;
-	/* background-color: #d7f5ff; */
-	background-color: #273f95;
+	background-color: #d7f5ff;
+	/* background-color: #273f95; */
 }
 
 .brand_head {
@@ -34,13 +34,13 @@
 }
 
 .navbar-text {
-	/* color: #273f95; */
-	color: #d7f5ff;
+	color: #273f95;
+	/* color: #d7f5ff; */
 }
 
 .navbar-toggler-icon{
-	/* color: #273f95; */
-	color: #d7f5ff;
+	color: #273f95;
+	/* color: #d7f5ff; */
 }
 
 .subtitle {

@@ -1,6 +1,6 @@
 .footer{
-	/* background-color: #d7f5ff; */
-	background-color: #273f95;
+	background-color: #d7f5ff;
+	/* background-color: #273f95; */
 	display: flex;
 	justify-content: space-evenly;
 	align-items: start;
@@ -20,20 +20,19 @@
 }
 
 .footer-text{
-	/* color: #273f95; */
-	color: #d7f5ff;
+	color: #273f95;
 	text-align: center;
 	width: 100%;
 }
 
 .footer-text > * > * > *{
-	/* color: #273f95; */
-	color: #d7f5ff;
+	color: #273f95;
+	/* color: #d7f5ff; */
 }
 
 .footer-text > * > *{
-	/* color: #273f95; */
-	color: #d7f5ff;
+	color: #273f95;
+	/* color: #d7f5ff; */
 	margin: 0;
 }
 
@@ -42,8 +41,8 @@
 	flex-direction: column;
 	width: 100%;
 	gap: 1rem;
-	/* color: #273f95; */
-	color: #d7f5ff;
+	color: #273f95;
+	/* color: #d7f5ff; */
 	justify-content: center;
 	align-items: center;
 	margin-bottom: 2rem;

@@ -1,9 +1,10 @@
 .doctorsGallery {
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: center;
 	position: relative;
 	margin-top: 5%;
 	margin-bottom: 5%;
+	gap: 10%;
 }
 
 .doctorsCards {
