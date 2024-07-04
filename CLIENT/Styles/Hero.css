@@ -6,9 +6,10 @@
 
 .hero-text{
 	text-align: center;
-	margin-bottom: 2%;
-	margin-top: 2%;
-	color: #4682A9
+	padding-bottom: 2%;
+	padding-top: 2%;
+	background-color: #273f95;
+	color: #d7f5ff;
 }
 
 .Hero-background{

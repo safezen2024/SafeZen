@@ -8,7 +8,9 @@ body {
 	font-optical-sizing: auto;
 	font-style: normal;
 	font-variation-settings: "slnt" 0;
-	background-color: #f0f4f8;
+	/* background-color: #f7fbfe; */
+	background-color: #f0f4f8;;
+	/* background-color: #e0e1e3; */
 }
 
 body::-webkit-scrollbar {
@@ -54,50 +56,72 @@ p {
 }
 
 .btn:hover {
-	background-color: #273f95;
+	/* background-color: #273f95;
 	color: #d7f5ff;
-	border-color: #273f95;
+	border-color: #273f95; */
+
+	background-color: #d7f5ff;
+	color: #273f95;
+	border-color: #d7f5ff;
+
 }
 
 .btn {
-	border-color: #273f95;
-	color: #273f95;
+	/* border-color: #273f95;
+	color: #273f95; */
+	border-color: #d7f5ff;
+	color: #d7f5ff;
 	font-weight: 600;
 	margin: 10px;
 }
 .btn-sign-up {
-	border-color: #273f95;
+	/* border-color: #273f95;
+	color: #d7f5ff;
+	background-color: #273f95; */
+	border-color: #d7f5ff;
+	color: #273f95;
+	background-color: #d7f5ff;
+}
+
+.btn-sign-up:hover {
+	/* border-color: #273f95;
+	color: #273f95;
+	background-color: #d7f5ff; */
+	border-color: #d7f5ff;
 	color: #d7f5ff;
 	background-color: #273f95;
 }
 
-.btn-sign-up:hover {
-	border-color: #273f95;
-	color: #273f95;
-	background-color: #d7f5ff;
-}
-
 .btn-book-appointment {
-	border-color: #273f95;
-	color: #273f95;
-	background-color: #d7f5ff;
+	border-color: #d7f5ff;
+	color: #d7f5ff;
+	background-color: #273f95;
 }
 
 .btn-book-appointment:hover {
 	background-color: #d7f5ff;
 	color: #273f95;
+	border-color: #273f95 ;
 }
 
 .card-deck {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
+	height: 40rem;
+	margin: 2rem;
 }
 
 .card-deck > * {
-	margin: 30px;
-	width: 25%;
+	margin: 2rem;
+	height: 25rem;
+	/* width: 25%; */
+}
+
+.card-body{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
 }
 
 .card-header {
@@ -119,7 +143,7 @@ p {
 }
 
 .text {
-	margin-top: 30px;
+	/* margin-top: 30px; */
 	width: 100%;
 }
 
@@ -229,10 +253,10 @@ p {
 .form--input {
 	width: 100%;
 	margin-bottom: 20px;
-	color: #537497;
+	color: #273f95;
 	height: 40px;
 	border-radius: 5px;
-	border: 1px solid #537497;
+	border: 1px solid #273f95;
 	padding: 5px;
 	font-family: "Inter", sans-serif;
 }
@@ -241,15 +265,15 @@ p {
 	width: 50%;
 	padding: 10px;
 	border-radius: 5px;
-	color: #f6f4eb;
-	background-color: #4682a9;
+	color: #d7f5ff;
+	background-color: #273f95;
 	cursor: pointer;
 }
 
 .form--submit:hover {
-	background-color: #f6f4eb;
-	color: #4682a9;
-	border-color: #4682a9;
+	background-color: #d7f5ff;
+	color: #273f95;
+	border-color: #273f95;
 }
 
 .form--marketing {

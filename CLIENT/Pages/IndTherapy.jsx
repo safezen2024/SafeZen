@@ -4,6 +4,7 @@ import Navbar from "../Components/Navbar";
 import illness_data from "../data_files/illness_data";
 import IllnessCard from "../Components/illness_card";
 import Foot from "../Components/Foot";
+import PricePlans from "../Components/PricePlans";
 
 export default function IndTherapy() {
 	const [style, setStyle] = useState();
@@ -19,7 +20,7 @@ export default function IndTherapy() {
 		smallScreen: {
 			display: "grid",
 			gridTemplateColumns: "1fr",
-			gridTemplateRows:"auto",
+			gridTemplateRows: "auto",
 			gap: "20px",
 			margin: "20px",
 		},
@@ -118,17 +119,24 @@ export default function IndTherapy() {
 						<p className="book-appoinntment-card-text">
 							We have the best professionals - licensed and verified.
 						</p>
-						<Link to="/appointment-page">
-							<button type="button" className="btn btn-book-appointment">
+						{/* <Link to="/IndTherapy/#pplans"> */}
+							<button
+								type="button"
+								className="btn btn-book-appointment"
+								onClick={() => {
+									// e.preventDefault();
+									window.scrollTo(0,2700);
+								}}>
 								Book an appointment
 							</button>
-						</Link>
+						{/* </Link> */}
 					</div>
 				</div>
 				<div className="various_illness" style={style}>
 					{illData}
 				</div>
 			</div>
+			<PricePlans id="pplans" />
 			<Foot />
 		</div>
 	);

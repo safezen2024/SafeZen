@@ -4,9 +4,10 @@ import Navbar from "../Components/Navbar";
 import relillness_data from "../data_files/relillness_data";
 import RelIllnessCard from "../Components/relillness_card";
 import Foot from "../Components/Foot";
+import PricePlans from "../Components/PricePlans";
 
 export default function RelTherapy() {
-	const [style, setStyle] = React.useState();
+	const [style, setStyle] = useState();
 
 	const styles = {
 		default: {
@@ -19,7 +20,7 @@ export default function RelTherapy() {
 		smallScreen: {
 			display: "grid",
 			gridTemplateColumns: "1fr",
-			gridTemplateRows:"auto",
+			gridTemplateRows: "auto",
 			gap: "20px",
 			margin: "20px",
 		},
@@ -114,22 +115,25 @@ export default function RelTherapy() {
 			<div className="indPage">
 				<h1 className="page-title">RELATIONSHIP THERAPY</h1>
 				<div className="indTherapyHero">
-					<div className="book-appoinntment-card"> 
+					<div className="book-appoinntment-card">
 						<p className="book-appoinntment-card-text">
 							We have the best professionals - licensed and verified.
 						</p>
-						<Link to="/appointment-page">
-							<button type="button" className="btn btn-book-appointment">
-								Book an appointment
-							</button>
-						</Link>
+						{/* <Link to="/appointment-page"> */}
+						<button
+							type="button"
+							className="btn btn-book-appointment"
+							onClick={() => {
+								window.scrollTo(0, 1000);
+							}}>
+							Book an appointment
+						</button>
+						{/* </Link> */}
 					</div>
 				</div>
-				
-				<div style={style}>
-					{illData}
-				</div>
+				<div style={style}>{illData}</div>
 			</div>
+			<PricePlans />
 			<Foot />
 		</div>
 	);

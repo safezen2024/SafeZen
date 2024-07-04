@@ -4,7 +4,7 @@
 	font-style: normal;
 	font-size: 5rem;
 	padding-top: 2.5rem;
-	color: #4682A9;
+	color: #273f95;
 	text-align: center;
 	text-wrap: wrap;
 	margin-left: 2rem;
@@ -15,15 +15,34 @@
 	text-align: center;
 	align-content: center;
 	margin: 2.5rem 6rem 4rem 6rem;
-	padding: 0rem 4rem 0rem 4rem ;
+	padding: 2rem 4rem 2rem 4rem ;
 	/* display: block; */
-	height: 23rem;
-	background-color: #91C8E4;
+	height: 100%;
+	background-color: #d7f5ff;
 	border-radius: 50px;
 	/* border-radius: 1-4 length|% / 1-4 length|%|initial|inherit; */
-	color: #F6F4EB;
+	color: #273f95;
 	font-weight: 700;
 	font-size: larger;
+}
+
+.services-text{
+	text-align: left;
+	align-content: center;
+	margin: 2.5rem 6rem 4rem 6rem;
+	padding: 2rem 4rem 2rem 4rem ;
+	/* display: block; */
+	height: 100%;
+	background-color: #d7f5ff;
+	border-radius: 60px;
+	/* border-radius: 1-4 length|% / 1-4 length|%|initial|inherit; */
+	color: #273f95;
+	font-weight: 300;
+	font-size: large;
+}
+
+.services-text > *{
+	margin-bottom: 1rem;
 }
 
 @media (max-width: 620px) {
@@ -32,8 +51,11 @@
 	}
 	.meditation-text{
 		padding: 2rem 3rem 2rem 3rem ;
-		height: 30rem;
 		font-size: large;
+	}
+	.services-text{
+		padding: 2rem 3rem 2rem 3rem ;
+		font-size: medium;
 	}
 }
 
@@ -49,7 +71,9 @@
 	}
 	.meditation-text{
 		font-size: smaller;
-		height: 36.5rem;
+	}
+	.services-text{
+		font-size: smaller;
 	}
 }
 

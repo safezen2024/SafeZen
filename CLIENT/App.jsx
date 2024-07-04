@@ -11,7 +11,10 @@ import AppointmentPage from "./Pages/AppointmentPage";
 import Contact from "./Pages/Contact";
 import Jinam from "./Components/Jinam";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Pricing from "./Components/pricing";
+import Pricing from "./Pages/pricing.jsx";
+import TermsOfService from "./Pages/TermsOfService";
+import PrivacyPolicy from "./Pages/PrivacyPolicy.jsx";
+import Disclaimer from "./Pages/Disclaimer";
 
 function App() {
 	function requireAuth(nextState, replace, next) {
@@ -36,6 +39,9 @@ function App() {
 					<Route path="/checkout/step1" element={<Checkout1 />}></Route>
 					<Route path="/checkout/step2" element={<Checkout2 />}></Route>
 					<Route path="/pricing" element={<Pricing />}></Route>
+					<Route path="/termsofservice" element={<TermsOfService/>}></Route>
+					<Route path="/privacypolicy" element={<PrivacyPolicy/>}></Route>
+					<Route path="/disclaimer" element={<Disclaimer/>}></Route>
 					<Route path="/appointment-page" element={<AppointmentPage />}></Route>
 					<Route path="/contact" element={<Contact />} onEnter={requireAuth}></Route>
 					<Route path="/jinam" element={<Jinam />}></Route>
