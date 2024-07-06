@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import emailjs from "@emailjs/browser";
 // env.config();
 
 export default function Foot() {
@@ -7,11 +8,13 @@ export default function Foot() {
 	function handleNumChange(event) {
 		setPhoneNo(event.target.value);
 	}
-	function handleSubmit() {
+	function handleSubmit(event) {
+		event.preventDefault();
 		const mailData = {
 			phone_no: phone_no,
 		};
 		try {
+			console.log(mailData);
 			emailjs
 				.send(
 					import.meta.env.VITE_CALL_EMAILJS_SERVICE_ID,
@@ -23,7 +26,7 @@ export default function Foot() {
 					(result) => {
 						console.log(result);
 						console.log("SUCCESS!");
-						alert("Call Booked");
+						alert(`Call Booked for ${phone_no}`);
 					},
 					(err) => {
 						console.log("FAILED...", err);
@@ -111,7 +114,7 @@ export default function Foot() {
 								onChange={handleNumChange}
 								value={phone_no}
 							/>
-							<button type="submit" className="btn">
+							<button className="btn">
 								Request Callback
 							</button>
 						</form>
