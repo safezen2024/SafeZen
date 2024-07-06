@@ -1,7 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
+// env.config();
 
 export default function Foot() {
+	const [phone_no, setPhoneNo] = React.useState();
+	function handleNumChange(event) {
+		setPhoneNo(event.target.value);
+	}
+	function handleSubmit() {
+		const mailData = {
+			phone_no: phone_no,
+		};
+		try {
+			emailjs
+				.send(
+					import.meta.env.VITE_CALL_EMAILJS_SERVICE_ID,
+					import.meta.env.VITE_CALL_EMAILJS_TEMPLATE_ID,
+					mailData,
+					import.meta.env.VITE_EMAILJS_PUBLIC_ID
+				)
+				.then(
+					(result) => {
+						console.log(result);
+						console.log("SUCCESS!");
+						alert("Call Booked");
+					},
+					(err) => {
+						console.log("FAILED...", err);
+					}
+				);
+		} catch (err) {
+			console.error(err.message);
+		}
+	}
 	return (
 		<div>
 			<div>
@@ -28,7 +59,9 @@ export default function Foot() {
 					</div>
 
 					<div className="footer-text">
-						<h5>Quick Links</h5>
+						<h4>
+							<strong>Quick Links</strong>
+						</h4>
 						<ul className="nav flex-column footer-text">
 							<Link to="/">
 								<li className="nav-item mb-2">Home</li>
@@ -45,10 +78,15 @@ export default function Foot() {
 							<Link to="/Contact">
 								<li className="nav-item mb-2">Contact</li>
 							</Link>
+							<Link to="/aboutus">
+								<li className="nav-item mb-2">About Us</li>
+							</Link>
 						</ul>
 					</div>
 					<div className="footer-text">
-						<h5>Legalities</h5>
+						<h4>
+							<strong>Legalities</strong>
+						</h4>
 						<ul className="nav flex-column footer-text">
 							<Link to="/termsofservice">
 								<li className="nav-item mb-2">Terms Of Service</li>
@@ -66,8 +104,13 @@ export default function Foot() {
 					</div>
 					<div className="footer-callback">
 						<p className="footer-text">We are here to help you :)</p>
-						<form className="req-callback">
-							<input type="text" placeholder="Enter your phone number" />
+						<form className="req-callback" onSubmit={handleSubmit}>
+							<input
+								type="text"
+								placeholder="Enter your phone number"
+								onChange={handleNumChange}
+								value={phone_no}
+							/>
 							<button type="submit" className="btn">
 								Request Callback
 							</button>

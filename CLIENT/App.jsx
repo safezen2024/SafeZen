@@ -15,6 +15,7 @@ import Pricing from "./Pages/pricing.jsx";
 import TermsOfService from "./Pages/TermsOfService";
 import PrivacyPolicy from "./Pages/PrivacyPolicy.jsx";
 import Disclaimer from "./Pages/Disclaimer";
+import AboutUs from "./Pages/AbourUs.jsx";
 
 function App() {
 	function requireAuth(nextState, replace, next) {
@@ -44,6 +45,7 @@ function App() {
 					<Route path="/disclaimer" element={<Disclaimer/>}></Route>
 					<Route path="/appointment-page" element={<AppointmentPage />}></Route>
 					<Route path="/contact" element={<Contact />} onEnter={requireAuth}></Route>
+					<Route path="/aboutus" element={<AboutUs/>}></Route>
 					<Route path="/jinam" element={<Jinam />}></Route>
 					<Route path="*" element={<Navigate to="/" />} />
 				</Routes>

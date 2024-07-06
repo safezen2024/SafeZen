@@ -11,7 +11,8 @@ import axios from "axios";
 import emailjs from "@emailjs/browser";
 // import env from "dotenv";
 // env.config();
-axios.defaults.withCredentials = true ;
+
+axios.defaults.withCredentials = true;
 export default function AppointmentForm() {
 	const d = new Date();
 	const [date, setDate] = React.useState(d);
@@ -60,10 +61,8 @@ export default function AppointmentForm() {
 		console.log(date, timeSlot, description, illness, therapy);
 		if (logged_in || auth) {
 			let x = "";
-			if(logged_in)
-				x = email;
-			else 
-				x = gmail;
+			if (logged_in) x = email;
+			else x = gmail;
 			const formData = { x, date, timeSlot, therapy, illness, description };
 			const mailData = {
 				user_email: x,
@@ -74,7 +73,12 @@ export default function AppointmentForm() {
 			};
 			try {
 				emailjs
-					.send("service_zt76834", "template_pkpimjc", mailData, "tdQv2n6LJSvFhlleR")
+					.send(
+						import.meta.env.VITE_EMAILJS_SERVICE_ID,
+						import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+						mailData,
+						import.meta.env.VITE_EMAILJS_PUBLIC_ID
+					)
 					.then(
 						(result) => {
 							console.log(result);
@@ -85,12 +89,10 @@ export default function AppointmentForm() {
 								axios
 									.post("https://safezen.onrender.com/book-appointment", formData)
 									.then((res) => {
-										if (res.data.Status === "Success")
-										{
+										if (res.data.Status === "Success") {
 											alert("Appointment booked");
 											navigate("/");
-										}
-										else alert(res.data.Error);
+										} else alert(res.data.Error);
 									})
 									.catch((err) => console.log(err));
 							} catch (err) {
