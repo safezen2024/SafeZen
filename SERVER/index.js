@@ -363,6 +363,7 @@ app.post("/verify", async (req, res) => {
 				res.json(response.data);
 			})
 			.catch((error) => {
+				console.log("Error in autheticating cashfree");
 				console.error(error.response.data.message);
 			});
 	} catch (error) {

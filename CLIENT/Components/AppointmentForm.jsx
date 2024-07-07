@@ -9,6 +9,8 @@ import { auth, gmail } from "../data_files/checkLoginStatus";
 import { logged_in, email } from "./Login";
 import axios from "axios";
 import emailjs from "@emailjs/browser";
+// import {Cashfree} from "@cashfreepayments/cashfree-js"
+import { load } from "@cashfreepayments/cashfree-js";
 // import env from "dotenv";
 // env.config();
 
@@ -96,9 +98,8 @@ export default function AppointmentForm() {
 	}
 
 	function handleSubmit(event) {
-		// const form = React.useRef();
 		event.preventDefault();
-		console.log(date, timeSlot, description, illness, therapy);
+		// console.log(date, timeSlot, description, illness, therapy);
 		if (logged_in || auth) {
 			let x = "";
 			if (logged_in) x = email;
@@ -134,13 +135,13 @@ export default function AppointmentForm() {
 											// navigate("/");
 											try {
 												let sessionId = await getSessionId();
+												console.log(sessionId);
 												let checkoutOptions = {
 													paymentSessionId: sessionId,
 													redirectTarget: "_modal",
 												};
 
-												cashfree.checkout(checkoutOptions)
-												.then((res) => {
+												cashfree.checkout(checkoutOptions).then((res) => {
 													console.log("payment initialized");
 													verifyPayment(orderId);
 												});
