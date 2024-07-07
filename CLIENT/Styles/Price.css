@@ -1,0 +1,28 @@
+.card{
+	display: flex;
+	flex-direction: column;
+}
+
+.card-deck {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* height: 35rem; */
+	margin: 2rem;
+}
+
+.card-deck > * {
+	/* margin: 2rem; */
+	/* height: 25rem; */
+	/* width: 25%; */
+}
+
+.card-body{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.card-header {
+	background-color: #d7f5ff;
+}

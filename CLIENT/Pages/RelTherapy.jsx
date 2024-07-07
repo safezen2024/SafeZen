@@ -114,7 +114,7 @@ export default function RelTherapy() {
 			<Navbar />
 			<div className="indPage">
 				<h1 className="page-title">RELATIONSHIP THERAPY</h1>
-				<div className="indTherapyHero">
+				<div className="relTherapyHero">
 					<div className="book-appoinntment-card">
 						<p className="book-appoinntment-card-text">
 							We have the best professionals - licensed and verified.

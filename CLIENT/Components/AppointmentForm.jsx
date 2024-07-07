@@ -1,4 +1,4 @@
-import React from "react";
+import React, { StrictMode } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import SelectTime from "./SelectTime";
@@ -23,6 +23,18 @@ export default function AppointmentForm() {
 
 	const textAreaRef = React.useRef(null);
 	const navigate = useNavigate();
+	let cashfree;
+
+	let insitialzeSDK = async function () {
+		cashfree = await load({
+			mode: "production",
+		});
+	};
+
+	insitialzeSDK();
+
+	const [orderId, setOrderId] = React.useState("");
+
 	React.useEffect(() => {
 		textAreaRef.current.style.height = "auto";
 		textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
@@ -53,6 +65,34 @@ export default function AppointmentForm() {
 	function handleTherapyChange(event) {
 		setTherapy(event.target.value);
 		console.log(event.target.value);
+	}
+
+	async function getSessionId() {
+		try {
+			let res = await axios.get("https://safezen.onrender.com/payment");
+
+			if (res.data && res.data.payment_session_id) {
+				console.log(res.data);
+				setOrderId(res.data.order_id);
+				return res.data.payment_session_id;
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	async function verifyPayment() {
+		try {
+			let res = await axios.post("https://safezen.onrender.com/verify", {
+				orderId: orderId,
+			});
+
+			if (res && res.data) {
+				alert("payment verified");
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	function handleSubmit(event) {
@@ -88,10 +128,25 @@ export default function AppointmentForm() {
 								console.log(formData);
 								axios
 									.post("https://safezen.onrender.com/book-appointment", formData)
-									.then((res) => {
+									.then(async (res) => {
 										if (res.data.Status === "Success") {
-											alert("Appointment booked");
-											navigate("/");
+											// alert("Appointment booked");
+											// navigate("/");
+											try {
+												let sessionId = await getSessionId();
+												let checkoutOptions = {
+													paymentSessionId: sessionId,
+													redirectTarget: "_modal",
+												};
+
+												cashfree.checkout(checkoutOptions)
+												.then((res) => {
+													console.log("payment initialized");
+													verifyPayment(orderId);
+												});
+											} catch (error) {
+												console.log(error);
+											}
 										} else alert(res.data.Error);
 									})
 									.catch((err) => console.log(err));
@@ -156,7 +211,7 @@ export default function AppointmentForm() {
 						maxLength="500"
 						ref={textAreaRef}></textarea>
 				</div>
-				<button className="form--submit">Submit</button>
+				<button className="form--submit">Pay Now</button>
 			</form>
 		</div>
 	);

@@ -11,8 +11,21 @@
 	align-items: flex-start;
 }
 
+.relTherapyHero {
+	width: 100%;
+	height: 40rem;
+	margin-bottom: 2rem;
+	background-image: url("/src//RelCounselling.jpeg");
+	background-repeat: no-repeat;
+	background-size: 100% 50rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	align-items: flex-start;
+}
+
 .book-appoinntment-card {
-	position: relative;
+	position: absolute;
 	background: rgba(246, 244, 235, 0.7) /* Green background with 30% opacity */;
 	height: 22rem;
 	width: 27rem;
@@ -75,7 +88,7 @@
 .indPage{
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: start;
 	align-items: center;
 	font-family: "Inter", sans-serif;	
 }
@@ -101,6 +114,10 @@
 	}
 	.book-appoinntment-card-text {
 		font-size: 1.5rem;
+	}
+	.relTherapyHero{
+		background-image: url("/src/RelCounselling3.jpeg");
+		height: 50rem;
 	}
 }
 

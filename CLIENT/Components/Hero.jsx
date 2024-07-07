@@ -5,10 +5,10 @@ export default function Hero() {
 
 	useEffect(() => {
 		const handleResize = () => {
-			if(window.innerWidth <= 550) 
+			if(window.innerWidth <= 650) 
 				setImage("/src/Hero3.jpg");
-			else if (window.innerWidth <= 850 && window.innerWidth > 550) 
-				setImage("/src/Hero2.jpg");
+			else if (window.innerWidth <= 950 && window.innerWidth > 650) 
+				setImage("/src/Hero1.jpg");
 			else
 				setImage("/src/hero.jpg");
 		};

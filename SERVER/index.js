@@ -9,6 +9,8 @@ import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import authRouter, { tokenExport, user_data_google } from "./oAuth.js";
 import requestRouter from "./request.js";
+import { Cashfree } from "cashfree-pg";
+import crypto from "crypto";
 env.config();
 
 const app = express();
@@ -27,6 +29,11 @@ app.use(
 );
 
 app.use(express.json()); //req.body
+app.use(
+	express.urlencoded({
+		extended: true,
+	})
+);
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -58,6 +65,18 @@ app.use(function (req, res, next) {
 app.use("/oauth", authRouter);
 app.use("/request", requestRouter);
 
+Cashfree.XClientId = process.env.CLIENT_ID;
+Cashfree.XClientSecret = process.env.CLIENT_SECRET;
+Cashfree.XEnvironment = Cashfree.Environment.PRODUCTION;
+
+function generateOrderId() {
+	const uniqueId = crypto.randomBytes(16).toString("hex");
+	const hash = crypto.createHash("sha256");
+	hash.update(uniqueId);
+	const orderId = hash.digest("hex");
+	return orderId.substr(0, 12);
+}
+
 const verifyUser = (req, res, next) => {
 	const token = req.cookies.token;
 	if (!token) return res.json({ Error: "You need to sign in" });
@@ -71,7 +90,6 @@ const verifyUser = (req, res, next) => {
 		});
 	}
 };
-
 
 app.post("/verifyToken", (req, res) => {
 	let token = req.body.token;
@@ -94,7 +112,6 @@ app.get("/", verifyUser, (req, res) => {
 
 app.get("/logout", (req, res) => {
 	res.clearCookie("token");
-	// islogged_in = false;
 	return res.json({ Status: "Success" });
 });
 
@@ -127,10 +144,6 @@ app.get("/RelTherapy", (req, res) => {
 });
 
 app.get("/doctorsData", (req, res) => {
-	// res.header("Access-Control-Allow-Origin", "https://safezen.in");
-	// res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-	// res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
-	// res.header("Referrer-Policy", "no-referrer-when-downgrade");
 	try {
 		const sql = "SELECT * FROM doctor_data";
 		db.query(sql, (err, data) => {
@@ -172,10 +185,7 @@ app.post("/login", (req, res) => {
 								sameSite: "None",
 								domain: "safezen.onrender.com",
 							});
-							// res.setHeader("Set-Cookie", token);
-							// console.log(cookie);
-							// return res.json({ Status: "Success" });
-							// res.send('Cookie set');
+
 							return res.json({ Status: "Success" });
 						} else {
 							return res.json({ Error: "Passwors do no match" });
@@ -316,6 +326,47 @@ app.post("/book-appointment", (req, res) => {
 		});
 	} catch (err) {
 		console.log({ Error: "Error" });
+	}
+});
+
+app.get("/payment", async (req, res) => {
+	try {
+		let request = {
+			order_amount: 1.0,
+			order_currency: "INR",
+			order_id: await generateOrderId(),
+			customer_details: {
+				customer_id: "testing bro",
+				customer_phone: "9999999999",
+				customer_name: "Web Codder",
+				customer_email: "webcodder@example.com",
+			},
+		};
+		Cashfree.PGCreateOrder("2023-08-01", request)
+			.then((response) => {
+				console.log(response.data);
+				res.json(response.data);
+			})
+			.catch((error) => {
+				console.error(error.response.data.message);
+			});
+	} catch (error) {
+		console.log(error);
+	}
+});
+
+app.post("/verify", async (req, res) => {
+	try {
+		let { orderId } = req.body;
+		Cashfree.PGOrderFetchPayments("2023-08-01", orderId)
+			.then((response) => {
+				res.json(response.data);
+			})
+			.catch((error) => {
+				console.error(error.response.data.message);
+			});
+	} catch (error) {
+		console.log(error);
 	}
 });
 
