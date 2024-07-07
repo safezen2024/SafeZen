@@ -348,9 +348,11 @@ app.get("/payment", async (req, res) => {
 				res.json(response.data);
 			})
 			.catch((error) => {
+				console.log("Error in autheticating cashfree 3");
 				console.error(error.response.data.message);
 			});
 	} catch (error) {
+		console.log("Error in autheticating cashfree 4");
 		console.log(error);
 	}
 });
@@ -367,6 +369,7 @@ app.post("/verify", async (req, res) => {
 				console.error(error.response.data.message);
 			});
 	} catch (error) {
+		console.log("Error in autheticating cashfree 2");
 		console.log(error);
 	}
 });
