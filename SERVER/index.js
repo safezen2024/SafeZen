@@ -342,6 +342,7 @@ app.get("/payment", async (req, res) => {
 				customer_email: "webcodder@example.com",
 			},
 		};
+		console.log(request);
 		Cashfree.PGCreateOrder("2023-08-01", request)
 			.then((response) => {
 				console.log(response.data);

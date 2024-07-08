@@ -96,6 +96,31 @@ export default function AppointmentForm() {
 			console.log(error);
 		}
 	}
+	function handleSubmit2(event) {
+		event.preventDefault();
+		if (logged_in || auth) {
+			let x = "";
+			if (logged_in) x = email;
+			else x = gmail;
+			try {
+				let sessionId = getSessionId();
+				console.log(sessionId);
+				let checkoutOptions = {
+					paymentSessionId: sessionId,
+					redirectTarget: "_modal",
+				};
+
+				cashfree.checkout(checkoutOptions).then((res) => {
+					console.log("payment initialized");
+					verifyPayment(orderId);
+				});
+			} catch (error) {
+				console.log(error);
+			}
+		} else {
+			navigate("/login");
+		}
+	}
 
 	function handleSubmit(event) {
 		event.preventDefault();
@@ -171,7 +196,7 @@ export default function AppointmentForm() {
 
 	return (
 		<div className="form-container">
-			<form className="form" onSubmit={handleSubmit}>
+			<form className="form" onSubmit={handleSubmit2}>
 				<DatePicker
 					type="date"
 					selected={date}
