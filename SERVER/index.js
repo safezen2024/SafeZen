@@ -336,7 +336,7 @@ app.get("/payment", async (req, res) => {
 			order_currency: "INR",
 			order_id: await generateOrderId(),
 			customer_details: {
-				customer_id: "testing bro",
+				customer_id: "testingbro",
 				customer_phone: "9999999999",
 				customer_name: "Web Codder",
 				customer_email: "webcodder@example.com",
