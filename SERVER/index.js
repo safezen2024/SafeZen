@@ -346,8 +346,7 @@ app.get("/payment", async (req, res) => {
 					"https://www.cashfree.com/devstudio/preview/pg/web/checkout?order_id={order_id}",
 			},
 		};
-		console.log(order_id);
-		orderId;
+		console.log(request.order_id);
 		console.log(request);
 		Cashfree.PGCreateOrder("2023-08-01", request)
 			.then((response) => {
