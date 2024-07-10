@@ -35,7 +35,7 @@ export default function AppointmentForm() {
 
 	insitialzeSDK();
 
-	const [orderId, setOrderId] = React.useState("");
+	const [orderId, setOrderId] = React.useState();
 
 	React.useEffect(() => {
 		textAreaRef.current.style.height = "auto";
@@ -72,11 +72,13 @@ export default function AppointmentForm() {
 	async function getSessionId() {
 		try {
 			let res = await axios.get("https://safezen.onrender.com/payment");
-
+			// console.log(res);
 			if (res.data && res.data.payment_session_id) {
 				console.log(res.data);
-				setOrderId(res.data.order_id);
-				return res.data.payment_session_id;
+				await setOrderId(res.data.order_id);
+				await console.log(orderId);
+				// await console.log(res.data.payment_session_id)
+				return await res.data.payment_session_id;
 			}
 		} catch (error) {
 			console.log(error);
@@ -85,10 +87,11 @@ export default function AppointmentForm() {
 
 	async function verifyPayment() {
 		try {
+			console.log(orderId);
 			let res = await axios.post("https://safezen.onrender.com/verify", {
 				orderId: orderId,
 			});
-
+			console.log(res);
 			if (res && res.data) {
 				alert("payment verified");
 			}
@@ -96,33 +99,33 @@ export default function AppointmentForm() {
 			console.log(error);
 		}
 	}
-	function handleSubmit2(event) {
+	async function handleSubmit2(event) {
 		event.preventDefault();
-		if (logged_in || auth) {
-			let x = "";
-			if (logged_in) x = email;
-			else x = gmail;
-			try {
-				let sessionId = getSessionId();
-				console.log(sessionId);
-				let checkoutOptions = {
-					paymentSessionId: sessionId,
-					redirectTarget: "_modal",
-				};
+		// if (logged_in || auth) {
+		// let x = "";
+		// if (logged_in) x = email;
+		// else x = gmail;
+		try {
+			let sessionId = await getSessionId();
+			console.log(sessionId);
+			let checkoutOptions = await {
+				paymentSessionId: sessionId,
+				redirectTarget: "_modal",
+			};
 
-				cashfree.checkout(checkoutOptions).then((res) => {
-					console.log("payment initialized");
-					verifyPayment(orderId);
-				});
-			} catch (error) {
-				console.log(error);
-			}
-		} else {
-			navigate("/login");
+			cashfree.checkout(checkoutOptions).then((res) => {
+				console.log("payment initialized");
+				verifyPayment(orderId);
+			});
+		} catch (error) {
+			console.log(error);
 		}
+		// } else {
+		// 	navigate("/login");
+		// }
 	}
 
-	function handleSubmit(event) {
+	async function handleSubmit(event) {
 		event.preventDefault();
 		// console.log(date, timeSlot, description, illness, therapy);
 		if (logged_in || auth) {
@@ -138,7 +141,7 @@ export default function AppointmentForm() {
 				description: description,
 			};
 			try {
-				emailjs
+				await emailjs
 					.send(
 						import.meta.env.VITE_EMAILJS_SERVICE_ID,
 						import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
@@ -146,22 +149,22 @@ export default function AppointmentForm() {
 						import.meta.env.VITE_EMAILJS_PUBLIC_ID
 					)
 					.then(
-						(result) => {
+						async (result) => {
 							console.log(result);
 							console.log("SUCCESS!");
 							// alert("Appointment Booked Email sent");
 							try {
 								console.log(formData);
-								axios
+								await axios
 									.post("https://safezen.onrender.com/book-appointment", formData)
 									.then(async (res) => {
 										if (res.data.Status === "Success") {
-											// alert("Appointment booked");
+											alert("Redirecting to payment gateway!!");
 											// navigate("/");
 											try {
 												let sessionId = await getSessionId();
 												console.log(sessionId);
-												let checkoutOptions = {
+												let checkoutOptions = await {
 													paymentSessionId: sessionId,
 													redirectTarget: "_modal",
 												};
