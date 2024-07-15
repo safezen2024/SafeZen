@@ -338,8 +338,8 @@ app.get("/payment1", async (req, res) => {
 			customer_details: {
 				customer_id: "testingbro",
 				customer_phone: "9999999999",
-				customer_name: "Web Codder",
-				customer_email: "webcodder@example.com",
+				customer_name: "Enter your name",
+				customer_email: "Enter your email",
 			},
 			order_meta: {
 				return_url:
@@ -372,8 +372,8 @@ app.get("/payment2", async (req, res) => {
 			customer_details: {
 				customer_id: "testingbro",
 				customer_phone: "9999999999",
-				customer_name: "Web Codder",
-				customer_email: "webcodder@example.com",
+				customer_name: "Enter your Name",
+				customer_email: "Enter your email",
 			},
 			order_meta: {
 				return_url:
@@ -406,8 +406,8 @@ app.get("/payment3", async (req, res) => {
 			customer_details: {
 				customer_id: "testingbro",
 				customer_phone: "9999999999",
-				customer_name: "Web Codder",
-				customer_email: "webcodder@example.com",
+				customer_name: "Enter your name",
+				customer_email: "Enter Your Email",
 			},
 			order_meta: {
 				return_url:
