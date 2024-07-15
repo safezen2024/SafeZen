@@ -29,7 +29,9 @@ export default function AppointmentForm(props) {
 	const textAreaRef = React.useRef(null);
 	const navigate = useNavigate();
 	let cashfree;
-	let m1 = mt1, m2= mt2, m3 = mt3 ;
+	let m1 = mt1,
+		m2 = mt2,
+		m3 = mt3;
 	let insitialzeSDK = async function () {
 		cashfree = await load({
 			mode: "production",
@@ -88,7 +90,6 @@ export default function AppointmentForm(props) {
 	}
 	let url;
 	async function getSessionId() {
-		
 		if (props.amt === 1) url = "https://safezen.onrender.com/payment1";
 		else if (props.amt === 2) url = "https://safezen.onrender.com/payment2";
 		else url = "https://safezen.onrender.com/payment3";
@@ -178,44 +179,50 @@ export default function AppointmentForm(props) {
 												// 	button.classList.remove("button-loader");
 												// }, 2000); // Simulated 2-second task
 												// button.disabled = false;
-												// Remove the loading animation CSS class
+												
 												button.classList.remove("button-loader");
 												await cashfree
 													.checkout(checkoutOptions)
 													.then(async (res) => {
 														console.log("payment initialized");
-														await verifyPayment(orderId);
-														// try {
-														// 	console.log(mailData);
-														// 	emailjs
-														// 		.send(
-														// 			import.meta.env
-														// 				.VITE_CALL_EMAILJS_SERVICE_ID,
-														// 			import.meta.env
-														// 				.VITE_CALL_EMAILJS_TEMPLATE_ID,
-														// 			mailData,
-														// 			import.meta.env
-														// 				.VITE_EMAILJS_PUBLIC_ID
-														// 		)
-														// 		.then(
-														// 			(result) => {
-														// 				console.log(result);
-														// 				console.log("SUCCESS!");
-														// 				alert(
-														// 					`Call Booked for ${phone_no}`
-														// 				);
-														// 			},
-														// 			(err) => {
-														// 				console.log(
-														// 					"FAILED...",
-														// 					err
-														// 				);
-														// 			}
-														// 		);
-														// } catch (err) {
-														// 	button.disabled = false;
-														// 	console.error(err.message);
-														// }
+														// await verifyPayment(orderId);
+														try {
+															// console.log(mailData);
+															const mailData = {
+																user_email: x,
+																date: date,
+																time: timeSlot,
+																link: meetLink,
+															};
+															await emailjs
+																.send(
+																	import.meta.env
+																		.VITE_USER_EMAILJS_SERVICE_ID,
+																	import.meta.env
+																		.VITE_USER_EMAILJS_TEMPLATE_ID,
+																	mailData,
+																	import.meta.env
+																		.VITE_EMAILJS_PUBLIC_ID
+																)
+																.then(
+																	(result) => {
+																		console.log(result);
+																		console.log("SUCCESS!");
+																		alert(
+																			`You have recived the link at ${x}`
+																		);
+																	},
+																	(err) => {
+																		console.log(
+																			"FAILED...",
+																			err
+																		);
+																	}
+																);
+														} catch (err) {
+															button.disabled = false;
+															console.error(err.message);
+														}
 													})
 													.catch((err) => console.log(err));
 											} catch (error) {

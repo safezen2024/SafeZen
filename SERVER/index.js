@@ -405,7 +405,7 @@ app.get("/payment2", async (req, res) => {
 app.get("/payment3", async (req, res) => {
 	try {
 		let request = {
-			order_amount: 9199.0,
+			order_amount: 1.0,
 			order_currency: "INR",
 			order_id: await generateOrderId(),
 			customer_details: {
