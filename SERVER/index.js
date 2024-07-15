@@ -17,6 +17,8 @@ const app = express();
 const port = process.env.PORT;
 const saltRounds = 10;
 const secret = process.env.SESSION_SECRET;
+let mt1 = 0, mt2 = 20, mt3 = 40;
+
 
 app.use(
 	cors({
@@ -185,8 +187,8 @@ app.post("/login", (req, res) => {
 								sameSite: "None",
 								domain: "safezen.onrender.com",
 							});
-
-							return res.json({ Status: "Success" });
+							// return res.json({ Status: "Success" });
+							return res.json({ Status: "Success" , mt1:mt1 , mt2:mt2, mt3:mt3});
 						} else {
 							return res.json({ Error: "Passwors do no match" });
 						}
@@ -247,6 +249,9 @@ app.post("/book-appointment", (req, res) => {
 	const therapy = req.body.therapy;
 	const illness = req.body.illness;
 	const description = req.body.description;
+	mt1 = req.body.m1;
+	mt2 = req.body.m2;
+	mt3 = req.body.m3;
 	console.log(email);
 	try {
 		db.query("SELECT * FROM user_data WHERE emailId = ?", [email], (err, checkResult) => {
@@ -312,7 +317,7 @@ app.post("/book-appointment", (req, res) => {
 												Error: "Error storing appointment data in SERVER",
 											});
 										else {
-											return res.json({ Status: "Success" });
+											return res.json({ Status: "Success" , mt1:mt1 , mt2:mt2, mt3:mt3});
 										}
 									}
 								);

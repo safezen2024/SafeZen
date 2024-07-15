@@ -105,7 +105,7 @@ export default function Foot() {
 							</Link>
 						</ul>
 					</div>
-					<div className="footer-callback">
+					{/* <div className="footer-callback">
 						<p className="footer-text">We are here to help you :)</p>
 						<form className="req-callback" onSubmit={handleSubmit}>
 							<input
@@ -118,7 +118,7 @@ export default function Foot() {
 								Request Callback
 							</button>
 						</form>
-					</div>
+					</div> */}
 				</footer>
 			</div>
 		</div>

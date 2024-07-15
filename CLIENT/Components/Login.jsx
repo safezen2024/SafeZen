@@ -8,6 +8,7 @@ export let logged_in = false;
 export let email = "";
 import Navbar from "./Navbar";
 import Foot from "./Foot";
+export let mt1, mt2, mt3;
 
 export default function Login() {
 	React.useEffect(() => {
@@ -61,6 +62,9 @@ export default function Login() {
 				.post("https://safezen.onrender.com/login", formData)
 				.then((res) => {
 					if (res.data.Status === "Success") {
+						mt1 = res.data.mt1;
+						mt2 = res.data.mt2;
+						mt3 = res.data.mt3;
 						logged_in = true;
 						// const cok = document.cookie();
 						// console.log(cok);

@@ -12,7 +12,7 @@ export default function AppointmentPage2()
 		<div className="page">
 			<Navbar />
 			<div>
-				<AppointmentForm amt="2"/>
+				<AppointmentForm amt={2}/>
 			</div>
 			<Foot/>
 		</div>

@@ -6,7 +6,7 @@ import Specialization from "./Specialization";
 import SelectIllness from "./SelectIllness";
 import "react-datepicker/dist/react-datepicker.css";
 import { auth, gmail } from "../data_files/checkLoginStatus";
-import { logged_in, email } from "./Login";
+import { logged_in, email, mt1, mt2, mt3 } from "./Login";
 import axios from "axios";
 import emailjs from "@emailjs/browser";
 // import {Cashfree} from "@cashfreepayments/cashfree-js"
@@ -17,6 +17,7 @@ import gmeetLinks from "../data_files/GmeetLinks";
 
 axios.defaults.withCredentials = true;
 export default function AppointmentForm(props) {
+	console.log(props);
 	const d = new Date();
 	const [date, setDate] = React.useState(d);
 	const [timeSlot, setTimeSlot] = React.useState();
@@ -28,8 +29,7 @@ export default function AppointmentForm(props) {
 	const textAreaRef = React.useRef(null);
 	const navigate = useNavigate();
 	let cashfree;
-	let mt1 = 0, mt2 = 20, mt3 = 40;
-
+	let m1 = mt1, m2= mt2, m3 = mt3 ;
 	let insitialzeSDK = async function () {
 		cashfree = await load({
 			mode: "production",
@@ -63,23 +63,18 @@ export default function AppointmentForm(props) {
 		await setTimeSlot(event.target.value);
 		console.log(event.target.value);
 		const tm = event.target.value;
-		if(tm[1] == '2' || tm[1] == '5' || tm[1] == '8'){
+		if (tm[1] === "2" || tm[1] === "5" || tm[1] === "8") {
 			await setMeetLink(gmeetLinks[mt1]);
-			await mt1++;
-			if(mt1 == 20)
-				mt1 = 0;
-		}
-		else if(tm[1] == '3' || tm[1] == '6' || tm[1] == '9'){
+			m1 = mt1 + 1;
+			if (m1 === 20) m1 = 0;
+		} else if (tm[1] == "3" || tm[1] == "6" || tm[1] == "9") {
 			await setMeetLink(gmeetLinks[mt2]);
-			await mt2++;
-			if(mt2 == 40)
-				mt2 = 20;
-		}
-		else{
+			m2 = mt2 + 1;
+			if (m2 == 40) m2 = 20;
+		} else {
 			await setMeetLink(gmeetLinks[mt3]);
-			await mt3++;
-			if(mt3 == 60)
-				mt3 = 40;
+			m3 = mt3 + 1;
+			if (m3 == 60) m3 = 40;
 		}
 		console.log(meetLink);
 	}
@@ -91,16 +86,14 @@ export default function AppointmentForm(props) {
 		setTherapy(event.target.value);
 		console.log(event.target.value);
 	}
-	let url ;
-	if(props.amt === "1")
-		url = "https://safezen.onrender.com/payment1";
-	else if(props.amt === "1")
-		url = "https://safezen.onrender.com/payment2";
-	else
-		url = "https://safezen.onrender.com/payment3";
-
+	let url;
 	async function getSessionId() {
+		
+		if (props.amt === 1) url = "https://safezen.onrender.com/payment1";
+		else if (props.amt === 2) url = "https://safezen.onrender.com/payment2";
+		else url = "https://safezen.onrender.com/payment3";
 		try {
+			console.log(url);
 			const res = await axios.get(url);
 			// console.log(res);
 			if (res.data && res.data.payment_session_id) {
@@ -142,7 +135,7 @@ export default function AppointmentForm(props) {
 			let x = "";
 			if (logged_in) x = email;
 			else x = gmail;
-			const formData = { x, date, timeSlot, therapy, illness, description };
+			const formData = { x, date, timeSlot, therapy, illness, description, m1, m2, m3 };
 			const mailData = {
 				user_email: x,
 				date: date,
@@ -223,7 +216,8 @@ export default function AppointmentForm(props) {
 														// 	button.disabled = false;
 														// 	console.error(err.message);
 														// }
-													});
+													})
+													.catch((err) => console.log(err));
 											} catch (error) {
 												button.disabled = false;
 												console.log(error);
@@ -231,8 +225,8 @@ export default function AppointmentForm(props) {
 										} else alert(res.data.Error);
 									})
 									.catch((err) => {
-											console.log(err) 
-											button.disabled = false
+										console.log(err);
+										button.disabled = false;
 									});
 							} catch (err) {
 								button.disabled = false;
