@@ -25,6 +25,8 @@ export default function AppointmentForm(props) {
 	const [description, setDescription] = React.useState("");
 	const [therapy, setTherapy] = React.useState("");
 	const [meetLink, setMeetLink] = React.useState("");
+	const [orderId, setOrderId] = React.useState("");
+	const orderIdRef = React.useRef(orderId);
 
 	const textAreaRef = React.useRef(null);
 	const navigate = useNavigate();
@@ -40,12 +42,17 @@ export default function AppointmentForm(props) {
 
 	insitialzeSDK();
 
-	const [orderId, setOrderId] = React.useState("");
-
 	React.useEffect(() => {
 		textAreaRef.current.style.height = "auto";
 		textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
 	}, [description]);
+
+	React.useEffect(() => {
+		orderIdRef.current = orderId;
+		console.log("Updated orderId:", orderId);
+		setOrderId(orderId);
+		console.log("abcxyz:", orderId);
+	}, [orderId]);
 
 	function handleDescriptionChange(event) {
 		setDescription(event.target.value);
@@ -65,20 +72,21 @@ export default function AppointmentForm(props) {
 		await setTimeSlot(event.target.value);
 		console.log(event.target.value);
 		const tm = event.target.value;
+		console.log("mt1, mt2, mt3 ", mt1, mt2, mt3);
 		if (tm[1] === "2" || tm[1] === "5" || tm[1] === "8") {
-			await setMeetLink(gmeetLinks[mt1]);
 			m1 = mt1 + 1;
 			if (m1 === 20) m1 = 0;
+			setMeetLink(gmeetLinks[mt1]);
 		} else if (tm[1] == "3" || tm[1] == "6" || tm[1] == "9") {
-			await setMeetLink(gmeetLinks[mt2]);
 			m2 = mt2 + 1;
-			if (m2 == 40) m2 = 20;
+			if (m2 === 40) m2 = 20;
+			setMeetLink(gmeetLinks[mt2]);
 		} else {
-			await setMeetLink(gmeetLinks[mt3]);
 			m3 = mt3 + 1;
-			if (m3 == 60) m3 = 40;
+			if (m3 === 60) m3 = 40;
+			setMeetLink(gmeetLinks[mt3]);
 		}
-		console.log(meetLink);
+		// console.log(meetLink);
 	}
 	function handleSpecializationChange(event) {
 		setIllness(event.target.value);
@@ -99,8 +107,8 @@ export default function AppointmentForm(props) {
 			// console.log(res);
 			if (res.data && res.data.payment_session_id) {
 				console.log(res.data.order_id);
-				await setOrderId(res.data.order_id);
-				await console.log(orderId);
+				setOrderId(res.data.order_id);
+				console.log("Using ref:", orderIdRef.current);
 				// await console.log(res.data.payment_session_id)
 				return await res.data.payment_session_id;
 			}
@@ -111,9 +119,9 @@ export default function AppointmentForm(props) {
 
 	async function verifyPayment() {
 		try {
-			console.log(orderId);
+			console.log(orderIdRef.current);
 			let res = await axios.post("https://safezen.onrender.com/verify", {
-				orderId: orderId,
+				orderId: orderIdRef.current,
 			});
 			console.log(res);
 			if (res && res.data) {
@@ -137,6 +145,7 @@ export default function AppointmentForm(props) {
 			if (logged_in) x = email;
 			else x = gmail;
 			const formData = { x, date, timeSlot, therapy, illness, description, m1, m2, m3 };
+			console.log(m1, m2, m3);
 			const mailData = {
 				user_email: x,
 				date: date,
@@ -179,15 +188,15 @@ export default function AppointmentForm(props) {
 												// 	button.classList.remove("button-loader");
 												// }, 2000); // Simulated 2-second task
 												// button.disabled = false;
-												
+
 												button.classList.remove("button-loader");
 												await cashfree
 													.checkout(checkoutOptions)
-													.then(async (res) => {
+													.then(async(res) => {
 														console.log("payment initialized");
-														// await verifyPayment(orderId);
+														console.log(orderIdRef.current, "yeh hai order id");
+														await verifyPayment(orderIdRef.current);
 														try {
-															// console.log(mailData);
 															const mailData = {
 																user_email: x,
 																date: date,
@@ -205,7 +214,7 @@ export default function AppointmentForm(props) {
 																		.VITE_EMAILJS_PUBLIC_ID
 																)
 																.then(
-																	(result) => {
+																	async (result) => {
 																		console.log(result);
 																		console.log("SUCCESS!");
 																		alert(
