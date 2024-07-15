@@ -174,7 +174,7 @@ export default function AppointmentForm(props) {
 											try {
 												let sessionId = await getSessionId();
 												console.log(sessionId);
-												let checkoutOptions = await {
+												let checkoutOptions = {
 													paymentSessionId: sessionId,
 													redirectTarget: "_modal",
 												};
@@ -192,44 +192,50 @@ export default function AppointmentForm(props) {
 													.then(async (res) => {
 														console.log("payment initialized");
 														await verifyPayment(orderId);
-														try {
-															console.log(mailData);
-															emailjs
-																.send(
-																	import.meta.env
-																		.VITE_CALL_EMAILJS_SERVICE_ID,
-																	import.meta.env
-																		.VITE_CALL_EMAILJS_TEMPLATE_ID,
-																	mailData,
-																	import.meta.env
-																		.VITE_EMAILJS_PUBLIC_ID
-																)
-																.then(
-																	(result) => {
-																		console.log(result);
-																		console.log("SUCCESS!");
-																		alert(
-																			`Call Booked for ${phone_no}`
-																		);
-																	},
-																	(err) => {
-																		console.log(
-																			"FAILED...",
-																			err
-																		);
-																	}
-																);
-														} catch (err) {
-															console.error(err.message);
-														}
+														// try {
+														// 	console.log(mailData);
+														// 	emailjs
+														// 		.send(
+														// 			import.meta.env
+														// 				.VITE_CALL_EMAILJS_SERVICE_ID,
+														// 			import.meta.env
+														// 				.VITE_CALL_EMAILJS_TEMPLATE_ID,
+														// 			mailData,
+														// 			import.meta.env
+														// 				.VITE_EMAILJS_PUBLIC_ID
+														// 		)
+														// 		.then(
+														// 			(result) => {
+														// 				console.log(result);
+														// 				console.log("SUCCESS!");
+														// 				alert(
+														// 					`Call Booked for ${phone_no}`
+														// 				);
+														// 			},
+														// 			(err) => {
+														// 				console.log(
+														// 					"FAILED...",
+														// 					err
+														// 				);
+														// 			}
+														// 		);
+														// } catch (err) {
+														// 	button.disabled = false;
+														// 	console.error(err.message);
+														// }
 													});
 											} catch (error) {
+												button.disabled = false;
 												console.log(error);
 											}
 										} else alert(res.data.Error);
 									})
-									.catch((err) => console.log(err));
+									.catch((err) => {
+											console.log(err) 
+											button.disabled = false
+									});
 							} catch (err) {
+								button.disabled = false;
 								console.log("snfjksuusf fsdfsef hfhsdkkfho");
 								console.error(err.message);
 							}

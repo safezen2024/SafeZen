@@ -339,7 +339,7 @@ app.get("/payment1", async (req, res) => {
 				customer_id: "testingbro",
 				customer_phone: "9999999999",
 				customer_name: "Enter your name",
-				customer_email: "Enter your email",
+				customer_email: "jinam@gmail.com",
 			},
 			order_meta: {
 				return_url:
@@ -373,7 +373,7 @@ app.get("/payment2", async (req, res) => {
 				customer_id: "testingbro",
 				customer_phone: "9999999999",
 				customer_name: "Enter your Name",
-				customer_email: "Enter your email",
+				customer_email: "jinam@gmail.com",
 			},
 			order_meta: {
 				return_url:
@@ -407,7 +407,7 @@ app.get("/payment3", async (req, res) => {
 				customer_id: "testingbro",
 				customer_phone: "9999999999",
 				customer_name: "Enter your name",
-				customer_email: "Enter Your Email",
+				customer_email: "jinam@gmail.com",
 			},
 			order_meta: {
 				return_url:
