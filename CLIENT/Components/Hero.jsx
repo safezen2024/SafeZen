@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 
 export default function Hero() {
-	const [image, setImage] = useState("/src/hero.jpg");
+	const [image, setImage] = useState("");
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -10,7 +10,7 @@ export default function Hero() {
 			else if (window.innerWidth <= 950 && window.innerWidth > 650) 
 				setImage("/src/Hero1.jpg");
 			else
-				setImage("/src/hero.jpg");
+				setImage("/src/Home_3.jpg");
 		};
 
 		window.addEventListener("resize", handleResize);

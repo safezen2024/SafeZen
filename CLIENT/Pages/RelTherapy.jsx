@@ -7,6 +7,9 @@ import Foot from "../Components/Foot";
 import PricePlans from "../Components/PricePlans";
 
 export default function RelTherapy() {
+	React.useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 	const [style, setStyle] = useState();
 
 	const styles = {

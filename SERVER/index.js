@@ -329,10 +329,78 @@ app.post("/book-appointment", (req, res) => {
 	}
 });
 
-app.get("/payment", async (req, res) => {
+app.get("/payment1", async (req, res) => {
 	try {
 		let request = {
-			order_amount: 1.0,
+			order_amount: 899.0,
+			order_currency: "INR",
+			order_id: await generateOrderId(),
+			customer_details: {
+				customer_id: "testingbro",
+				customer_phone: "9999999999",
+				customer_name: "Web Codder",
+				customer_email: "webcodder@example.com",
+			},
+			order_meta: {
+				return_url:
+					"https://www.cashfree.com/devstudio/preview/pg/web/checkout?order_id={order_id}",
+			},
+		};
+		console.log(request.order_id);
+		console.log(request);
+		Cashfree.PGCreateOrder("2023-08-01", request)
+			.then((response) => {
+				console.log(response.data);
+				res.json(response.data);
+			})
+			.catch((error) => {
+				console.log("Error in autheticating cashfree 3");
+				console.error(error.response.data.message);
+			});
+	} catch (error) {
+		console.log("Error in autheticating cashfree 4");
+		console.log(error);
+	}
+});
+
+app.get("/payment2", async (req, res) => {
+	try {
+		let request = {
+			order_amount: 2429.0,
+			order_currency: "INR",
+			order_id: await generateOrderId(),
+			customer_details: {
+				customer_id: "testingbro",
+				customer_phone: "9999999999",
+				customer_name: "Web Codder",
+				customer_email: "webcodder@example.com",
+			},
+			order_meta: {
+				return_url:
+					"https://www.cashfree.com/devstudio/preview/pg/web/checkout?order_id={order_id}",
+			},
+		};
+		console.log(request.order_id);
+		console.log(request);
+		Cashfree.PGCreateOrder("2023-08-01", request)
+			.then((response) => {
+				console.log(response.data);
+				res.json(response.data);
+			})
+			.catch((error) => {
+				console.log("Error in autheticating cashfree 3");
+				console.error(error.response.data.message);
+			});
+	} catch (error) {
+		console.log("Error in autheticating cashfree 4");
+		console.log(error);
+	}
+});
+
+app.get("/payment3", async (req, res) => {
+	try {
+		let request = {
+			order_amount: 9199.0,
 			order_currency: "INR",
 			order_id: await generateOrderId(),
 			customer_details: {

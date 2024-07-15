@@ -1,4 +1,4 @@
-* {
+*{
 	box-sizing: border-box;
 }
 
@@ -63,7 +63,6 @@ p {
 	/* background-color: #d7f5ff;
 	color: #273f95;
 	border-color: #d7f5ff; */
-
 }
 
 .btn {
@@ -93,15 +92,15 @@ p {
 }
 
 .btn-book-appointment {
-	border-color: #d7f5ff;
-	color: #d7f5ff;
-	background-color: #273f95;
+	border-color: #273f95;
+	color: #273f95;
+	background-color: #d7f5ff;
 }
 
 .btn-book-appointment:hover {
-	background-color: #d7f5ff;
-	color: #273f95;
-	border-color: #273f95 ;
+	background-color: #273f95;
+	color: #d7f5ff;
+	border-color: #d7f5ff;
 }
 
 .hero_photo {
@@ -121,6 +120,10 @@ p {
 .text {
 	/* margin-top: 30px; */
 	width: 100%;
+}
+
+.hero-text{
+	background-color: #d7f5ff;
 }
 
 .form {
@@ -309,4 +312,33 @@ p {
 .btn-auth {
 	padding: 0;
 	border: none;
+}
+
+/* CSS for the loading spinner */
+.button-loader {
+	position: relative;
+	overflow: hidden;
+}
+.button-loader:after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 24px;
+	height: 24px;
+	margin: -12px 0 0 -12px;
+	border: 4px solid #fff;
+	border-top: 4px solid #3498db;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+	box-sizing: border-box;
+	transform-origin: 50% 50%;
+}
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }

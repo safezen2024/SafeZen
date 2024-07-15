@@ -3,6 +3,9 @@ import Navbar from "../Components/Navbar";
 import Foot from "../Components/Foot";
 
 export default function AboutUs() {
+	React.useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 	return (
 		<div className="page">
 			<Navbar />

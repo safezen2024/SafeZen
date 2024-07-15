@@ -20,7 +20,7 @@ export default function Navbar() {
 		<nav className="navbar navbar-expand-lg">
 			<a
 				href="/"
-				className="d-inline-flex link-body-emphasis text-decoration-none brand_head">
+				className="pl-2 d-inline-flex link-body-emphasis text-decoration-none brand_head">
 				<img src="/src//Circle_Logo.PNG" alt="brand-logo" height="60" />
 				<div className="brand-name">
 					<h1 className="navbar-text m-0 p-0">SafeZen</h1>

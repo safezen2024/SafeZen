@@ -3,14 +3,17 @@ import Navbar from "../Components/Navbar";
 import Foot from "../Components/Foot";
 
 export default function Contact() {
+	React.useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 	return (
 		<div className="page">
 			<Navbar />
 			<div className="page">
 				<div className="text-center hero mb-0">
-					<h1 className="display-6 text pt-0 fw-bold page-title">CONTACT ME</h1>
+					<h1 className="display-6 text pt-0 fw-bold page-title">CONTACT US</h1>
 					
-						<p className="meditation-text">
+						{/* <p className="meditation-text">
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
 							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
 							veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -18,7 +21,7 @@ export default function Contact() {
 							velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
 							occaecat cupidatat non proident, sunt in culpa qui officia deserunt
 							mollit anim id est laborum.
-						</p>
+						</p> */}
 					
 				</div>
 
@@ -31,7 +34,8 @@ export default function Contact() {
 						<br />
 						<li className="contact-items">
 							<img src="/src/envelope.svg" alt="Mail: " class="contact-icon" />
-							<h2>help@safezen.in</h2>
+							<h2><a href="mailto:help@safezen.in">help@safezen.in</a></h2>
+							
 						</li>
 					</ul>
 				</div>

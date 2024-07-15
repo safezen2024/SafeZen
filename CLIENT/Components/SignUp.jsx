@@ -2,8 +2,13 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import googleButton from "/assets/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png";
+import Foot from "./Foot";
+import Navbar from "./Navbar";
 axios.defaults.withCredentials = true;
 export default function SignUp() {
+	React.useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 	const [formData, setFormData] = React.useState({
 		email: "",
 		password: "",
@@ -33,15 +38,21 @@ export default function SignUp() {
 		}));
 	}
 	// axios.defaults.withCredentials = true;
-	function handleSubmit(event) {
+	async function handleSubmit(event) {
 		event.preventDefault();
+		const button = document.getElementById("loading-button");
+		button.disabled = true;
+		// Add the loading animation CSS class
+		button.classList.add("button-loader");
 		try {
 			console.log(formData);
-			axios
+			await axios
 				.post("https://safezen.onrender.com/signup", formData)
 				.then((res) => {
-					if (res.data.Status === "Success") navigate("/login");
-					else alert(res.data.Error);
+					if (res.data.Status === "Success") {
+						button.classList.remove("button-loader");
+						navigate("/login");
+					} else alert(res.data.Error);
 				})
 				.catch((err) => console.log(err));
 		} catch (err) {
@@ -54,58 +65,63 @@ export default function SignUp() {
 	}
 
 	return (
-		<div className="form-container">
-			<form className="form" onSubmit={handleSubmit}>
-				<input
-					required
-					type="email"
-					placeholder="Email address"
-					className="form--input mb-1"
-					name="email"
-					onChange={handleChange}
-					value={formData.email}
-				/>
-				<input
-					required
-					type="password"
-					placeholder="Password"
-					className="form--input mb-1"
-					name="password"
-					onChange={handleChange}
-					value={formData.password}
-				/>
-				<input
-					required
-					type="text"
-					placeholder="Enter your Age"
-					className="form--input mb-1"
-					name="age"
-					onChange={handleChange}
-					value={formData.age}
-				/>
-
-				<div className="form--marketing">
+		<div>
+		<Navbar/>
+			<div className="form-container">
+				<form className="form" onSubmit={handleSubmit}>
 					<input
-						id="okayToEmail"
-						type="checkbox"
-						name="joinedNewsletter"
+						required
+						type="email"
+						placeholder="Email address"
+						className="form--input mb-1"
+						name="email"
 						onChange={handleChange}
-						checked={formData.joinedNewsletter}
+						value={formData.email}
 					/>
-					<label htmlFor="okayToEmail">I want to join the newsletter</label>
-				</div>
-				<button className="form--submit">Sign up</button>
+					<input
+						required
+						type="password"
+						placeholder="Password"
+						className="form--input mb-1"
+						name="password"
+						onChange={handleChange}
+						value={formData.password}
+					/>
+					<input
+						required
+						type="text"
+						placeholder="Enter your Age"
+						className="form--input mb-1"
+						name="age"
+						onChange={handleChange}
+						value={formData.age}
+					/>
 
-				<br />
-				{/* <hr height="2px" border-width="0" color="gray" background-color="gray" /> */}
-				{/* <p>-----------OR-----------</p>
+					<div className="form--marketing">
+						<input
+							id="okayToEmail"
+							type="checkbox"
+							name="joinedNewsletter"
+							onChange={handleChange}
+							checked={formData.joinedNewsletter}
+						/>
+						<label htmlFor="okayToEmail">I want to join the newsletter</label>
+					</div>
+					<button className="form--submit" id="loading-button">
+						Sign up
+					</button>
+
+					<br />
+					{/* <hr height="2px" border-width="0" color="gray" background-color="gray" /> */}
+					{/* <p>-----------OR-----------</p>
 
 				
 				<button className="btn-auth" type="button" onClick={() => auth()}>
 					<img className="btn-auth-img" src={googleButton} alt="google sign in" />
 				</button> */}
-				
-			</form>
+				</form>
+			</div>
+			<Foot/>
 		</div>
 	);
 }

@@ -23,18 +23,20 @@
 }
 
 .slider {
-	background-color: #273f95;
-	border-radius: 10px;
-	height: 1rem;
-	width: 1rem;
-	padding: 1rem;
+	/* background-color: #d7f5ff; */
+	border-radius: 50%;
+	color: #273f95;
+	/* height: 1rem; */
+	/* width: 1rem; */
+	/* padding: 1rem; */
 	/* margin: 1rem; */
 }
 
 .doctorDetails {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
+	justify-content: center;
+	gap: 2rem;
 	color: #273f95;
 }
 

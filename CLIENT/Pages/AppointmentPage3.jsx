@@ -1,17 +1,20 @@
 import React from "react";
-import PricePlans from "../Components/PricePlans";
 import Navbar from "../Components/Navbar";
 import Foot from "../Components/Foot";
+import AppointmentForm from "../Components/AppointmentForm";
 
-export default function Pricing() {
+export default function AppointmentPage3() 
+{
 	React.useEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
 	return (
 		<div className="page">
 			<Navbar />
-			<PricePlans />
-			<Foot />
+			<div>
+				<AppointmentForm amt="3"/>
+			</div>
+			<Foot/>
 		</div>
-	);
+	);	
 }

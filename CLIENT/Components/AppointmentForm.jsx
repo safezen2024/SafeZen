@@ -11,21 +11,24 @@ import axios from "axios";
 import emailjs from "@emailjs/browser";
 // import {Cashfree} from "@cashfreepayments/cashfree-js"
 import { load } from "@cashfreepayments/cashfree-js";
+import gmeetLinks from "../data_files/GmeetLinks";
 // import env from "dotenv";
 // env.config();
 
 axios.defaults.withCredentials = true;
-export default function AppointmentForm() {
+export default function AppointmentForm(props) {
 	const d = new Date();
 	const [date, setDate] = React.useState(d);
 	const [timeSlot, setTimeSlot] = React.useState();
 	const [illness, setIllness] = React.useState();
 	const [description, setDescription] = React.useState("");
 	const [therapy, setTherapy] = React.useState("");
+	const [meetLink, setMeetLink] = React.useState("");
 
 	const textAreaRef = React.useRef(null);
 	const navigate = useNavigate();
 	let cashfree;
+	let mt1 = 0, mt2 = 20, mt3 = 40;
 
 	let insitialzeSDK = async function () {
 		cashfree = await load({
@@ -35,7 +38,7 @@ export default function AppointmentForm() {
 
 	insitialzeSDK();
 
-	const [orderId, setOrderId] = React.useState();
+	const [orderId, setOrderId] = React.useState("");
 
 	React.useEffect(() => {
 		textAreaRef.current.style.height = "auto";
@@ -56,9 +59,29 @@ export default function AppointmentForm() {
 		else if (event < p) alert("You have to select date in future");
 		else setDate(event);
 	}
-	function handleSlotChange(event) {
-		setTimeSlot(event.target.value);
+	async function handleSlotChange(event) {
+		await setTimeSlot(event.target.value);
 		console.log(event.target.value);
+		const tm = event.target.value;
+		if(tm[1] == '2' || tm[1] == '5' || tm[1] == '8'){
+			await setMeetLink(gmeetLinks[mt1]);
+			await mt1++;
+			if(mt1 == 20)
+				mt1 = 0;
+		}
+		else if(tm[1] == '3' || tm[1] == '6' || tm[1] == '9'){
+			await setMeetLink(gmeetLinks[mt2]);
+			await mt2++;
+			if(mt2 == 40)
+				mt2 = 20;
+		}
+		else{
+			await setMeetLink(gmeetLinks[mt3]);
+			await mt3++;
+			if(mt3 == 60)
+				mt3 = 40;
+		}
+		console.log(meetLink);
 	}
 	function handleSpecializationChange(event) {
 		setIllness(event.target.value);
@@ -68,13 +91,20 @@ export default function AppointmentForm() {
 		setTherapy(event.target.value);
 		console.log(event.target.value);
 	}
+	let url ;
+	if(props.amt === "1")
+		url = "https://safezen.onrender.com/payment1";
+	else if(props.amt === "1")
+		url = "https://safezen.onrender.com/payment2";
+	else
+		url = "https://safezen.onrender.com/payment3";
 
 	async function getSessionId() {
 		try {
-			let res = await axios.get("https://safezen.onrender.com/payment");
+			const res = await axios.get(url);
 			// console.log(res);
 			if (res.data && res.data.payment_session_id) {
-				console.log(res.data);
+				console.log(res.data.order_id);
 				await setOrderId(res.data.order_id);
 				await console.log(orderId);
 				// await console.log(res.data.payment_session_id)
@@ -99,35 +129,15 @@ export default function AppointmentForm() {
 			console.log(error);
 		}
 	}
-	async function handleSubmit2(event) {
-		event.preventDefault();
-		// if (logged_in || auth) {
-		// let x = "";
-		// if (logged_in) x = email;
-		// else x = gmail;
-		try {
-			let sessionId = await getSessionId();
-			console.log(sessionId);
-			let checkoutOptions = await {
-				paymentSessionId: sessionId,
-				redirectTarget: "_modal",
-			};
-
-			cashfree.checkout(checkoutOptions).then((res) => {
-				console.log("payment initialized");
-				verifyPayment(orderId);
-			});
-		} catch (error) {
-			console.log(error);
-		}
-		// } else {
-		// 	navigate("/login");
-		// }
-	}
 
 	async function handleSubmit(event) {
 		event.preventDefault();
+		const button = document.getElementById("loading-button");
+		button.disabled = true;
+		// Add the loading animation CSS class
+		button.classList.add("button-loader");
 		// console.log(date, timeSlot, description, illness, therapy);
+		console.log(logged_in, auth);
 		if (logged_in || auth) {
 			let x = "";
 			if (logged_in) x = email;
@@ -168,11 +178,51 @@ export default function AppointmentForm() {
 													paymentSessionId: sessionId,
 													redirectTarget: "_modal",
 												};
-
-												cashfree.checkout(checkoutOptions).then((res) => {
-													console.log("payment initialized");
-													verifyPayment(orderId);
-												});
+												// setTimeout(() => {
+												// 	// Re-enable the button
+												// 	button.disabled = false;
+												// 	// Remove the loading animation CSS class
+												// 	button.classList.remove("button-loader");
+												// }, 2000); // Simulated 2-second task
+												// button.disabled = false;
+												// Remove the loading animation CSS class
+												button.classList.remove("button-loader");
+												await cashfree
+													.checkout(checkoutOptions)
+													.then(async (res) => {
+														console.log("payment initialized");
+														await verifyPayment(orderId);
+														try {
+															console.log(mailData);
+															emailjs
+																.send(
+																	import.meta.env
+																		.VITE_CALL_EMAILJS_SERVICE_ID,
+																	import.meta.env
+																		.VITE_CALL_EMAILJS_TEMPLATE_ID,
+																	mailData,
+																	import.meta.env
+																		.VITE_EMAILJS_PUBLIC_ID
+																)
+																.then(
+																	(result) => {
+																		console.log(result);
+																		console.log("SUCCESS!");
+																		alert(
+																			`Call Booked for ${phone_no}`
+																		);
+																	},
+																	(err) => {
+																		console.log(
+																			"FAILED...",
+																			err
+																		);
+																	}
+																);
+														} catch (err) {
+															console.error(err.message);
+														}
+													});
 											} catch (error) {
 												console.log(error);
 											}
@@ -199,7 +249,7 @@ export default function AppointmentForm() {
 
 	return (
 		<div className="form-container">
-			<form className="form" onSubmit={handleSubmit2}>
+			<form className="form" onSubmit={handleSubmit}>
 				<DatePicker
 					type="date"
 					selected={date}
@@ -240,7 +290,9 @@ export default function AppointmentForm() {
 						maxLength="500"
 						ref={textAreaRef}></textarea>
 				</div>
-				<button className="form--submit">Pay Now</button>
+				<button className="form--submit" id="loading-button">
+					Pay Now
+				</button>
 			</form>
 		</div>
 	);

@@ -6,8 +6,13 @@ const clientId = process.env.clientId;
 axios.defaults.withCredentials = true;
 export let logged_in = false;
 export let email = "";
+import Navbar from "./Navbar";
+import Foot from "./Foot";
 
 export default function Login() {
+	React.useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 	const [formData, setFormData] = React.useState({
 		email: "",
 		password: "",
@@ -46,6 +51,10 @@ export default function Login() {
 
 	function handleSubmit(event) {
 		event.preventDefault();
+		const button = document.getElementById("loading-button");
+		button.disabled = true;
+		// Add the loading animation CSS class
+		button.classList.add("button-loader");
 		try {
 			// console.log(formData);
 			axios
@@ -60,6 +69,7 @@ export default function Login() {
 						console.log(document.cookie);
 						email = formData.email;
 						console.log(res.data.Status);
+						button.classList.remove("button-loader");
 						navigate("/");
 						// window.location.href = "/";
 					} else alert(res.data.Error);
@@ -79,6 +89,8 @@ export default function Login() {
 	}
 
 	return (
+		<div>
+		<Navbar/>
 		<div className="form-container">
 			<form className="form" onSubmit={handleSubmit}>
 				<input
@@ -100,7 +112,7 @@ export default function Login() {
 					value={formData.password}
 				/>
 
-				<button className="form--submit">Login</button>
+				<button className="form--submit" id="loading-button">Login</button>
 				<br />
 				{/* 
 				<p>-----------OR-----------</p>
@@ -111,6 +123,8 @@ export default function Login() {
 
 				{/* <GLogin/> */}
 			</form>
+		</div>
+		<Foot/>
 		</div>
 	);
 }

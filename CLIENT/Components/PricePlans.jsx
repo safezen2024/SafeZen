@@ -19,7 +19,7 @@ export default function PricePlans() {
 						<li>Address Your Concerns</li>
 						<li>Make a plan with your therapist</li>
 					</ul>
-					<Link to="/appointment-page">
+					<Link to="/appointment-page1">
 						<button type="button" class="btn btn-lg btn-block">
 							Get Therapy
 						</button>
@@ -40,7 +40,7 @@ export default function PricePlans() {
 						<li>Break negative thought Loops</li>
 						<li>Start positive ones</li>
 					</ul>
-					<Link to="/appointment-page">
+					<Link to="/appointment-page2">
 						<button type="button" class="btn btn-lg btn-block btn-sign-up">
 							Get Therapy
 						</button>
@@ -61,7 +61,7 @@ export default function PricePlans() {
 						<li>Learn how to manage your thoughts</li>
 						<li>Learn how to manage your emotions</li>
 					</ul>
-					<Link to="/appointment-page">
+					<Link to="/appointment-page3">
 						<button type="button" class="btn btn-lg btn-block btn-sign-up">
 							Get Therapy
 						</button>
