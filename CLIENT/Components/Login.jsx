@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import googleButton from "/assets/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png";
 const clientId = process.env.clientId;
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 export let logged_in = false;
 export let email = "";
 import Navbar from "./Navbar";
@@ -19,7 +19,7 @@ export default function Login() {
 		password: "",
 	});
 	const navigate = useNavigate();
-	// axios.defaults.withCredentials = true;
+	
 	function auth() {
 		try {
 			// const response = await fetch("https://safezen.onrender.com/request", { method: "post" });
@@ -58,6 +58,7 @@ export default function Login() {
 		button.classList.add("button-loader");
 		try {
 			// console.log(formData);
+			axios.defaults.withCredentials = true;
 			axios
 				.post("https://safezen.onrender.com/login", formData)
 				.then((res) => {
@@ -68,9 +69,7 @@ export default function Login() {
 						logged_in = true;
 						// const cok = document.cookie();
 						// console.log(cok);
-						document.cookie =
-							"username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC";
-						console.log(document.cookie);
+						// console.log(document.cookie);
 						email = formData.email;
 						console.log(res.data.Status);
 						button.classList.remove("button-loader");

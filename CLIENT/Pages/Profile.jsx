@@ -6,6 +6,7 @@ import Foot from "../Components/Foot";
 
 export default function Profile() {
 	const handleDelete = async () => {
+		axios.defaults.withCredentials = true;
 		await axios
 			.get("https://safezen.onrender.com/logout")
 			.then((res) => {

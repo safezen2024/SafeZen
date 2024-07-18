@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import googleButton from "/assets/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png";
 import Foot from "./Foot";
 import Navbar from "./Navbar";
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 export default function SignUp() {
 	React.useEffect(() => {
 		window.scrollTo(0, 0);
@@ -46,6 +46,7 @@ export default function SignUp() {
 		button.classList.add("button-loader");
 		try {
 			console.log(formData);
+			axios.defaults.withCredentials = true;
 			await axios
 				.post("https://safezen.onrender.com/signup", formData)
 				.then((res) => {
