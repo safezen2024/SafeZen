@@ -51,7 +51,7 @@ app.use(
             expires: new Date(Date.now() + (7*24*60*60*1000)),
             httpOnly: true, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
             secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
-            // sameSite: "None",
+            sameSite: "None",
         },
     })
 );
@@ -233,8 +233,8 @@ app.post("/login", (req, res) => {
 							expires: expiryDate,
 							httpOnly: true, // Ensure the cookie is only accessible by the web server
 							secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-							// sameSite: "None",
-							// domain: "safezen.onrender.com",
+							sameSite: "None",
+							domain: ".safezen.onrender.com",
 						})
 						.status(200)
 						.json({ Status: "Success", mt1: mt1, mt2: mt2, mt3: mt3 });
