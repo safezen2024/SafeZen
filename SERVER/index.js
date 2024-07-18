@@ -182,10 +182,37 @@ app.post("/login", (req, res) => {
 				bcrypt.compare(password, storedHashedPassword, (err, valid) => {
 					if (err) return res.json({ Error: "Error comparing password" });
 					if (valid) {
+						// const token = jwt.sign(
+						// 	{ email },
+						// 	process.env.JWT_SECRET,
+						// 	{ expiresIn: "8d" },
+						// 	(_err, token) => {
+						// 		const serialized = serialize("token", token, {
+						// 			httpOnly: true,
+						// 			secure: process.env.NODE_ENV === "production",
+						// 			sameSite: "strict",
+						// 			maxAge: 60 * 60 * 24 * 7 * 1000,
+						// 			path: "/",
+						// 		});
+						// 	}
+						// );
+						// res.setHeader("Set-Cookie", serialized);
+						// const expiryDate = new Date(Date.now() + 604800000); // 7 days
+						// // res
+						// // .cookie("token", token, {
+						// // 	expires: expiryDate,
+						// // 	httpOnly: true, // Ensure the cookie is only accessible by the web server
+						// // 	secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+						// // 	sameSite: "None",
+						// // 	domain: ".safezen.onrender.com",
+						// // })
+						// res.status(200).json({ Status: "Success", mt1: mt1, mt2: mt2, mt3: mt3 });
 						const token = jwt.sign(
-							{ email },
+							{email},
 							process.env.JWT_SECRET,
-							{ expiresIn: "8d" },
+							{
+								expiresIn: 60 * 60 * 24 * 7 * 1000,
+							},
 							(_err, token) => {
 								const serialized = serialize("token", token, {
 									httpOnly: true,
@@ -194,19 +221,13 @@ app.post("/login", (req, res) => {
 									maxAge: 60 * 60 * 24 * 7 * 1000,
 									path: "/",
 								});
+								res.setHeader("Set-Cookie", serialized);
+								res.status(HTTP_STATUS_CODES.OK).json({
+									success: true,
+								}).json({ Status: "Success", mt1: mt1, mt2: mt2, mt3: mt3 });
 							}
+
 						);
-						res.setHeader("Set-Cookie", serialized);
-						const expiryDate = new Date(Date.now() + 604800000); // 7 days
-						// res
-						// .cookie("token", token, {
-						// 	expires: expiryDate,
-						// 	httpOnly: true, // Ensure the cookie is only accessible by the web server
-						// 	secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-						// 	sameSite: "None",
-						// 	domain: ".safezen.onrender.com",
-						// })
-						res.status(200).json({ Status: "Success", mt1: mt1, mt2: mt2, mt3: mt3 });
 					} else {
 						return res.json({ Error: "Password does not match" });
 					}
