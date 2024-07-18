@@ -40,21 +40,21 @@ app.use(
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(
-    session({
-        key: "userID",
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-            expires: new Date(Date.now() + (7*24*60*60*1000)),
-            httpOnly: true, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
-            secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
-            sameSite: "None",
-        },
-    })
-);
+// app.use(
+// 	session({
+// 		key: "userID",
+// 		secret: process.env.SESSION_SECRET,
+// 		resave: false,
+// 		saveUninitialized: false,
+// 		cookie: {
+// 			maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+// 			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+// 			httpOnly: true, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
+// 			secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
+// 			sameSite: "None",
+// 		},
+// 	})
+// );
 
 app.use((req, res, next) => {
 	res.setHeader(
@@ -225,7 +225,9 @@ app.post("/login", (req, res) => {
 				bcrypt.compare(password, storedHashedPassword, (err, valid) => {
 					if (err) return res.json({ Error: "Error comparing password" });
 					if (valid) {
-						const token = jwt.sign({ email }, process.env.JWT_SECRET);
+						const token = jwt.sign({ email }, process.env.JWT_SECRET, {
+							expiresIn: "3d",
+						});
 						const expiryDate = new Date(Date.now() + 604800000); // 7 days
 						// res
 						// .cookie("token", token, {
@@ -235,8 +237,7 @@ app.post("/login", (req, res) => {
 						// 	sameSite: "None",
 						// 	domain: ".safezen.onrender.com",
 						// })
-						res.status(200)
-						.json({ Status: "Success", mt1: mt1, mt2: mt2, mt3: mt3 });
+						res.status(200).json({ Status: "Success", mt1: mt1, mt2: mt2, mt3: mt3 });
 					} else {
 						return res.json({ Error: "Password does not match" });
 					}
