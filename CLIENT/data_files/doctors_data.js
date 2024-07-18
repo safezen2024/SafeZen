@@ -20,7 +20,7 @@
 let doctors_data = [
     {
         "doctor_id": 1,
-        "name": "Priya Zoting",
+        "name": "Mrs. Priya Zoting",
         "profile_img": "/src/Priya Zoting.jpg",
         "specialization": "Counsellor|Psychologist|Psychotherapist",
         "qualification": "MA ( Clinical Psychology)|MS ( Counselling & Psychotherapy)"
@@ -34,14 +34,14 @@ let doctors_data = [
     },
     {
         "doctor_id": 3,
-        "name": "Aditi Waghmare",
+        "name": "Ms. Aditi Waghmare",
         "profile_img": "/src/Aditi.jpg",
         "specialization": "Counselor",
         "qualification": "Master in clinical psychology"
     },
     {
         "doctor_id": 4,
-        "name": "Mrs. Prerna Gaidhane",
+        "name": "Ms. Prerna Gaidhane",
         "profile_img": "/src/Prerna.jpg",
         "specialization": "Counselor",
         "qualification": "Masters in clinical psychology"

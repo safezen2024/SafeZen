@@ -40,22 +40,29 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
-	session({
-		key: "userID",
-		secret: process.env.SESSION_SECRET,
-		resave: false,
-		saveUninitialized: false, //  D  -  O  -  U  -  B  -  T
-		cookie: {
-			// token: "token",
-			maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-			httpOnly: false, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
-			// secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
-			secure: true,
-			sameSite: "None",
-		},
-	})
+    session({
+        key: "userID",
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+            expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+            httpOnly: true, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
+            secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
+            sameSite: "None",
+        },
+    })
 );
+
+app.use((req, res, next) => {
+    res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' https://apis.google.com");
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+    res.setHeader("X-Frame-Options", "DENY");
+    next();
+});
+
 
 app.use(function (req, res, next) {
 	res.setHeader("Access-Control-Allow-Origin", "https://safezen.in");
@@ -83,7 +90,7 @@ const verifyUser = (req, res, next) => {
 	const token = req.cookies.token;
 	if (!token) return res.json({ Error: "You need to sign in" });
 	else {
-		jwt.verify(token, process.env.SESSION_SECRET, (err, decoded) => {
+		jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
 			if (err) return res.json({ Error: "Token is not same" });
 			else {
 				req.email = decoded.email;
@@ -158,50 +165,88 @@ app.get("/doctorsData", (req, res) => {
 	}
 });
 
+// app.post("/login", (req, res) => {
+// 	const email = req.body.email;
+// 	const password = req.body.password;
+// 	try {
+// 		db.query("SELECT * FROM user_data WHERE emailID = ? ", [email], (err, result) => {
+// 			if (err) return res.json({ Error: "Error" });
+// 			else if (result.length > 0) {
+// 				const user = result[0];
+// 				const storedHashedPassword = user.Password;
+// 				bcrypt.compare(password, storedHashedPassword, (err, valid) => {
+// 					if (err) {
+// 						return res.json({ Error: "Error Comparing Password" });
+// 					} else {
+// 						if (valid) {
+// 							const token = jwt.sign({ email }, process.env.JWT_SECRET, {
+// 								expiresIn: "7d",
+// 							});
+// 							// res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
+// 							res.setHeader("Cookie", `token=${token}; path=/;`);
+// 							res.cookie("token", token, {
+// 								path: "/",
+// 								maxAge: 7 * 24 * 60 * 60 * 1000,
+// 								withCredentials: true,
+// 								httpOnly: false, // Ensure the cookie is only accessible by the web server
+// 								// secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+// 								secure: true,
+// 								sameSite: "None",
+// 								domain: "safezen.onrender.com",
+// 							});
+// 							// return res.json({ Status: "Success" });
+// 							return res.json({ Status: "Success" , mt1:mt1 , mt2:mt2, mt3:mt3});
+// 						} else {
+// 							return res.json({ Error: "Passwors do no match" });
+// 						}
+// 					}
+// 				});
+// 			} else {
+// 				return res.json({ Error: "User Not Found" });
+// 			}
+// 		});
+// 	} catch (err) {
+// 		return res.json({ Error: "Error" });
+// 	}
+// });
+
 app.post("/login", (req, res) => {
 	const email = req.body.email;
 	const password = req.body.password;
 	try {
-		db.query("SELECT * FROM user_data WHERE emailID = ? ", [email], (err, result) => {
-			if (err) return res.json({ Error: "Error" });
-			else if (result.length > 0) {
+		db.query("SELECT * FROM user_data WHERE emailID = ?", [email], (err, result) => {
+			if (err) return res.json({ Error: "Database query error" });
+			if (result.length > 0) {
 				const user = result[0];
 				const storedHashedPassword = user.Password;
 				bcrypt.compare(password, storedHashedPassword, (err, valid) => {
-					if (err) {
-						return res.json({ Error: "Error Comparing Password" });
+					if (err) return res.json({ Error: "Error comparing password" });
+					if (valid) {
+						const token = jwt.sign({ email }, process.env.JWT_SECRET, {
+							expiresIn: "7d",
+						});
+						res.cookie("token", token, {
+							path: "/",
+							maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+							httpOnly: true, // Ensure the cookie is only accessible by the web server
+							secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+							sameSite: "None",
+							domain: "safezen.onrender.com",
+						});
+						return res.json({ Status: "Success" , mt1:mt1 , mt2:mt2, mt3:mt3});
 					} else {
-						if (valid) {
-							const token = jwt.sign({ email }, process.env.SESSION_SECRET, {
-								expiresIn: "7d",
-							});
-							// res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
-							res.setHeader("Cookie", `token=${token}; path=/;`);
-							res.cookie("token", token, {
-								path: "/",
-								maxAge: 7 * 24 * 60 * 60 * 1000,
-								withCredentials: true,
-								httpOnly: false, // Ensure the cookie is only accessible by the web server
-								// secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-								secure: true,
-								sameSite: "None",
-								domain: "safezen.onrender.com",
-							});
-							// return res.json({ Status: "Success" });
-							return res.json({ Status: "Success" , mt1:mt1 , mt2:mt2, mt3:mt3});
-						} else {
-							return res.json({ Error: "Passwors do no match" });
-						}
+						return res.json({ Error: "Password does not match" });
 					}
 				});
 			} else {
-				return res.json({ Error: "User Not Found" });
+				return res.json({ Error: "User not found" });
 			}
 		});
 	} catch (err) {
-		return res.json({ Error: "Error" });
+		return res.json({ Error: "Unexpected error" });
 	}
 });
+
 app.post("/signup", (req, res) => {
 	console.log("hi");
 	const email = req.body.email;

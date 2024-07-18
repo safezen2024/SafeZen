@@ -1,4 +1,4 @@
-import React, { StrictMode } from "react";
+import React, { StrictMode, useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import SelectTime from "./SelectTime";
@@ -19,21 +19,23 @@ axios.defaults.withCredentials = true;
 export default function AppointmentForm(props) {
 	console.log(props);
 	const d = new Date();
-	const [date, setDate] = React.useState(d);
-	const [timeSlot, setTimeSlot] = React.useState();
-	const [illness, setIllness] = React.useState();
-	const [description, setDescription] = React.useState("");
-	const [therapy, setTherapy] = React.useState("");
-	const [meetLink, setMeetLink] = React.useState("");
-	const [orderId, setOrderId] = React.useState("");
-	const orderIdRef = React.useRef(orderId);
-
-	const textAreaRef = React.useRef(null);
+	const [date, setDate] = useState(d);
+	const [timeSlot, setTimeSlot] = useState();
+	const [illness, setIllness] = useState();
+	const [description, setDescription] = useState("");
+	const [therapy, setTherapy] = useState("");
+	const [meetLink, setMeetLink] = useState("");
+	const [orderId, setOrderId] = useState("");
+	const orderIdRef = useRef(orderId);
+	const [m1, setM1] = useState(mt1);
+	const [m2, setM2] = useState(mt2);
+	const [m3, setM3] = useState(mt3);
+	const textAreaRef = useRef(null);
 	const navigate = useNavigate();
 	let cashfree;
-	let m1 = mt1,
-		m2 = mt2,
-		m3 = mt3;
+	// let m1 = mt1,
+	// 	m2 = mt2,
+	// 	m3 = mt3;
 	let insitialzeSDK = async function () {
 		cashfree = await load({
 			mode: "production",
@@ -42,17 +44,21 @@ export default function AppointmentForm(props) {
 
 	insitialzeSDK();
 
-	React.useEffect(() => {
+	useEffect(() => {
 		textAreaRef.current.style.height = "auto";
 		textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
 	}, [description]);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		orderIdRef.current = orderId;
 		console.log("Updated orderId:", orderId);
 		setOrderId(orderId);
 		console.log("abcxyz:", orderId);
 	}, [orderId]);
+
+	useEffect(() => {
+		console.log(m1, m2, m3);
+	}, [m1, m2, m3]);
 
 	function handleDescriptionChange(event) {
 		setDescription(event.target.value);
@@ -74,16 +80,16 @@ export default function AppointmentForm(props) {
 		const tm = event.target.value;
 		console.log("mt1, mt2, mt3 ", mt1, mt2, mt3);
 		if (tm[1] === "2" || tm[1] === "5" || tm[1] === "8") {
-			m1 = mt1 + 1;
-			if (m1 === 20) m1 = 0;
+			setM1(mt1 + 1);
+			if (m1 === 20) setM1(0);
 			setMeetLink(gmeetLinks[mt1]);
 		} else if (tm[1] == "3" || tm[1] == "6" || tm[1] == "9") {
-			m2 = mt2 + 1;
-			if (m2 === 40) m2 = 20;
+			setM2(mt2 + 1);
+			if (m2 === 40) setM2(20);
 			setMeetLink(gmeetLinks[mt2]);
 		} else {
-			m3 = mt3 + 1;
-			if (m3 === 60) m3 = 40;
+			setM3(mt3 + 1);
+			if (m3 === 60) setM3(40);
 			setMeetLink(gmeetLinks[mt3]);
 		}
 		// console.log(meetLink);
@@ -123,12 +129,17 @@ export default function AppointmentForm(props) {
 			let res = await axios.post("https://safezen.onrender.com/verify", {
 				orderId: orderIdRef.current,
 			});
-			console.log(res);
+			// console.log(res.data[0]);
 			if (res && res.data) {
-				alert("payment verified");
-			}
+				if (res.data[0].payment_status === "SUCCESS") {
+					alert("Payment Verified");
+					return true;
+				}
+			} else alert("Payment Not Done");
+			return false;
 		} catch (error) {
 			console.log(error);
+			return false;
 		}
 	}
 
@@ -192,45 +203,52 @@ export default function AppointmentForm(props) {
 												button.classList.remove("button-loader");
 												await cashfree
 													.checkout(checkoutOptions)
-													.then(async(res) => {
+													.then(async (res) => {
 														console.log("payment initialized");
-														console.log(orderIdRef.current, "yeh hai order id");
-														await verifyPayment(orderIdRef.current);
-														try {
-															const mailData = {
-																user_email: x,
-																date: date,
-																time: timeSlot,
-																link: meetLink,
-															};
-															await emailjs
-																.send(
-																	import.meta.env
-																		.VITE_USER_EMAILJS_SERVICE_ID,
-																	import.meta.env
-																		.VITE_USER_EMAILJS_TEMPLATE_ID,
-																	mailData,
-																	import.meta.env
-																		.VITE_EMAILJS_PUBLIC_ID
-																)
-																.then(
-																	async (result) => {
-																		console.log(result);
-																		console.log("SUCCESS!");
-																		alert(
-																			`You have recived the link at ${x}`
-																		);
-																	},
-																	(err) => {
-																		console.log(
-																			"FAILED...",
-																			err
-																		);
-																	}
-																);
-														} catch (err) {
-															button.disabled = false;
-															console.error(err.message);
+														console.log(
+															orderIdRef.current,
+															"yeh hai order id"
+														);
+														const ans = await verifyPayment(
+															orderIdRef.current
+														);
+														if (ans) {
+															try {
+																const mailData = {
+																	user_email: x,
+																	date: date,
+																	time: timeSlot,
+																	link: meetLink,
+																};
+																await emailjs
+																	.send(
+																		import.meta.env
+																			.VITE_USER_EMAILJS_SERVICE_ID,
+																		import.meta.env
+																			.VITE_USER_EMAILJS_TEMPLATE_ID,
+																		mailData,
+																		import.meta.env
+																			.VITE_EMAILJS_PUBLIC_ID
+																	)
+																	.then(
+																		async (result) => {
+																			console.log(result);
+																			console.log("SUCCESS!");
+																			alert(
+																				`You have recived the link at ${x}`
+																			);
+																		},
+																		(err) => {
+																			console.log(
+																				"FAILED...",
+																				err
+																			);
+																		}
+																	);
+															} catch (err) {
+																button.disabled = false;
+																console.error(err.message);
+															}
 														}
 													})
 													.catch((err) => console.log(err));

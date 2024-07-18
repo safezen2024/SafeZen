@@ -78,7 +78,7 @@ export default function Login() {
 						// window.location.href = "/";
 					} else alert(res.data.Error);
 				})
-				.catch((err) => console.log("Idhar error hai"));
+				.catch((err) => console.log("	 hai"));
 		} catch (err) {
 			console.log("snfjksuusf fsdfsef hfhsdkkfho  login");
 			console.error(err.message);
@@ -118,12 +118,12 @@ export default function Login() {
 
 				<button className="form--submit" id="loading-button">Login</button>
 				<br />
-				{/* 
+				
 				<p>-----------OR-----------</p>
 
 				<button className="btn-auth" type="button" onClick={auth}>
 					<img className="btn-auth-img" src={googleButton} alt="google sign in" />
-				</button> */}
+				</button>
 
 				{/* <GLogin/> */}
 			</form>

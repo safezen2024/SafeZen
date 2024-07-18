@@ -113,12 +113,12 @@ export default function SignUp() {
 
 					<br />
 					{/* <hr height="2px" border-width="0" color="gray" background-color="gray" /> */}
-					{/* <p>-----------OR-----------</p>
+					 <p>-----------OR-----------</p>
 
 				
 				<button className="btn-auth" type="button" onClick={() => auth()}>
 					<img className="btn-auth-img" src={googleButton} alt="google sign in" />
-				</button> */}
+				</button>
 				</form>
 			</div>
 			<Foot/>
