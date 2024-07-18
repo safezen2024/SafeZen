@@ -119,6 +119,7 @@ app.post("/verifyToken", (req, res) => {
 });
 
 app.get("/", verifyUser, (req, res) => {
+	console.log("hi i am at line 122");
 	res.send({ Status: "Success", email: req.email });
 });
 
