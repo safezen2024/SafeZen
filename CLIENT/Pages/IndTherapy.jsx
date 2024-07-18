@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 import Navbar from "../Components/Navbar";
 import illness_data from "../data_files/illness_data";
 import IllnessCard from "../Components/illness_card";
@@ -120,18 +121,22 @@ export default function IndTherapy() {
 				<div className="indTherapyHero">
 					<div className="book-appoinntment-card">
 						<p className="book-appoinntment-card-text">
-							We have the best professionals - licensed and verified.
+							We have the best professionals.
 						</p>
 						{/* <Link to="/IndTherapy/#pplans"> */}
-							<button
-								type="button"
-								className="btn btn-book-appointment"
-								onClick={() => {
-									// e.preventDefault();
-									window.scrollTo(0,2700);
-								}}>
-								Book an appointment
-							</button>
+						<button
+							type="button"
+							className="btn btn-book-appointment"
+							onClick={() => {
+								// e.preventDefault();
+								console.log("under ind therapy section");
+								console.log(document.cookie);
+								let token = Cookies.get("token");
+								console.log("Retrieved token:", token); // Debugging log
+								window.scrollTo(0, 2700);
+							}}>
+							Book an appointment
+						</button>
 						{/* </Link> */}
 					</div>
 				</div>

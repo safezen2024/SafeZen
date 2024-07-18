@@ -231,7 +231,7 @@ app.post("/login", (req, res) => {
 							httpOnly: true, // Ensure the cookie is only accessible by the web server
 							secure: process.env.NODE_ENV === "production", // Use secure cookies in production
 							sameSite: "None",
-							domain: "safezen.onrender.com",
+							// domain: "safezen.onrender.com",
 						});
 						return res.json({ Status: "Success" , mt1:mt1 , mt2:mt2, mt3:mt3});
 					} else {

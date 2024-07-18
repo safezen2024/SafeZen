@@ -120,7 +120,7 @@ export default function RelTherapy() {
 				<div className="relTherapyHero">
 					<div className="book-appoinntment-card">
 						<p className="book-appoinntment-card-text">
-							We have the best professionals - licensed and verified.
+							We have the best professionals.
 						</p>
 						{/* <Link to="/appointment-page"> */}
 						<button
