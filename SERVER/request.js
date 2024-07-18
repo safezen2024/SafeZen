@@ -12,7 +12,7 @@ app.post("/", async function (req, res, next) {
 	const redirectUrl = "https://safezen.onrender.com/oauth";
 
 	const oAuth2Client = new OAuth2Client(
-		process.env.CLIENT_ID,
+		process.env.CLIENT_ID, 
 		process.env.CLIENT_SECRET,
 		redirectUrl
 	);
