@@ -3,6 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import bcrypt from "bcrypt";
 import session from "cookie-session";
+import { serialize } from "cookie";
 import env from "dotenv";
 import db from "./db.js";
 import cookieParser from "cookie-parser";
@@ -169,51 +170,6 @@ app.get("/doctorsData", (req, res) => {
 	}
 });
 
-// app.post("/login", (req, res) => {
-// 	const email = req.body.email;
-// 	const password = req.body.password;
-// 	try {
-// 		db.query("SELECT * FROM user_data WHERE emailID = ? ", [email], (err, result) => {
-// 			if (err) return res.json({ Error: "Error" });
-// 			else if (result.length > 0) {
-// 				const user = result[0];
-// 				const storedHashedPassword = user.Password;
-// 				bcrypt.compare(password, storedHashedPassword, (err, valid) => {
-// 					if (err) {
-// 						return res.json({ Error: "Error Comparing Password" });
-// 					} else {
-// 						if (valid) {
-// 							const token = jwt.sign({ email }, process.env.JWT_SECRET, {
-// 								expiresIn: "7d",
-// 							});
-// 							// res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
-// 							res.setHeader("Cookie", `token=${token}; path=/;`);
-// 							res.cookie("token", token, {
-// 								path: "/",
-// 								maxAge: 7 * 24 * 60 * 60 * 1000,
-// 								withCredentials: true,
-// 								httpOnly: false, // Ensure the cookie is only accessible by the web server
-// 								// secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-// 								secure: true,
-// 								sameSite: "None",
-// 								domain: "safezen.onrender.com",
-// 							});
-// 							// return res.json({ Status: "Success" });
-// 							return res.json({ Status: "Success" , mt1:mt1 , mt2:mt2, mt3:mt3});
-// 						} else {
-// 							return res.json({ Error: "Passwors do no match" });
-// 						}
-// 					}
-// 				});
-// 			} else {
-// 				return res.json({ Error: "User Not Found" });
-// 			}
-// 		});
-// 	} catch (err) {
-// 		return res.json({ Error: "Error" });
-// 	}
-// });
-
 app.post("/login", (req, res) => {
 	const email = req.body.email;
 	const password = req.body.password;
@@ -226,12 +182,21 @@ app.post("/login", (req, res) => {
 				bcrypt.compare(password, storedHashedPassword, (err, valid) => {
 					if (err) return res.json({ Error: "Error comparing password" });
 					if (valid) {
-						const token = jwt.sign({ email }, process.env.JWT_SECRET, {
-							expiresIn: "8d",
-							httpOnly: true,
-							secure: process.env.NODE_ENV,
-							sameSite: 'None',
-						});
+						const token = jwt.sign(
+							{ email },
+							process.env.JWT_SECRET,
+							{ expiresIn: "8d" },
+							(_err, token) => {
+								const serialized = serialize("token", token, {
+									httpOnly: true,
+									secure: process.env.NODE_ENV === "production",
+									sameSite: "strict",
+									maxAge: 60 * 60 * 24 * 30,
+									path: "/",
+								});
+							}
+						);
+						res.setHeader("Set-Cookie", serialized);
 						const expiryDate = new Date(Date.now() + 604800000); // 7 days
 						// res
 						// .cookie("token", token, {
