@@ -227,16 +227,15 @@ app.post("/login", (req, res) => {
 					if (valid) {
 						const token = jwt.sign({ email }, process.env.JWT_SECRET);
 						const expiryDate = new Date(Date.now() + 604800000); // 7 days
-						res
-						.cookie("token", token, {
-							path: "/login",
-							expires: expiryDate,
-							httpOnly: true, // Ensure the cookie is only accessible by the web server
-							secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-							sameSite: "None",
-							domain: ".safezen.onrender.com",
-						})
-						.status(200)
+						// res
+						// .cookie("token", token, {
+						// 	expires: expiryDate,
+						// 	httpOnly: true, // Ensure the cookie is only accessible by the web server
+						// 	secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+						// 	sameSite: "None",
+						// 	domain: ".safezen.onrender.com",
+						// })
+						res.status(200)
 						.json({ Status: "Success", mt1: mt1, mt2: mt2, mt3: mt3 });
 					} else {
 						return res.json({ Error: "Password does not match" });
