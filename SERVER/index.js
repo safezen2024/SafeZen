@@ -226,7 +226,10 @@ app.post("/login", (req, res) => {
 					if (err) return res.json({ Error: "Error comparing password" });
 					if (valid) {
 						const token = jwt.sign({ email }, process.env.JWT_SECRET, {
-							expiresIn: "3d",
+							expiresIn: "8d",
+							httpOnly: true,
+							secure: process.env.NODE_ENV,
+							sameSite: 'None',
 						});
 						const expiryDate = new Date(Date.now() + 604800000); // 7 days
 						// res
