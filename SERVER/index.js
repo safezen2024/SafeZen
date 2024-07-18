@@ -211,14 +211,14 @@ app.post("/login", (req, res) => {
 							{email},
 							process.env.JWT_SECRET,
 							{
-								expiresIn: 60 * 60 * 24 * 30 * 1000,
+								expiresIn: 60 * 60 * 24 * 30,
 							},
 							(_err, token) => {
 								const serialized = serialize("token", token, {
 									httpOnly: true,
 									secure: true,
 									sameSite: "None",
-									maxAge: 60 * 60 * 24 * 30 * 1000,
+									maxAge: 60 * 60 * 24 * 30,
 									path: "/",
 									domain: ".safezen.onrender.com",
 								});
