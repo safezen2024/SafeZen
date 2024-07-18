@@ -215,8 +215,8 @@ app.post("/login", (req, res) => {
 							},
 							(_err, token) => {
 								const serialized = serialize("token", token, {
-									// httpOnly: true,
-									// secure: process.env.NODE_ENV === "production",
+									httpOnly: true,
+									secure: true,
 									sameSite: "None",
 									maxAge: 60 * 60 * 24 * 30 * 1000,
 									path: "/",
