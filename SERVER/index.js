@@ -74,8 +74,8 @@ app.use(function (req, res, next) {
 	next();
 });
 
-app.use("/oauth", authRouter);
-app.use("/request", requestRouter);
+// app.use("/oauth", authRouter);
+// app.use("/request", requestRouter);
 
 Cashfree.XClientId = process.env.CLIENT_ID;
 Cashfree.XClientSecret = process.env.CLIENT_SECRET;
