@@ -96,5 +96,3 @@ export let gmail = "";
 console.log(document.cookie);
 let token = Cookies.get("token");
 console.log("Retrieved token:", token); // Debugging log
-
-
