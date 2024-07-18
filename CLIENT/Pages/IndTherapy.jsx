@@ -131,7 +131,7 @@ export default function IndTherapy() {
 								// e.preventDefault();
 								console.log("under ind therapy section");
 								console.log(document.cookie);
-								let token = Cookies.get("token");
+								let token = Cookies.get();
 								console.log("Retrieved token:", token); // Debugging log
 								window.scrollTo(0, 2700);
 							}}>
