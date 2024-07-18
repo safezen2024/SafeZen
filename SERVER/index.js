@@ -17,8 +17,9 @@ const app = express();
 const port = process.env.PORT;
 const saltRounds = 10;
 const secret = process.env.SESSION_SECRET;
-let mt1 = 0, mt2 = 20, mt3 = 40;
-
+let mt1 = 0,
+	mt2 = 20,
+	mt3 = 40;
 
 app.use(
 	cors({
@@ -56,13 +57,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // );
 
 app.use((req, res, next) => {
-    res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' https://apis.google.com");
-    res.setHeader("X-Content-Type-Options", "nosniff");
-    res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
-    res.setHeader("X-Frame-Options", "DENY");	
-    next();
+	res.setHeader(
+		"Content-Security-Policy",
+		"default-src 'self'; script-src 'self' 'unsafe-inline' https://apis.google.com"
+	);
+	res.setHeader("X-Content-Type-Options", "nosniff");
+	res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+	res.setHeader("X-Frame-Options", "DENY");
+	next();
 });
-
 
 app.use(function (req, res, next) {
 	res.setHeader("Access-Control-Allow-Origin", "https://safezen.in");
@@ -222,18 +225,19 @@ app.post("/login", (req, res) => {
 				bcrypt.compare(password, storedHashedPassword, (err, valid) => {
 					if (err) return res.json({ Error: "Error comparing password" });
 					if (valid) {
-						const token = jwt.sign({ email }, process.env.JWT_SECRET, {
-							expiresIn: "7d",
-						});
-						res.cookie("token", token, {
+						const token = jwt.sign({ email }, process.env.JWT_SECRET);
+						const expiryDate = new Date(Date.now() + 604800000); // 7 days
+						res
+						.cookie("token", token, {
 							path: "/",
-							maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+							expires: expiryDate,
 							httpOnly: true, // Ensure the cookie is only accessible by the web server
-							secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+							// secure: process.env.NODE_ENV === "production", // Use secure cookies in production
 							sameSite: "None",
 							// domain: "safezen.onrender.com",
-						});
-						return res.json({ Status: "Success" , mt1:mt1 , mt2:mt2, mt3:mt3});
+						})
+						.status(200)
+						json({ Status: "Success", mt1: mt1, mt2: mt2, mt3: mt3 });
 					} else {
 						return res.json({ Error: "Password does not match" });
 					}
@@ -362,7 +366,12 @@ app.post("/book-appointment", (req, res) => {
 												Error: "Error storing appointment data in SERVER",
 											});
 										else {
-											return res.json({ Status: "Success" , mt1:mt1 , mt2:mt2, mt3:mt3});
+											return res.json({
+												Status: "Success",
+												mt1: mt1,
+												mt2: mt2,
+												mt3: mt3,
+											});
 										}
 									}
 								);
