@@ -237,7 +237,7 @@ app.post("/login", (req, res) => {
 							// domain: "safezen.onrender.com",
 						})
 						.status(200)
-						json({ Status: "Success", mt1: mt1, mt2: mt2, mt3: mt3 });
+						.json({ Status: "Success", mt1: mt1, mt2: mt2, mt3: mt3 });
 					} else {
 						return res.json({ Error: "Password does not match" });
 					}
