@@ -196,14 +196,14 @@ app.get("/", async function (req, res, next) {
 	}
 });
 
-app.get("/verifyGoogleLogin", (req, res) => {
-	if (user_data_google.email_verified) {
-		let email_user = user_data_google.email;
-		return res.json({ Status: "Success", email: email_user });
-	} else {
-		return res.json({ Status: "Error", Error: "Invalid Token" });
-	}
-});
+// app.get("/verifyGoogleLogin", (req, res) => {
+// 	if (user_data_google.email_verified) {
+// 		let email_user = user_data_google.email;
+// 		return res.json({ Status: "Success", email: email_user });
+// 	} else {
+// 		return res.json({ Status: "Error", Error: "Invalid Token" });
+// 	}
+// });
 
 export default app;
 
