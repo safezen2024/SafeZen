@@ -233,7 +233,7 @@ app.post("/login", (req, res) => {
 							expires: expiryDate,
 							httpOnly: true, // Ensure the cookie is only accessible by the web server
 							secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-							sameSite: "None",
+							// sameSite: "None",
 							// domain: "safezen.onrender.com",
 						})
 						.status(200)
