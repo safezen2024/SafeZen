@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import googleButton from "/assets/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 import Foot from "./Foot";
 import Navbar from "./Navbar";
 // axios.defaults.withCredentials = true;
@@ -20,15 +22,15 @@ export default function SignUp() {
 	function goTo(url) {
 		window.location.href = url;
 	}
-	async function auth() {
-		const response = await fetch("https://safezen.onrender.com/request", { method: "post" });
+	// async function auth() {
+	// 	const response = await fetch("https://safezen.onrender.com/request", { method: "post" });
 
-		const data = await response.json();
-		console.log(data);
-		const red_url = data.url;
-		console.log(red_url);
-		goTo(red_url);
-	}
+	// 	const data = await response.json();
+	// 	console.log(data);
+	// 	const red_url = data.url;
+	// 	console.log(red_url);
+	// 	goTo(red_url);
+	// }
 
 	function handleChange(event) {
 		const { name, value, type, checked } = event.target;
@@ -67,7 +69,7 @@ export default function SignUp() {
 
 	return (
 		<div>
-		<Navbar/>
+			<Navbar />
 			<div className="form-container">
 				<form className="form" onSubmit={handleSubmit}>
 					<input
@@ -114,15 +116,52 @@ export default function SignUp() {
 
 					<br />
 					{/* <hr height="2px" border-width="0" color="gray" background-color="gray" /> */}
-					 <p>-----------OR-----------</p>
+					<p>-----------OR-----------</p>
 
-				
-				<button className="btn-auth" type="button" onClick={() => auth()}>
+					{/* <button className="btn-auth" type="button" onClick={() => auth()}>
 					<img className="btn-auth-img" src={googleButton} alt="google sign in" />
-				</button>
+					</button> */}
+					<GoogleLogin
+						onSuccess={(credentialResponse) => {
+							const credentials = jwtDecode(credentialResponse.credential);
+							console.log(credentials);
+							if (credentials.email_verified) {
+								try {
+									axios.defaults.withCredentials = true;
+									axios
+										.post(
+											"https://safezen.onrender.com/login-google",
+											{ email: credentials.email, password: "google" },
+											{
+												withCredentials: true,
+											}
+										)
+										.then((res) => {
+											if (res.data.Status === "Success") {
+												mt1 = res.data.mt1;
+												mt2 = res.data.mt2;
+												mt3 = res.data.mt3;
+												localStorage.setItem("token", res.data.token);
+												console.log(res.data.Status);
+												// button.classList.remove("button-loader");
+												// navigate("/");
+												window.location.href = "/";
+											} else alert(res.data.Error);
+										})
+										.catch((err) => console.log("hai", err));
+								} catch (err) {
+									console.log("snfjksuusf fsdfsef hfhsdkkfho  login");
+									console.error(err.message);
+								}
+							}
+						}}
+						onError={() => {
+							console.log("Login Failed");
+						}}
+					/>
 				</form>
 			</div>
-			<Foot/>
+			<Foot />
 		</div>
 	);
 }

@@ -49,7 +49,7 @@ app.use(
 		saveUninitialized: false,
 		cookie: {
 			// maxAge: 1000 * 60 * 60 * 24 * 365, // 1 week
-			expires: new Date(Date.now() +  (24 * 60 * 60 * 365)),
+			expires: new Date(Date.now() + 24 * 60 * 60 * 365),
 			httpOnly: true, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
 			secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
 			// secure: true,
@@ -184,7 +184,7 @@ app.post("/login", (req, res) => {
 					if (err) return res.json({ Error: "Error comparing password" });
 					if (valid) {
 						const token = jwt.sign(
-							{email},
+							{ email },
 							process.env.JWT_SECRET,
 							{
 								expiresIn: 60 * 60 * 24 * 365,
@@ -199,9 +199,14 @@ app.post("/login", (req, res) => {
 									domain: ".safezen.onrender.com",
 								});
 								res.setHeader("Set-Cookie", serialized);
-								res.status(200).json({ Status: "Success", mt1: mt1, mt2: mt2, mt3: mt3, token });
+								res.status(200).json({
+									Status: "Success",
+									mt1: mt1,
+									mt2: mt2,
+									mt3: mt3,
+									token,
+								});
 							}
-
 						);
 					} else {
 						return res.json({ Error: "Password does not match" });
@@ -209,6 +214,67 @@ app.post("/login", (req, res) => {
 				});
 			} else {
 				return res.json({ Error: "User not found" });
+			}
+		});
+	} catch (err) {
+		return res.json({ Error: "Unexpected error" });
+	}
+});
+
+app.post("/login-google", (req, res) => {
+	const email = req.body.email;
+	const password = req.body.password;
+	try {
+		db.query("SELECT * FROM user_data WHERE emailID = ?", [email], (err, result) => {
+			if (err) return res.json({ Error: "Database query error" });
+			if (result.length > 0) {
+				const user = result[0];
+				const storedHashedPassword = user.Password;
+				if (storedHashedPassword === password) {
+					const token = jwt.sign(
+						{ email },
+						process.env.JWT_SECRET,
+						{
+							expiresIn: 60 * 60 * 24 * 365,
+						},
+						(_err, token) => {
+							const serialized = serialize("token", token, {
+								httpOnly: true,
+								secure: process.env.NODE_ENV === "production",
+								sameSite: "None",
+								maxAge: 60 * 60 * 24 * 365,
+								path: "/",
+								domain: ".safezen.onrender.com",
+							});
+							res.setHeader("Set-Cookie", serialized);
+							res.status(200).json({
+								Status: "Success",
+								mt1: mt1,
+								mt2: mt2,
+								mt3: mt3,
+								token,
+							});
+						}
+					);
+				} else {
+					return res.json({ Error: "Password does not match" });
+				}
+			} else {
+				try {
+					db.query(
+						"INSERT INTO user_data (emailId, Password, age, noOfSessions) VALUES (?, ?, ?, ?)",
+						[email, password, 0, 0],
+						(err, result) => {
+							if (err) return res.json({ Error: "Error storing data" });
+							else {
+								const user = result[0];
+								return res.json({ Status: "Success" });
+							}
+						}
+					);
+				} catch (err) {
+					return res.json({ Error: "Error inserting data in database" });
+				}
 			}
 		});
 	} catch (err) {

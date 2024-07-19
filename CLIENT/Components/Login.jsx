@@ -4,11 +4,13 @@ import axios from "axios";
 import googleButton from "/assets/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png";
 const clientId = process.env.clientId;
 import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 // axios.defaults.withCredentials = true;
 // export let logged_in = false;
 // export let email = "";
 import Navbar from "./Navbar";
 import Foot from "./Foot";
+import { email } from "../data_files/checkLoginStatus";
 export let mt1, mt2, mt3;
 
 export default function Login() {
@@ -69,12 +71,7 @@ export default function Login() {
 						mt1 = res.data.mt1;
 						mt2 = res.data.mt2;
 						mt3 = res.data.mt3;
-						// console.log(res.data.token);
 						localStorage.setItem("token", res.data.token);
-						// const cok = document.cookie();
-						// console.log(cok);
-						// console.log(document.cookie);
-						// email = formData.email;
 						console.log(res.data.Status);
 						button.classList.remove("button-loader");
 						// navigate("/");
@@ -128,13 +125,42 @@ export default function Login() {
 					</button> */}
 					<GoogleLogin
 						onSuccess={(credentialResponse) => {
-							console.log(credentialResponse);
+							const credentials = jwtDecode(credentialResponse.credential);
+							console.log(credentials);
+							if (credentials.email_verified) {
+								try {
+									axios.defaults.withCredentials = true;
+									axios
+										.post(
+											"https://safezen.onrender.com/login-google",
+											{ email: credentials.email, password: "google" },
+											{
+												withCredentials: true,
+											}
+										)
+										.then((res) => {
+											if (res.data.Status === "Success") {
+												mt1 = res.data.mt1;
+												mt2 = res.data.mt2;
+												mt3 = res.data.mt3;
+												localStorage.setItem("token", res.data.token);
+												console.log(res.data.Status);
+												// button.classList.remove("button-loader");
+												// navigate("/");
+												window.location.href = "/";
+											} else alert(res.data.Error);
+										})
+										.catch((err) => console.log("hai", err));
+								} catch (err) {
+									console.log("snfjksuusf fsdfsef hfhsdkkfho  login");
+									console.error(err.message);
+								}
+							}
 						}}
 						onError={() => {
 							console.log("Login Failed");
 						}}
 					/>
-					{/* <GLogin/> */}
 				</form>
 			</div>
 			<Foot />
