@@ -224,7 +224,7 @@ app.post("/login", (req, res) => {
 									domain: ".safezen.onrender.com",
 								});
 								res.setHeader("Set-Cookie", serialized);
-								res.status(200).json({ Status: "Success", mt1: mt1, mt2: mt2, mt3: mt3 });
+								res.status(200).json({ Status: "Success", mt1: mt1, mt2: mt2, mt3: mt3, token });
 							}
 
 						);

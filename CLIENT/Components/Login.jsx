@@ -69,7 +69,7 @@ export default function Login() {
 						mt2 = res.data.mt2;
 						mt3 = res.data.mt3;
 						logged_in = true;
-						console.log(res.data);
+						console.log(res.data.token);
 						// const cok = document.cookie();
 						// console.log(cok);
 						// console.log(document.cookie);
