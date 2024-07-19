@@ -41,21 +41,22 @@ app.use(
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use(
-// 	session({
-// 		key: "userID",
-// 		secret: process.env.SESSION_SECRET,
-// 		resave: false,
-// 		saveUninitialized: false,
-// 		cookie: {
-// 			maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-// 			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-// 			httpOnly: true, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
-// 			secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
-// 			sameSite: "None",
-// 		},
-// 	})
-// );
+app.use(
+	session({
+		key: "userID",
+		secret: process.env.SESSION_SECRET,
+		resave: false,
+		saveUninitialized: false,
+		cookie: {
+			// maxAge: 1000 * 60 * 60 * 24 * 365, // 1 week
+			expires: new Date(Date.now() +  (24 * 60 * 60 * 365)),
+			httpOnly: true, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
+			// secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
+			secure: true,
+			sameSite: "None",
+		},
+	})
+);
 
 app.use((req, res, next) => {
 	res.setHeader(
@@ -211,16 +212,16 @@ app.post("/login", (req, res) => {
 							{email},
 							process.env.JWT_SECRET,
 							{
-								expiresIn: 60 * 60 * 24 * 30 * 365,
+								expiresIn: 60 * 60 * 24 * 365,
 							},
 							(_err, token) => {
 								const serialized = serialize("token", token, {
-									// httpOnly: true,
-									// secure: true,
+									httpOnly: true,
+									secure: true,
 									sameSite: "None",
-									maxAge: 60 * 60 * 24 * 30 * 365,
-									// path: "/",
-									// domain: ".safezen.onrender.com",
+									maxAge: 60 * 60 * 24 * 365,
+									path: "/",
+									domain: ".safezen.onrender.com",
 								});
 								res.setHeader("Set-Cookie", serialized);
 								res.status(200).json({ Status: "Success", mt1: mt1, mt2: mt2, mt3: mt3 });

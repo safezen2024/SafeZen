@@ -19,7 +19,7 @@ export default function Login() {
 		password: "",
 	});
 	const navigate = useNavigate();
-	
+
 	function auth() {
 		try {
 			// const response = await fetch("https://safezen.onrender.com/request", { method: "post" });
@@ -60,13 +60,16 @@ export default function Login() {
 			// console.log(formData);
 			axios.defaults.withCredentials = true;
 			axios
-				.post("https://safezen.onrender.com/login", formData)
+				.post("https://safezen.onrender.com/login", formData, {
+					withCredentials: true,
+				})
 				.then((res) => {
 					if (res.data.Status === "Success") {
 						mt1 = res.data.mt1;
 						mt2 = res.data.mt2;
 						mt3 = res.data.mt3;
 						logged_in = true;
+						console.log(res.data);
 						// const cok = document.cookie();
 						// console.log(cok);
 						// console.log(document.cookie);
@@ -93,41 +96,43 @@ export default function Login() {
 
 	return (
 		<div>
-		<Navbar/>
-		<div className="form-container">
-			<form className="form" onSubmit={handleSubmit}>
-				<input
-					required
-					type="email"
-					placeholder="Email address"
-					className="form--input mb-1"
-					name="email"
-					onChange={handleChange}
-					value={formData.email}
-				/>
-				<input
-					required
-					type="password"
-					placeholder="Password"
-					className="form--input mb-1"
-					name="password"
-					onChange={handleChange}
-					value={formData.password}
-				/>
+			<Navbar />
+			<div className="form-container">
+				<form className="form" onSubmit={handleSubmit}>
+					<input
+						required
+						type="email"
+						placeholder="Email address"
+						className="form--input mb-1"
+						name="email"
+						onChange={handleChange}
+						value={formData.email}
+					/>
+					<input
+						required
+						type="password"
+						placeholder="Password"
+						className="form--input mb-1"
+						name="password"
+						onChange={handleChange}
+						value={formData.password}
+					/>
 
-				<button className="form--submit" id="loading-button">Login</button>
-				<br />
-				
-				<p>-----------OR-----------</p>
+					<button className="form--submit" id="loading-button">
+						Login
+					</button>
+					<br />
 
-				<button className="btn-auth" type="button" onClick={auth}>
-					<img className="btn-auth-img" src={googleButton} alt="google sign in" />
-				</button>
+					<p>-----------OR-----------</p>
 
-				{/* <GLogin/> */}
-			</form>
-		</div>
-		<Foot/>
+					<button className="btn-auth" type="button" onClick={auth}>
+						<img className="btn-auth-img" src={googleButton} alt="google sign in" />
+					</button>
+
+					{/* <GLogin/> */}
+				</form>
+			</div>
+			<Foot />
 		</div>
 	);
 }
