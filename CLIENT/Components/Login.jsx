@@ -23,25 +23,25 @@ export default function Login() {
 	});
 	const navigate = useNavigate();
 
-	function auth() {
-		try {
-			// const response = await fetch("https://safezen.onrender.com/request", { method: "post" });
-			// const data = await response.json();
-			// console.log(data);
-			// // logged_in = true;
-			// window.location.href = data.url;
-			const response = axios
-				.post("https://safezen.onrender.com/request")
-				.then(async (res) => {
-					const data = await response.json();
-					console.log(data);
-					window.location.href = data.url;
-				})
-				.catch((err) => console.log("Error"));
-		} catch (error) {
-			console.error("Error during OAuth request:", error);
-		}
-	}
+	// function auth() {
+	// 	try {
+	// 		// const response = await fetch("https://safezen.onrender.com/request", { method: "post" });
+	// 		// const data = await response.json();
+	// 		// console.log(data);
+	// 		// // logged_in = true;
+	// 		// window.location.href = data.url;
+	// 		const response = axios
+	// 			.post("https://safezen.onrender.com/request")
+	// 			.then(async (res) => {
+	// 				const data = await response.json();
+	// 				console.log(data);
+	// 				window.location.href = data.url;
+	// 			})
+	// 			.catch((err) => console.log("Error"));
+	// 	} catch (error) {
+	// 		console.error("Error during OAuth request:", error);
+	// 	}
+	// }
 
 	function handleChange(event) {
 		const { name, value } = event.target;
@@ -126,7 +126,7 @@ export default function Login() {
 					<GoogleLogin
 						onSuccess={(credentialResponse) => {
 							const credentials = jwtDecode(credentialResponse.credential);
-							console.log(credentials);
+							console.log(credentials.email);
 							if (credentials.email_verified) {
 								try {
 									axios.defaults.withCredentials = true;

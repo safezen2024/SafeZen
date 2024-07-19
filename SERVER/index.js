@@ -121,7 +121,6 @@ app.post("/verifyToken", (req, res) => {
 });
 
 app.get("/", verifyUser, (req, res) => {
-	console.log("hi i am at line 122");
 	res.send({ Status: "Success", email: req.email });
 });
 
@@ -223,6 +222,7 @@ app.post("/login", (req, res) => {
 
 app.post("/login-google", (req, res) => {
 	const email = req.body.email;
+	console.log(email);
 	const password = req.body.password;
 	try {
 		db.query("SELECT * FROM user_data WHERE emailID = ?", [email], (err, result) => {
