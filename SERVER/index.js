@@ -12,6 +12,7 @@ import authRouter, { tokenExport, user_data_google } from "./oAuth.js";
 import requestRouter from "./request.js";
 import { Cashfree } from "cashfree-pg";
 import crypto from "crypto";
+import path from "path";
 env.config();
 
 const app = express();
@@ -104,6 +105,14 @@ const verifyUser = (req, res, next) => {
 		});
 	}
 };
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// Catch all routes and return the index file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 
 app.post("/verifyToken", (req, res) => {
 	let token = req.body.token;
