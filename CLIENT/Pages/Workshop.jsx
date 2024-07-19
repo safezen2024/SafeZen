@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../Components/Navbar";
 import Foot from "../Components/Foot";
 import { auth } from "../data_files/checkLoginStatus";
-import { logged_in } from "../Components/Login";
+// import { logged_in } from "../Components/Login";
 
 export default function Workshop() {
 	// const params = useParams();
@@ -61,8 +61,8 @@ export default function Workshop() {
 						}}>
 						Register
 					</button>
-					{flag && (logged_in || auth) && <h5>https://meet.google.com/xrr-oncb-aby</h5>}
-					{flag && !(logged_in || auth) && <h5>Please Login first !!</h5>}
+					{flag && (auth) && <h5>https://meet.google.com/xrr-oncb-aby</h5>}
+					{flag && !(auth) && <h5>Please Login first !!</h5>}
 				</p>
 			</div>
 			<Foot />

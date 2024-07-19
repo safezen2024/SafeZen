@@ -1,5 +1,5 @@
 import React from "react";
-import { email } from "../Components/Login";
+import { email } from "../data_files/checkLoginStatus";
 import axios from "axios";
 import Navbar from "../Components/Navbar";
 import Foot from "../Components/Foot";
@@ -10,7 +10,10 @@ export default function Profile() {
 		await axios
 			.get("https://safezen.onrender.com/logout")
 			.then((res) => {
+				localStorage.clear();
+				//
 				location.reload();
+				window.location.href = "/";
 			})
 			.catch((err) => console.log(err));
 	};
@@ -18,9 +21,11 @@ export default function Profile() {
 		<div>
 			<Navbar />
 			<h1 className="meditation-text">Hello {email}</h1>
-			<button type="button" className="btn m-0" onClick={handleDelete}>
-				Logout
-			</button>
+			<div className="logout">
+				<button type="button" className="btn m-0" onClick={handleDelete}>
+					Logout
+				</button>
+			</div>
 			<Foot />
 		</div>
 	);

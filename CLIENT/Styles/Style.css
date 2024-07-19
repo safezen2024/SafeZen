@@ -1,4 +1,4 @@
-*{
+* {
 	box-sizing: border-box;
 }
 
@@ -122,7 +122,7 @@ p {
 	width: 100%;
 }
 
-.hero-text{
+.hero-text {
 	background-color: #d7f5ff;
 }
 
@@ -341,4 +341,11 @@ p {
 	100% {
 		transform: rotate(360deg);
 	}
+}
+
+.logout {
+	display: flex;
+	justify-content: end;
+	margin-right: 4rem;
+	margin-bottom: 4rem;
 }

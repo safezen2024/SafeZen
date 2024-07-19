@@ -4,8 +4,8 @@ import axios from "axios";
 import googleButton from "/assets/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png";
 const clientId = process.env.clientId;
 // axios.defaults.withCredentials = true;
-export let logged_in = false;
-export let email = "";
+// export let logged_in = false;
+// export let email = "";
 import Navbar from "./Navbar";
 import Foot from "./Foot";
 export let mt1, mt2, mt3;
@@ -68,19 +68,19 @@ export default function Login() {
 						mt1 = res.data.mt1;
 						mt2 = res.data.mt2;
 						mt3 = res.data.mt3;
-						logged_in = true;
-						console.log(res.data.token);
+						// console.log(res.data.token);
+						localStorage.setItem('token', res.data.token);
 						// const cok = document.cookie();
 						// console.log(cok);
 						// console.log(document.cookie);
-						email = formData.email;
+						// email = formData.email;
 						console.log(res.data.Status);
 						button.classList.remove("button-loader");
-						navigate("/");
-						// window.location.href = "/";
+						// navigate("/");
+						window.location.href = "/";
 					} else alert(res.data.Error);
 				})
-				.catch((err) => console.log("	 hai"));
+				.catch((err) => console.log("hai", err));
 		} catch (err) {
 			console.log("snfjksuusf fsdfsef hfhsdkkfho  login");
 			console.error(err.message);

@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Illness from "./Illness";
 import axios from "axios";
-import { auth } from "../data_files/checkLoginStatus";
-import { logged_in, email } from "./Login";
+import { auth, email } from "../data_files/checkLoginStatus";
+// import { logged_in, email } from "./Login";
 // axios.defaults.withCredentials = true;
 export default function Navbar() {
 	axios.defaults.withCredentials = true;
@@ -72,7 +72,7 @@ export default function Navbar() {
 					</ul>
 				</div>
 				<div className="col-md-3 text-end account-buttons">
-					{!(logged_in || auth) ? (
+					{!(auth) ? (
 						<div>
 							<Link to="/login" id="props.id">
 								<button type="button" className="btn me-2">

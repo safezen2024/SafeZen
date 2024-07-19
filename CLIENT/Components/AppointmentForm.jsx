@@ -5,15 +5,13 @@ import SelectTime from "./SelectTime";
 import Specialization from "./Specialization";
 import SelectIllness from "./SelectIllness";
 import "react-datepicker/dist/react-datepicker.css";
-import { auth, gmail } from "../data_files/checkLoginStatus";
-import { logged_in, email, mt1, mt2, mt3 } from "./Login";
+import { auth, email } from "../data_files/checkLoginStatus";
+import { mt1, mt2, mt3 } from "./Login";
 import axios from "axios";
 import emailjs from "@emailjs/browser";
 // import {Cashfree} from "@cashfreepayments/cashfree-js"
 import { load } from "@cashfreepayments/cashfree-js";
 import gmeetLinks from "../data_files/GmeetLinks";
-// import env from "dotenv";
-// env.config();
 
 axios.defaults.withCredentials = true;
 export default function AppointmentForm(props) {

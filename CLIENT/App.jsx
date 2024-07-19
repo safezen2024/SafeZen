@@ -24,12 +24,12 @@ import TermsOfService from "./Pages/TermsOfService";
 import PrivacyPolicy from "./Pages/PrivacyPolicy.jsx";
 import Disclaimer from "./Pages/Disclaimer";
 import AboutUs from "./Pages/AbourUs.jsx";
-import { logged_in } from "./Components/Login";
+// import { logged_in } from "./Components/Login";
 import { auth } from "./data_files/checkLoginStatus.js";
 
 function App() {
 	function requireAuth(nextState, replace, next) {
-		if (!(logged_in || auth)) {
+		if (!(auth)) {
 			replace({
 				pathname: "/login",
 				state: { nextPathname: nextState.location.pathname },

@@ -51,8 +51,8 @@ app.use(
 			// maxAge: 1000 * 60 * 60 * 24 * 365, // 1 week
 			expires: new Date(Date.now() +  (24 * 60 * 60 * 365)),
 			httpOnly: true, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
-			// secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
-			secure: true,
+			secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent only over HTTPS
+			// secure: true,
 			sameSite: "None",
 		},
 	})
@@ -76,8 +76,8 @@ app.use(function (req, res, next) {
 	next();
 });
 
-// app.use("/oauth", authRouter);
-// app.use("/request", requestRouter);
+app.use("/oauth", authRouter);
+app.use("/request", requestRouter);
 
 Cashfree.XClientId = process.env.CLIENT_ID;
 Cashfree.XClientSecret = process.env.CLIENT_SECRET;
@@ -183,31 +183,6 @@ app.post("/login", (req, res) => {
 				bcrypt.compare(password, storedHashedPassword, (err, valid) => {
 					if (err) return res.json({ Error: "Error comparing password" });
 					if (valid) {
-						// const token = jwt.sign(
-						// 	{ email },
-						// 	process.env.JWT_SECRET,
-						// 	{ expiresIn: "8d" },
-						// 	(_err, token) => {
-						// 		const serialized = serialize("token", token, {
-						// 			httpOnly: true,
-						// 			secure: process.env.NODE_ENV === "production",
-						// 			sameSite: "strict",
-						// 			maxAge: 60 * 60 * 24 * 7 * 1000,
-						// 			path: "/",
-						// 		});
-						// 	}
-						// );
-						// res.setHeader("Set-Cookie", serialized);
-						// const expiryDate = new Date(Date.now() + 604800000); // 7 days
-						// // res
-						// // .cookie("token", token, {
-						// // 	expires: expiryDate,
-						// // 	httpOnly: true, // Ensure the cookie is only accessible by the web server
-						// // 	secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-						// // 	sameSite: "None",
-						// // 	domain: ".safezen.onrender.com",
-						// // })
-						// res.status(200).json({ Status: "Success", mt1: mt1, mt2: mt2, mt3: mt3 });
 						const token = jwt.sign(
 							{email},
 							process.env.JWT_SECRET,
@@ -217,7 +192,7 @@ app.post("/login", (req, res) => {
 							(_err, token) => {
 								const serialized = serialize("token", token, {
 									httpOnly: true,
-									secure: true,
+									secure: process.env.NODE_ENV === "production",
 									sameSite: "None",
 									maxAge: 60 * 60 * 24 * 365,
 									path: "/",
