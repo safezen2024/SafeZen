@@ -12,8 +12,8 @@ import authRouter, { tokenExport, user_data_google } from "./oAuth.js";
 import requestRouter from "./request.js";
 import { Cashfree } from "cashfree-pg";
 import crypto from "crypto";
-import path from "path";
-import { fileURLToPath } from 'url';
+// import path from "path";
+// import { fileURLToPath } from 'url';
 env.config();
 
 const app = express();
@@ -60,15 +60,15 @@ app.use(
 	})
 );
 
-const __filename = fileURLToPath("https://safezen.in");
-const __dirname = path.dirname(__filename);
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'build')));
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+// // Serve static files from the React app
+// app.use(express.static(path.join(__dirname, 'client/build')));
 
-// Catch all routes and return the index file
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+// // Catch all routes and return the index file
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+// });
 
 app.use((req, res, next) => {
 	res.setHeader(

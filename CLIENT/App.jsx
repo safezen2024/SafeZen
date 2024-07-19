@@ -11,12 +11,11 @@ import AppointmentPage3 from "./Pages/AppointmentPage3.jsx";
 import Contact from "./Pages/Contact";
 import Jinam from "./Components/Jinam";
 import {
-	BrowserRouter as Router,
+	BrowserRouter as 
+	Router,
 	Routes,
 	Route,
-	Navigate,
-	Link,
-	BrowserRouter,
+	Switch,
 } from "react-router-dom";
 import Pricing from "./Pages/Pricing.jsx";
 import Profile from "./Pages/Profile.jsx";
@@ -41,7 +40,7 @@ function App() {
 	// /* <Link to="/jinam" element={<Jinam/>}></Link> */
 
 	return (
-		<BrowserRouter>
+		<Router>
 			<Routes>
 				{/* <Route path="/*" element={<Home />} /> */}
 				<Route path="/" element={<Home />}></Route>
@@ -61,8 +60,9 @@ function App() {
 				<Route path="/profile" element={<Profile />} onEnter={requireAuth}></Route>
 				<Route path="/aboutus" element={<AboutUs />}></Route>
 				<Route path="/jinam" element={<Jinam />}></Route>
+				<Route component={<Jinam/>} /> {/* Fallback for 404 errors */}
 			</Routes>
-		</BrowserRouter>
+		</Router>
 	);
 }
 
