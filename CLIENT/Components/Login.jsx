@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import googleButton from "/assets/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png";
 const clientId = process.env.clientId;
+import { GoogleLogin } from "@react-oauth/google";
 // axios.defaults.withCredentials = true;
 // export let logged_in = false;
 // export let email = "";
@@ -69,7 +70,7 @@ export default function Login() {
 						mt2 = res.data.mt2;
 						mt3 = res.data.mt3;
 						// console.log(res.data.token);
-						localStorage.setItem('token', res.data.token);
+						localStorage.setItem("token", res.data.token);
 						// const cok = document.cookie();
 						// console.log(cok);
 						// console.log(document.cookie);
@@ -117,18 +118,22 @@ export default function Login() {
 						onChange={handleChange}
 						value={formData.password}
 					/>
-
 					<button className="form--submit" id="loading-button">
 						Login
 					</button>
 					<br />
-
 					<p>-----------OR-----------</p>
-
-					<button className="btn-auth" type="button" onClick={auth}>
+					{/* <button className="btn-auth" type="button" onClick={auth}>
 						<img className="btn-auth-img" src={googleButton} alt="google sign in" />
-					</button>
-
+					</button> */}
+					<GoogleLogin
+						onSuccess={(credentialResponse) => {
+							console.log(credentialResponse);
+						}}
+						onError={() => {
+							console.log("Login Failed");
+						}}
+					/>
 					{/* <GLogin/> */}
 				</form>
 			</div>
