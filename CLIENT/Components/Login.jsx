@@ -1,16 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import googleButton from "/assets/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png";
 const clientId = process.env.clientId;
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-// axios.defaults.withCredentials = true;
-// export let logged_in = false;
-// export let email = "";
 import Navbar from "./Navbar";
 import Foot from "./Foot";
-import { email } from "../data_files/checkLoginStatus";
 export let mt1, mt2, mt3;
 
 export default function Login() {
@@ -22,26 +17,6 @@ export default function Login() {
 		password: "",
 	});
 	const navigate = useNavigate();
-
-	// function auth() {
-	// 	try {
-	// 		// const response = await fetch("https://safezen.onrender.com/request", { method: "post" });
-	// 		// const data = await response.json();
-	// 		// console.log(data);
-	// 		// // logged_in = true;
-	// 		// window.location.href = data.url;
-	// 		const response = axios
-	// 			.post("https://safezen.onrender.com/request")
-	// 			.then(async (res) => {
-	// 				const data = await response.json();
-	// 				console.log(data);
-	// 				window.location.href = data.url;
-	// 			})
-	// 			.catch((err) => console.log("Error"));
-	// 	} catch (error) {
-	// 		console.error("Error during OAuth request:", error);
-	// 	}
-	// }
 
 	function handleChange(event) {
 		const { name, value } = event.target;

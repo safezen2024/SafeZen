@@ -15,7 +15,6 @@ import {
 	Router,
 	Routes,
 	Route,
-	Switch,
 } from "react-router-dom";
 import Pricing from "./Pages/Pricing.jsx";
 import Profile from "./Pages/Profile.jsx";

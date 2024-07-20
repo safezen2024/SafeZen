@@ -1,5 +1,5 @@
-import React, { StrictMode, useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import SelectTime from "./SelectTime";
 import Specialization from "./Specialization";
@@ -9,13 +9,11 @@ import { auth, email } from "../data_files/checkLoginStatus";
 import { mt1, mt2, mt3 } from "./Login";
 import axios from "axios";
 import emailjs from "@emailjs/browser";
-// import {Cashfree} from "@cashfreepayments/cashfree-js"
 import { load } from "@cashfreepayments/cashfree-js";
 import gmeetLinks from "../data_files/GmeetLinks";
 
 axios.defaults.withCredentials = true;
 export default function AppointmentForm(props) {
-	console.log(props);
 	const d = new Date();
 	const [date, setDate] = useState(d);
 	const [timeSlot, setTimeSlot] = useState();
@@ -74,9 +72,9 @@ export default function AppointmentForm(props) {
 	}
 	async function handleSlotChange(event) {
 		await setTimeSlot(event.target.value);
-		console.log(event.target.value);
+		// console.log(event.target.value);
 		const tm = event.target.value;
-		console.log("mt1, mt2, mt3 ", mt1, mt2, mt3);
+		// console.log("mt1, mt2, mt3 ", mt1, mt2, mt3);
 		if (tm[1] === "2" || tm[1] === "5" || tm[1] === "8") {
 			setM1(mt1 + 1);
 			if (m1 === 20) setM1(0);
@@ -94,11 +92,9 @@ export default function AppointmentForm(props) {
 	}
 	function handleSpecializationChange(event) {
 		setIllness(event.target.value);
-		console.log(event.target.value);
 	}
 	function handleTherapyChange(event) {
 		setTherapy(event.target.value);
-		console.log(event.target.value);
 	}
 	let url;
 	async function getSessionId() {
@@ -106,13 +102,13 @@ export default function AppointmentForm(props) {
 		else if (props.amt === 2) url = "https://safezen.onrender.com/payment2";
 		else url = "https://safezen.onrender.com/payment3";
 		try {
-			console.log(url);
+			// console.log(url);
 			const res = await axios.get(url);
 			// console.log(res);
 			if (res.data && res.data.payment_session_id) {
-				console.log(res.data.order_id);
+				// console.log(res.data.order_id);
 				setOrderId(res.data.order_id);
-				console.log("Using ref:", orderIdRef.current);
+				// console.log("Using ref:", orderIdRef.current);
 				// await console.log(res.data.payment_session_id)
 				return await res.data.payment_session_id;
 			}
@@ -123,7 +119,7 @@ export default function AppointmentForm(props) {
 
 	async function verifyPayment() {
 		try {
-			console.log(orderIdRef.current);
+			// console.log(orderIdRef.current);
 			let res = await axios.post("https://safezen.onrender.com/verify", {
 				orderId: orderIdRef.current,
 			});
@@ -148,13 +144,10 @@ export default function AppointmentForm(props) {
 		// Add the loading animation CSS class
 		button.classList.add("button-loader");
 		// console.log(date, timeSlot, description, illness, therapy);
-		console.log(logged_in, auth);
-		if (logged_in || auth) {
-			let x = "";
-			if (logged_in) x = email;
-			else x = gmail;
+		if (auth) {
+			let x = email;
 			const formData = { x, date, timeSlot, therapy, illness, description, m1, m2, m3 };
-			console.log(m1, m2, m3);
+			// console.log(m1, m2, m3);
 			const mailData = {
 				user_email: x,
 				date: date,
@@ -172,11 +165,10 @@ export default function AppointmentForm(props) {
 					)
 					.then(
 						async (result) => {
-							console.log(result);
+							// console.log(result);
 							console.log("SUCCESS!");
 							// alert("Appointment Booked Email sent");
 							try {
-								console.log(formData);
 								await axios
 									.post("https://safezen.onrender.com/book-appointment", formData)
 									.then(async (res) => {
@@ -185,7 +177,6 @@ export default function AppointmentForm(props) {
 											// navigate("/");
 											try {
 												let sessionId = await getSessionId();
-												console.log(sessionId);
 												let checkoutOptions = {
 													paymentSessionId: sessionId,
 													redirectTarget: "_modal",
@@ -203,10 +194,10 @@ export default function AppointmentForm(props) {
 													.checkout(checkoutOptions)
 													.then(async (res) => {
 														console.log("payment initialized");
-														console.log(
-															orderIdRef.current,
-															"yeh hai order id"
-														);
+														// console.log(
+														// 	orderIdRef.current,
+														// 	"yeh hai order id"
+														// );
 														const ans = await verifyPayment(
 															orderIdRef.current
 														);
@@ -230,7 +221,7 @@ export default function AppointmentForm(props) {
 																	)
 																	.then(
 																		async (result) => {
-																			console.log(result);
+																			// console.log(result);
 																			console.log("SUCCESS!");
 																			alert(
 																				`You have recived the link at ${x}`

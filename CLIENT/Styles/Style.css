@@ -59,17 +59,11 @@ p {
 	background-color: #273f95;
 	color: #d7f5ff;
 	border-color: #273f95;
-
-	/* background-color: #d7f5ff;
-	color: #273f95;
-	border-color: #d7f5ff; */
 }
 
 .btn {
 	border-color: #273f95;
 	color: #273f95;
-	/* border-color: #d7f5ff;
-	color: #d7f5ff; */
 	font-weight: 600;
 	margin: 10px;
 }
@@ -77,18 +71,12 @@ p {
 	border-color: #273f95;
 	color: #d7f5ff;
 	background-color: #273f95;
-	/* border-color: #d7f5ff;
-	color: #273f95;
-	background-color: #d7f5ff; */
 }
 
 .btn-sign-up:hover {
 	border-color: #273f95;
 	color: #273f95;
 	background-color: #d7f5ff;
-	/* border-color: #d7f5ff;
-	color: #d7f5ff;
-	background-color: #273f95; */
 }
 
 .btn-book-appointment {
@@ -118,12 +106,7 @@ p {
 }
 
 .text {
-	/* margin-top: 30px; */
 	width: 100%;
-}
-
-.hero-text {
-	background-color: #d7f5ff;
 }
 
 .form {
@@ -159,9 +142,7 @@ p {
 	display: flex;
 	flex-direction: column;
 	width: 60%;
-	/* height: 100%; */
 	text-wrap: wrap;
-	/* height: 0.5vh; */
 }
 
 .box-detail > * {
@@ -183,7 +164,6 @@ p {
 
 .form-container {
 	height: 50rem;
-	/* padding: 20px; */
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

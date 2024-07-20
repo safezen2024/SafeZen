@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Cookies from "js-cookie";
+import React, { useEffect, useState, useRef } from "react";
 import Navbar from "../Components/Navbar";
 import illness_data from "../data_files/illness_data";
 import IllnessCard from "../Components/illness_card";
@@ -12,7 +10,7 @@ export default function IndTherapy() {
 		window.scrollTo(0, 0);
 	}, []);
 	const [style, setStyle] = useState();
-
+	const ref = useRef(null);
 	const styles = {
 		default: {
 			display: "grid",
@@ -128,12 +126,7 @@ export default function IndTherapy() {
 							type="button"
 							className="btn btn-book-appointment"
 							onClick={() => {
-								// e.preventDefault();
-								console.log("under ind therapy section");
-								console.log(document.cookie);
-								let token = Cookies.get('token');
-								console.log("Retrieved token:", token); // Debugging log
-								window.scrollTo(0, 2700);
+								ref.current?.scrollIntoView({ behavior: "smooth" });
 							}}>
 							Book an appointment
 						</button>
@@ -144,7 +137,9 @@ export default function IndTherapy() {
 					{illData}
 				</div>
 			</div>
-			<PricePlans id="pplans" />
+			<div ref={ref}>
+				<PricePlans />
+			</div>
 			<Foot />
 		</div>
 	);

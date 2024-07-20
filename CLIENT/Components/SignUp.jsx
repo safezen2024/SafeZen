@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import googleButton from "/assets/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import Foot from "./Foot";

@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
 import relillness_data from "../data_files/relillness_data";
 import RelIllnessCard from "../Components/relillness_card";
@@ -11,7 +10,7 @@ export default function RelTherapy() {
 		window.scrollTo(0, 0);
 	}, []);
 	const [style, setStyle] = useState();
-
+	const ref = useRef(null);
 	const styles = {
 		default: {
 			display: "grid",
@@ -122,12 +121,11 @@ export default function RelTherapy() {
 						<p className="book-appoinntment-card-text">
 							We have the best professionals.
 						</p>
-						{/* <Link to="/appointment-page"> */}
 						<button
 							type="button"
 							className="btn btn-book-appointment"
 							onClick={() => {
-								window.scrollTo(0, 1000);
+								ref.current?.scrollIntoView({ behavior: "smooth" });
 							}}>
 							Book an appointment
 						</button>
@@ -136,7 +134,9 @@ export default function RelTherapy() {
 				</div>
 				<div style={style}>{illData}</div>
 			</div>
-			<PricePlans />
+			<div ref={ref}>
+				<PricePlans />
+			</div>
 			<Foot />
 		</div>
 	);

@@ -99,58 +99,57 @@
 // console.log("Retrieved token:", token); // Debugging log
 // console.log("Retrieved token2:", token2); // Debugging log
 
-
 // import Cookies from "js-cookie";
 import axios from "axios";
 
 export let auth = false;
 export let email = "";
 axios.defaults.withCredentials = true;
-const token = localStorage.getItem('token');
-console.log(token);
+const token = localStorage.getItem("token");
+// console.log(token);
 if (token) {
-	if (token[0] === "j" && token[1] == ":") {
-		// Retrieve the token from the cookie
-		if (token) {
-			token = token.slice(2);
-			token = JSON.parse(token);
-			console.log("token yeh hai: ", token);
-			if (token) {
-				await axios
-					.post("https://safezen.onrender.com/verifyToken", { token })
-					.then((res) => {
-						if (res.data.Status === "Success") {
-							console.log("abcxyz");
-							auth = true;
-							email = res.data.email;
-						} else {
-							auth = false;
-							console.log(res.data.Error);
-						}
-					})
-					.catch((err) => console.error("Error verifying token:", err));
-			} else {
-				auth = false;
-			}
-		}
-	} else {
-		try {
-			await axios
-				.get("https://safezen.onrender.com")
-				.then((res) => {
-					if (res.data.Status === "Success") {
-						console.log("token verify hogaya hai jinam");
-						auth = true;
-						email = res.data.email;
-						console.log(email);
-					} else {
-						auth = false;
-						setMsg(res.data.Error);
-					}
-				})
-				.catch((err) => console.log(err));
-		} catch (err) {
-			console.error(err.message);
-		}
+	// if (token[0] === "j" && token[1] == ":") {
+	// 	// Retrieve the token from the cookie
+	// 	if (token) {
+	// 		token = token.slice(2);
+	// 		token = JSON.parse(token);
+	// 		console.log("token yeh hai: ", token);
+	// 		if (token) {
+	// 			await axios
+	// 				.post("https://safezen.onrender.com/verifyToken", { token })
+	// 				.then((res) => {
+	// 					if (res.data.Status === "Success") {
+	// 						console.log("abcxyz");
+	// 						auth = true;
+	// 						email = res.data.email;
+	// 					} else {
+	// 						auth = false;
+	// 						console.log(res.data.Error);
+	// 					}
+	// 				})
+	// 				.catch((err) => console.error("Error verifying token:", err));
+	// 		} else {
+	// 			auth = false;
+	// 		}
+	// 	}
+	// } else {
+	try {
+		await axios
+			.get("https://safezen.onrender.com")
+			.then((res) => {
+				if (res.data.Status === "Success") {
+					console.log("token verify hogaya hai jinam");
+					auth = true;
+					email = res.data.email;
+					console.log(email);
+				} else {
+					auth = false;
+					setMsg(res.data.Error);
+				}
+			})
+			.catch((err) => console.log(err));
+	} catch (err) {
+		console.error(err.message);
 	}
+	// }
 }

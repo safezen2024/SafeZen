@@ -1,4 +1,4 @@
-.page-title{
+.page-title {
 	font-family: "Inter", sans-serif;
 	font-weight: 700;
 	font-style: normal;
@@ -11,11 +11,11 @@
 	margin-top: 1.5rem;
 }
 
-.meditation-text{
+.meditation-text {
 	text-align: center;
 	align-content: center;
 	margin: 2.5rem 6rem 4rem 6rem;
-	padding: 2rem 4rem 2rem 4rem ;
+	padding: 2rem 4rem 2rem 4rem;
 	/* display: block; */
 	height: 100%;
 	background-color: #d7f5ff;
@@ -26,11 +26,11 @@
 	font-size: larger;
 }
 
-.services-text{
+.services-text {
 	text-align: left;
 	align-content: center;
 	margin: 2.5rem 6rem 4rem 6rem;
-	padding: 2rem 4rem 2rem 4rem ;
+	padding: 2rem 4rem 2rem 4rem;
 	/* display: block; */
 	height: 100%;
 	background-color: #d7f5ff;
@@ -41,53 +41,80 @@
 	font-size: large;
 }
 
-.services-text > *{
+.services-text > * {
 	margin-bottom: 1rem;
 }
 
-@media (max-width: 620px) {
-	.page-title{
+.contact-item {
+	font-size: 2.2rem;
+}
+
+.workshop-item {
+	font-size: 2rem;
+}
+
+.workshop-text {
+	text-align: left;
+}
+
+@media (max-width: 680px) {
+	.page-title {
 		font-size: 4rem;
+		margin-left: 1rem;
+		margin-right: 1rem;
 	}
-	.meditation-text{
-		padding: 2rem 3rem 2rem 3rem ;
+	.meditation-text {
+		padding: 2rem 3rem 2rem 3rem;
+		margin: 2.2rem 3rem 4rem 3rem;
 		font-size: large;
 	}
-	.services-text{
-		padding: 2rem 3rem 2rem 3rem ;
+	.services-text {
+		padding: 2rem 3rem 2rem 3rem;
+		margin: 2.2rem 3rem 4rem 3rem;
 		font-size: medium;
+	}
+
+	.contact-item {
+		font-size: 1.8rem;
 	}
 }
 
 @media (max-width: 500px) {
-	.page-title{
+	.page-title {
 		font-size: 3.5rem;
+		margin-left: 0rem;
+		margin-right: 0rem;
 	}
 }
 
 @media (max-width: 440px) {
-	.page-title{
+	.page-title {
 		font-size: 3rem;
+		margin-left: 0rem;
+		margin-right: 0rem;
 	}
-	.meditation-text{
+	.meditation-text {
 		font-size: smaller;
+		margin: 1.8rem 2rem 3rem 2rem;
 	}
-	.services-text{
+	.services-text {
 		font-size: smaller;
+		margin: 1.8rem 2rem 3rem 2rem;
+	}
+
+	.contact-item {
+		font-size: 1.4rem;
 	}
 }
 
-@media (max-width: 320px) {
-	.page-title{
+@media (max-width: 350px) {
+	.page-title {
+		margin-left: 0rem;
+		margin-right: 0rem;
 		font-size: 2rem;
 	}
-}
 
-
-.workshop-item{
-	font-size: 2rem;
-}
-
-.workshop-text{
-	text-align: left;
+	.contact-item {
+		font-size: 1rem;
+	}
 }

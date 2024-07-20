@@ -1,16 +1,14 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Hero() {
 	const [image, setImage] = useState("");
 
 	useEffect(() => {
 		const handleResize = () => {
-			if(window.innerWidth <= 650) 
-				setImage("/src/Hero3.jpg");
-			else if (window.innerWidth <= 950 && window.innerWidth > 650) 
+			if (window.innerWidth <= 650) setImage("/src/Hero3.jpg");
+			else if (window.innerWidth <= 950 && window.innerWidth > 650)
 				setImage("/src/Hero1.jpg");
-			else
-				setImage("/src/Home_3.jpg");
+			else setImage("/src/Home_3 (1).jpg");
 		};
 
 		window.addEventListener("resize", handleResize);
@@ -21,7 +19,7 @@ export default function Hero() {
 
 	return (
 		<div className="Hero">
-			<img src={image} className="Hero-background" />
+				<img src={image} className="Hero-background" />
 		</div>
 	);
 }
