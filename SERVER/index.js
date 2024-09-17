@@ -421,7 +421,7 @@ app.post("/book-appointment", (req, res) => {
 app.get("/payment1", async (req, res) => {
 	try {
 		let request = {
-			order_amount: 899.0,
+			order_amount: 999.0,
 			order_currency: "INR",
 			order_id: await generateOrderId(),
 			customer_details: {
@@ -455,7 +455,7 @@ app.get("/payment1", async (req, res) => {
 app.get("/payment2", async (req, res) => {
 	try {
 		let request = {
-			order_amount: 2429.0,
+			order_amount: 2699.0,
 			order_currency: "INR",
 			order_id: await generateOrderId(),
 			customer_details: {
@@ -489,7 +489,7 @@ app.get("/payment2", async (req, res) => {
 app.get("/payment3", async (req, res) => {
 	try {
 		let request = {
-			order_amount: 9199.0,
+			order_amount: 9999.0,
 			order_currency: "INR",
 			order_id: await generateOrderId(),
 			customer_details: {
