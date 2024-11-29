@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../Components/Navbar";
 import Hero from "../Components/Hero";
 import Foot from "../Components/Foot";
-import Text from "../Components/Text";
+import Text from "../Components/text";
 import Doctor from "../Components/Doctor";
 import "../Styles/Home.css"; // Import the CSS for animations
 
