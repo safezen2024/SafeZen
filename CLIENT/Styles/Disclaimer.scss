@@ -1,9 +1,4 @@
 .blue-container{
-    width: 100%;
-    height: 20rem;
-    margin-top: -3.5%;
-    background: radial-gradient(circle, #175CD3 , #07285F);
-    position: relative;
 
     .disclaimer-heading{
         position: absolute;
@@ -32,4 +27,26 @@
         margin-top: 2rem;
         text-align: justify;
     }
+}
+
+
+@media(max-width:992px){
+    .blue-container{
+       margin-top: -10%;
+       margin-bottom: 10%;
+
+       .disclaimer-heading{
+        width: 70%;
+
+        h2{
+            font-size: 2.3rem;
+            font-weight: 700;
+        }
+
+        p{
+            font-size: 1rem;
+        }
+    }
+    }
+
 }

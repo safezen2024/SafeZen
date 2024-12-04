@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../Components/Navbar";
 import Foot from "../Components/Foot";
 import { auth } from "../data_files/checkLoginStatus";
-import workshopImg from '../public/src/workshopsNew.png'
+import workshopImg from '../public/src/relation-banner-2.png'
 import { PiCubeFill } from "react-icons/pi";
 import '../Styles/Workshop.scss'
 // import { logged_in } from "../Components/Login";
@@ -21,7 +21,14 @@ export default function Workshop() {
 		<div>
 			<Navbar />
 			<div className="page">
-				<img src={workshopImg} alt="workshop" className="workshop-img" />
+				<div className="workshop-img">
+					<img src={workshopImg} alt="workshop" />
+					<div className="filter"></div>
+					<div className="txt">
+						<h2>Workshops</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, nihil!</p>
+					</div>
+				</div>
 
 				<div className="our-values">
 					<h5>Our Values</h5>

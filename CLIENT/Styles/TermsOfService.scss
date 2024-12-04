@@ -41,3 +41,25 @@
         text-align: justify;
     }
 }
+
+
+@media(max-width:992px){
+    .blue-container{
+       margin-top: -10%;
+       margin-bottom: 10%;
+
+       .terms-heading{
+        width: 70%;
+
+        h2{
+            font-size: 2.3rem;
+            font-weight: 700;
+        }
+
+        p{
+            font-size: 1rem;
+        }
+    }
+    }
+
+}

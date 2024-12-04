@@ -1,6 +1,7 @@
 .pricing{
     background-color: #F7FAFC;
     padding: 7%;
+    margin-top: -5%;
 
     .price-heading{
 
@@ -18,9 +19,48 @@
     }
 
     .pricing-cards{
-        margin-top: 5%;
+        margin-top: 3%;
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+}
+
+@media (max-width:786px){
+    .pricing{
+        padding: 5%;
+        .price-heading{
+            width: 100%;
+            h2{
+                font-size: 2rem;
+            }
+            p{
+                width: 100%;
+            }
+        }
+        .pricing-cards{
+            flex-direction: column;
+            gap: 2rem;
+        }
+    }
+}
+
+@media (max-width: 596px) {
+    .pricing{
+        margin-top: 10%;
+
+        .price-heading{
+            h2{
+                font-size: 1.8rem;
+            }
+            p{
+                font-size: 0.93rem;
+            }
+        }
+
+        .pricing-cards{
+            margin-top: 15%;
+            margin-bottom: 15%;
+        }
     }
 }

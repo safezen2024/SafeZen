@@ -1,0 +1,295 @@
+.hero2 {
+
+  text-align: center;
+  padding-top: 5rem;
+
+  .hero2-capsule {
+    border-radius: 25px;
+    background-color: rgba(46, 144, 250, 0.078);
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #1570ef;
+    border: 2px solid #1570ef;
+    font-weight: 600;
+  }
+
+  .hero2-heading {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+
+    h2 {
+      font-size: 2.5rem;
+      width: 45%;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+  }
+
+  .overlay-cards {
+    padding: 4% 5%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .hero2-benefits {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10rem;
+    padding: 0 5%;
+
+    .benefits-left {
+      text-align: start;
+      width: 45%;
+
+      h2 {
+        font-size: 2.4rem;
+        font-weight: 600;
+        text-transform: capitalize;
+        margin-top: 1rem;
+      }
+    }
+
+    .benefits-right {
+      width: 45%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: justify;
+    }
+  }
+
+  .hero2-benefits-cards {
+    padding: 1% 5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .hero2-banner {
+    margin-top: 7rem;
+    width: 100%;
+    height: 35rem;
+    position: relative;
+    user-select: none;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+
+    .blur-gradient {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(
+        90deg,
+        rgb(10, 59, 145, 0.9) 15%,
+        rgb(0, 0, 0, 0.1) 95%
+      );
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .hero-text {
+      text-align: start;
+      position: absolute;
+      top: 20%;
+      left: 6%;
+      width: 50%;
+      color: white;
+      padding: 1rem;
+
+      .hero-capsule {
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        border-radius: 25px;
+        border: 2px solid #1570ef;
+        background-color: rgb(255, 255, 255, 0.1);
+        padding: 0.3rem 0.6rem;
+      }
+
+      h2 {
+        width: 80%;
+        text-transform: capitalize;
+        font-size: 3rem;
+        margin-top: 1rem;
+        font-weight: 700;
+      }
+
+      p {
+        font-size: 1rem;
+        font-weight: 300;
+        margin-top: 1rem;
+      }
+
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.7rem;
+        margin-top: 2.5rem;
+        color: #175cd3;
+        background-color: white;
+        border: none;
+        outline: none;
+        padding: 0.6rem 1.4rem;
+        border-radius: 25px;
+        font-weight: 700;
+
+        &:hover {
+          background-color: rgb(227, 227, 227);
+        }
+      }
+
+      img {
+        width: 30%;
+        height: 45%;
+        position: absolute;
+        bottom: -23%;
+        right: 35%;
+      }
+    }
+  }
+
+  .testimonial {
+    margin-top: 2rem;
+    padding: 5%;
+    text-align: start;
+
+    h2 {
+      margin-top: 1rem;
+      font-size: 2.3rem;
+      font-weight: 600;
+    }
+
+    .testimonial-cards {
+      padding: 2% 0%;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .hero2-banner {
+    .hero-text {
+      top: 20%;
+      left: 5%;
+      width: 50%;
+
+      h2 {
+        font-size: 2.5rem;
+      }
+
+      p {
+        font-size: 1.1rem;
+      }
+
+      button {
+        margin-top: 2rem;
+      }
+
+      img {
+        width: 35%;
+        height: 50%;
+        bottom: -20%;
+        right: 20%;
+      }
+    }
+  }
+}
+
+@media (max-width: 596px) {
+  .hero2 {
+
+    .hero2-heading {
+      h2 {
+        font-size: 1.8rem;
+        width: 90%;
+        margin-bottom: 2rem;
+      }
+    }
+  
+      
+  .overlay-cards {
+    padding: 2% 1%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8rem;
+  }
+  
+  .hero2-benefits {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10rem;
+    padding: 0 5%;
+
+    .benefits-left {
+      text-align: center;
+      width: 100%;
+
+      h2 {
+        font-size: 2rem;
+        margin-top: 2rem;
+      }
+    }
+
+    .benefits-right {
+      width: 100%;
+      text-align: center;
+      margin-top: 1rem;
+    }
+  }
+
+  .hero2-benefits-cards {
+    padding: 1% 3%;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+    
+    .hero2-banner {
+
+      .hero-text {
+        padding: 1rem;
+        top: 20%;
+        left: 0%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+
+        h2 {
+          font-size: 2rem;
+        }
+
+        p {
+          font-size: 1rem;
+        }
+
+        button {
+          margin-top: 2rem;
+        }
+
+        img {
+          // width: 30%;
+          // height: 45%;
+          // bottom: -40%;
+          // right: 30%;
+          display: none;
+        }
+      }
+    }
+  }
+}

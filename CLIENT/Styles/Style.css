@@ -6,7 +6,7 @@ body {
 	overflow-x: hidden;
 	margin: 0;
 	padding: 0;
-	font-family: "Inter", sans-serif;
+	font-family: "Inter", sans-serif;;
 	font-optical-sizing: auto;
 	font-style: normal;
 	font-variation-settings: "slnt" 0;
@@ -172,7 +172,8 @@ p {
 	height: 50rem;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	padding-top: 7rem;
+	/* justify-content: center; */
 	align-items: center;
 }
 
@@ -184,7 +185,7 @@ p {
 	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: center;
-	box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
+	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
 }
 
 .date-box {
@@ -197,9 +198,22 @@ p {
 	width: 290px;
 }
 
-@media (max-width: 590px) {
+@media (max-width: 992px) {
+	.page{
+		margin-top: 15%;
+	}
+
 	.form-container {
 		height: 62rem;
+		margin-top: 10%;
+	}
+
+}
+
+@media (max-width: 590px) {
+	.form-container {
+		height: 50rem;
+		margin-top: 15%;
 	}
 	.form {
 		width: 80%;

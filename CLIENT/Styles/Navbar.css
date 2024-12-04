@@ -9,6 +9,7 @@
 	/* background-color: #d7f5ff; */
 	/* background-color: #273f95; */
 	border-radius: 0% 0% 40px 40px;
+	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
 	position: sticky;
 	top: 0;
 	z-index: 999;
@@ -147,18 +148,46 @@
 	margin-right: 0.5rem;
 }
 
+@media (max-width: 1220px) {
+	.navbar-nav {
+		margin-left: 17%;
+		width: 100%;
+	}
+
+	.account-buttons {
+		width: 100%;
+	}
+}
+
+
+
 /* Responsive styling */
 @media (max-width: 992px) {
+
+	.navbar {
+		position: fixed;
+		width: 100%;
+		top: 0;
+		left: 0;
+	}
+
 	.navbar-nav {
 		margin-left: 0;
 		flex-direction: column;
-		width: 100%;
+		width: 500px;
 		align-items: flex-start;
 	}
 
 	.nav-item {
 		margin-left: 0;
 		margin-bottom: 0.5rem;
+	}
+
+	.navbar-collapse{
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		align-items: start;
 	}
 
 	.account-buttons {
@@ -198,11 +227,19 @@
 
 @media (max-width: 576px) {
 	.brand_head {
-		margin-bottom: 1rem;
+		/* margin-bottom: 1rem; */
 	}
 
 	.navbar-nav {
 		width: 100%;
+	}
+
+	.nav-logo-txt{
+		font-size: 2rem;
+	}
+
+	.subtitle{
+		font-size: 0.7rem;
 	}
 
 	.account-buttons {
