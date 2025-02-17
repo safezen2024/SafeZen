@@ -1,146 +1,49 @@
 import React, { useEffect, useState, useRef } from "react";
 import Navbar from "../Components/Navbar";
 import illness_data from "../data_files/illness_data";
-import IllnessCard from "../Components/illness_card";
 import Foot from "../Components/Foot";
-import PricePlans from "../Components/PricePlans";
+import TherapyCard from "../Components/TherapyCard";
+import "../Styles/IndividualTherapy.scss";
+import Therapy1 from "../public/src/Therapy1.jpg";
 
 export default function IndTherapy() {
-	React.useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
-	const [style, setStyle] = useState();
-	const ref = useRef(null);
-	const styles = {
-		default: {
-			display: "grid",
-			gridTemplateColumns: "1fr 1fr 1fr",
-			gridTemplateRows: "1fr 1fr 1fr 1fr",
-			gap: "30px",
-			margin: "40px",
-		},
-		smallScreen: {
-			display: "grid",
-			gridTemplateColumns: "1fr",
-			gridTemplateRows: "auto",
-			gap: "20px",
-			margin: "20px",
-		},
-		mediumScreen: {
-			display: "grid",
-			gridTemplateColumns: "1fr 1fr",
-			gridTemplateRows: "auto",
-			gap: "25px",
-			margin: "30px",
-		},
-	};
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-	useEffect(() => {
-		const handleResize = () => {
-			if (window.innerWidth <= 800) {
-				setStyle(styles.smallScreen);
-			} else if (window.innerWidth <= 1300) {
-				setStyle(styles.mediumScreen);
-			} else {
-				setStyle(styles.default);
-			}
-		};
+  return (
+    <div className="page">
+      <Navbar />
+      <div className="workshop-img">
+        <img src={Therapy1} alt="workshop" />
+        <div className="filter"></div>
+        <div className="txt">
+          <h2>Individual Therapy</h2>
+          <p>
+            Experience personalized care to achieve balance through individual therapy.
+            
+          </p>
+        </div>
+      </div>
 
-		window.addEventListener("resize", handleResize);
-		handleResize(); // Call initially to set the correct style
+      <div className="cards-container">
+        {illness_data.map((illness, index) => (
+          <TherapyCard
+          key={index}
+          heading={illness.illness_name}
+          content={
+            <ul>
+              {illness.illness_desc.split('. ').map((point, i) => (
+                <li key={i}>{point}</li>
+              ))}
+            </ul>
+          }
+        />
+        
+        ))}
+      </div>
 
-		return () => window.removeEventListener("resize", handleResize);
-	}, []);
-
-	function handleCardHover(clickedId) {
-		if (window.innerWidth <= 800) {
-			setStyle({
-				...style,
-				gridTemplateColumns: "1fr",
-			});
-		} else if (window.innerWidth <= 1300) {
-			if (clickedId % 2 == 1) {
-				setStyle({
-					...style,
-					gridTemplateColumns: "1fr 2fr",
-				});
-			} else {
-				setStyle({
-					...style,
-					gridTemplateColumns: "2fr 1fr",
-				});
-			}
-		} else {
-			if (clickedId % 3 == 2) {
-				setStyle({
-					...style,
-					gridTemplateColumns: "1fr 1fr 2fr",
-				});
-			} else if (clickedId % 3 == 0) {
-				setStyle({
-					...style,
-					gridTemplateColumns: "2fr 1fr 1fr",
-				});
-			} else {
-				setStyle({
-					...style,
-					gridTemplateColumns: "1fr 2fr 1fr",
-				});
-			}
-		}
-	}
-
-	function handleCardHoverOut() {
-		if (window.innerWidth <= 800) {
-			setStyle(styles.smallScreen);
-		} else if (window.innerWidth <= 1300) {
-			setStyle(styles.mediumScreen);
-		} else {
-			setStyle(styles.default);
-		}
-	}
-
-	const illData = illness_data.map((iData) => {
-		return (
-			<IllnessCard
-				key={iData.illness_id}
-				{...iData}
-				onCardHover={handleCardHover}
-				onCardHoverOut={handleCardHoverOut}
-			/>
-		);
-	});
-
-	return (
-		<div className="page">
-			<Navbar />
-			<div className="indPage">
-				<h1 className="page-title">INDIVIDUAL THERAPY</h1>
-				<div className="indTherapyHero">
-					<div className="book-appoinntment-card">
-						<p className="book-appoinntment-card-text">
-							We have the best professionals.
-						</p>
-						{/* <Link to="/IndTherapy/#pplans"> */}
-						<button
-							type="button"
-							className="btn btn-book-appointment"
-							onClick={() => {
-								ref.current?.scrollIntoView({ behavior: "smooth" });
-							}}>
-							Book an appointment
-						</button>
-						{/* </Link> */}
-					</div>
-				</div>
-				<div className="various_illness" style={style}>
-					{illData}
-				</div>
-			</div>
-			<div ref={ref}>
-				<PricePlans />
-			</div>
-			<Foot />
-		</div>
-	);
+      <Foot />
+    </div>
+  );
 }

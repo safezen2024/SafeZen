@@ -40,6 +40,10 @@
 	color: #273f95;
 }
 
+body {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 @media (max-width: 992px) {
 	.doctorsGallery {
 		display: flex;

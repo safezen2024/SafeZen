@@ -16,7 +16,6 @@
 // }
 // export default doctors_data;
 
-
 let doctors_data = [
     {
         "doctor_id": 1,

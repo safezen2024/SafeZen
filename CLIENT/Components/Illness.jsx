@@ -9,7 +9,7 @@ export default function Illness() {
 	const menuClass = `dropdown-menu${isOpen ? " show" : ""}`;
 	return (
 		<div className="dropdown" onMouseEnter={toggleOpen} onMouseLeave={toggleOpen}>
-			<a
+			<a	style={{color: "black"}}
 				className="nav-link dropdown-toggle navbar-text"
 				href="#"
 				id="navbarDropdownMenuLink"
@@ -19,7 +19,7 @@ export default function Illness() {
 				Services
 			</a>
 
-			<div className={menuClass} aria-labelledby="dropdownMenuButton">
+			<div className={menuClass} aria-labelledby="dropdownMenuButton" style={{borderRadius:'10px'}}>
 				<Link to="/IndTherapy">
 					<a className="dropdown-item" href="/IndTherapy">
 						Individual Therapy

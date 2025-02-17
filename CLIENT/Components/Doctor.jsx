@@ -1,6 +1,7 @@
 import React from "react";
 import doctors_data from "../data_files/doctors_data";
 
+
 export default function Doctor(props) {
 	const [id, setId] = React.useState(0);
 	// console.log(doctors_data);

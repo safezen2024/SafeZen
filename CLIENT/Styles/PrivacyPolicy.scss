@@ -1,0 +1,60 @@
+.blue-container{
+
+    .privacy-heading{
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+
+        h2{
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        p{
+            margin-top: 1.2rem;
+        }
+    }
+
+}
+
+.privacy-text{
+    padding: 5% 10%;
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    h3{
+        font-size: 1.4rem;
+        font-weight: 700;
+    }
+
+    p{
+        text-align: justify;
+    }
+}
+
+
+@media(max-width:992px){
+    .blue-container{
+       margin-top: -10%;
+       margin-bottom: 10%;
+
+       .privacy-heading{
+        width: 70%;
+
+        h2{
+            font-size: 2.3rem;
+            font-weight: 700;
+        }
+
+        p{
+            font-size: 1rem;
+        }
+    }
+    }
+
+}

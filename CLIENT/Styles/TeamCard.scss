@@ -1,0 +1,57 @@
+.team-card{
+    width: 28rem;
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    color: black;
+
+    .team-img{
+        border-radius: 50%;
+        border: 1px solid black;
+        height: 5rem;
+        width: 5rem;
+        overflow: hidden;
+
+        img{
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .team-name{
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .team-job-title{
+        font-size: 1rem;
+        font-weight: 400;
+    }
+
+    .team-paragraph{
+        font-size: 0.9rem;
+        font-weight: 400;
+    }
+
+    .team-socials{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+
+        *{
+            height: 1.25rem;
+            width: 1.25rem;
+
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+    }
+}

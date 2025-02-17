@@ -5,8 +5,14 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 1rem;
-	background-color: #d7f5ff;
+	background-color: #ffffff;
+	/* background-color: #d7f5ff; */
 	/* background-color: #273f95; */
+	border-radius: 0% 0% 40px 40px;
+	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+	position: sticky;
+	top: 0;
+	z-index: 999;
 }
 
 .brand_head {
@@ -38,6 +44,13 @@
 	/* color: #d7f5ff; */
 }
 
+.nav-logo-txt{
+	background: linear-gradient(90deg, #1849A9 0%, #1774BD 100%);
+	color: transparent;
+	background-clip: text;
+	font-weight: 600;
+}
+
 .navbar-toggler-icon{
 	color: #273f95;
 	/* color: #d7f5ff; */
@@ -47,17 +60,22 @@
 	font-size: 0.7rem;
 	margin: 0%;
 	padding: 0%;
+	margin-top: -5px;
+	font-weight: 400;
 	text-wrap: nowrap;
+	text-transform: capitalize;
+	color: black;
 }
 
 /* Navbar links styling */
 .navbar-nav {
+	margin-left: 17vw;
 	display: flex;
 	flex-direction: row;
 	list-style: none;
 	padding-left: 0;
 	margin-bottom: 0;
-	margin-top: 2%;
+	margin-top: 1%;
 }
 
 .navbar-collapse{
@@ -66,16 +84,44 @@
 }
 
 .nav-item {
-	margin-left: 1rem;
+	/* margin-left: 1rem; */
+	padding: 0.5rem 1rem;
+	color: black;
+	text-decoration: none;
+	font-weight: 400;
 }
 
-.nav-link {
+.nav-item:hover{
+	text-decoration: none;
+}
+
+/* .nav-link {
 	text-decoration: none;
 	padding: 0.5rem 1rem;
-}
+	color: black;
+	font-weight: 400;
+} */
 
 .nav-link:hover {
-	text-decoration: underline;
+	/* text-decoration: underline; */
+	color: #175CD3;
+}
+
+.active{
+	color: #175CD3;
+	font-weight: 600;
+	position: relative;
+}
+
+.active::after{
+	content: "";
+	position: absolute;
+	bottom: 5px;
+	left: 0;
+	width: 100%;
+	border-bottom: 4px solid #175CD3;
+	border-bottom-left-radius: 50px;
+	border-bottom-right-radius: 50px;
 }
 
 /* Account buttons styling */
@@ -87,6 +133,7 @@
 
 .account-buttons .btn {
 	margin-right: 0.5rem;
+	border-radius: 10px;
 }
 
 .profile-logout {
@@ -101,17 +148,46 @@
 	margin-right: 0.5rem;
 }
 
+@media (max-width: 1220px) {
+	.navbar-nav {
+		margin-left: 17%;
+		width: 100%;
+	}
+
+	.account-buttons {
+		width: 100%;
+	}
+}
+
+
+
 /* Responsive styling */
 @media (max-width: 992px) {
-	.navbar-nav {
-		flex-direction: column;
+
+	.navbar {
+		position: fixed;
 		width: 100%;
+		top: 0;
+		left: 0;
+	}
+
+	.navbar-nav {
+		margin-left: 0;
+		flex-direction: column;
+		width: 500px;
 		align-items: flex-start;
 	}
 
 	.nav-item {
 		margin-left: 0;
 		margin-bottom: 0.5rem;
+	}
+
+	.navbar-collapse{
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		align-items: start;
 	}
 
 	.account-buttons {
@@ -151,11 +227,19 @@
 
 @media (max-width: 576px) {
 	.brand_head {
-		margin-bottom: 1rem;
+		/* margin-bottom: 1rem; */
 	}
 
 	.navbar-nav {
 		width: 100%;
+	}
+
+	.nav-logo-txt{
+		font-size: 2rem;
+	}
+
+	.subtitle{
+		font-size: 0.7rem;
 	}
 
 	.account-buttons {

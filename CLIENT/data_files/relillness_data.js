@@ -19,22 +19,22 @@ let relillness_data = [
     {
         "relillness_id": 1,
         "relillness_name": "Couples Counseling",
-        "relillness_desc": "Pre-Marital Counseling: Helping couples prepare for marriage by addressing potential issues and setting realistic expectations. | Marriage Counseling: Assisting married couples in resolving conflicts, improving communication, and reigniting their connection. | Conflict Resolution: Teaching effective conflict management and problem-solving techniques to foster a healthier relationship.\n"
+        "relillness_desc": "Pre-Marital Counseling: Prepares couples for marriage by addressing issues and setting expectations. Marriage Counseling: Helps couples resolve conflicts, improve communication, and reconnect. Conflict Resolution: Teaches effective conflict management and problem-solving skills."
     },
     {
         "relillness_id": 2,
         "relillness_name": "Family Counseling",
-        "relillness_desc": "Parent-Child Relationships: Addressing issues between parents and children to improve communication and understanding. | Blended Family Issues: Helping families navigate the complexities of merging different family units. | Sibling Relationships: Resolving conflicts and fostering stronger bonds between siblings.\n"
+        "relillness_desc": "Parent-Child: Improves communication and understanding between parents and children. Blended Families: Guides families in navigating challenges of merging units. Siblings: Resolves conflicts and strengthens sibling bonds."
     },
     {
         "relillness_id": 3,
         "relillness_name": "Individual Relationship Counseling",
-        "relillness_desc": "Self-Esteem and Confidence: Building self-esteem and confidence to improve overall relationship dynamics. | Dating and Single Life: Offering guidance on dating challenges and helping individuals find fulfilling relationships. | Healing from Breakups: Providing support and strategies for moving on from past relationships.\n"
+        "relillness_desc": "Self-Esteem: Boosts confidence to enhance relationships. Dating: Guides individuals in navigating dating challenges. Breakups: Supports healing and moving on from past relationships."
     },
     {
         "relillness_id": 4,
         "relillness_name": "Specialized Relationship Counseling",
-        "relillness_desc": "LGBTQ+ Relationships: Addressing unique challenges faced by LGBTQ+ individuals and couples. | \nIntercultural Relationships: Helping couples navigate cultural differences and enhance mutual understanding. | Long-Distance Relationships: Offering strategies to maintain intimacy and connection despite physical distance\n"
+        "relillness_desc": "LGBTQ+: Supports unique challenges for individuals and couples. Intercultural: Helps navigate cultural differences and build understanding. Long-Distance: Provides strategies to maintain intimacy and connection."
     }
 ];
 
